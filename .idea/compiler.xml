@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="seckill-common" />
+        <module name="seckill-common-config" />
+        <module name="seckill-common-core" />
+        <module name="seckill-common-web" />
+        <module name="seckill-facade-mall" />
+        <module name="seckill-service-mall" />
+        <module name="seckill-web-boss" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="SecKill" target="1.6" />
+      <module name="seckill-common" target="1.6" />
+      <module name="seckill-common-config" target="1.6" />
+      <module name="seckill-common-core" target="1.6" />
+      <module name="seckill-common-web" target="1.6" />
+      <module name="seckill-facade-mall" target="1.6" />
+      <module name="seckill-service-mall" target="1.6" />
+      <module name="seckill-web-boss" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

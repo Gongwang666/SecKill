@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SecKill.iml" filepath="$PROJECT_DIR$/SecKill.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-common/seckill-common.iml" filepath="$PROJECT_DIR$/seckill-common/seckill-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-common-config/seckill-common-config.iml" filepath="$PROJECT_DIR$/seckill-common-config/seckill-common-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-common-core/seckill-common-core.iml" filepath="$PROJECT_DIR$/seckill-common-core/seckill-common-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-common-web/seckill-common-web.iml" filepath="$PROJECT_DIR$/seckill-common-web/seckill-common-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-facade-mall/seckill-facade-mall.iml" filepath="$PROJECT_DIR$/seckill-facade-mall/seckill-facade-mall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-service-mall/seckill-service-mall.iml" filepath="$PROJECT_DIR$/seckill-service-mall/seckill-service-mall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-web-boss/seckill-web-boss.iml" filepath="$PROJECT_DIR$/seckill-web-boss/seckill-web-boss.iml" />
+    </modules>
+  </component>
+</project>

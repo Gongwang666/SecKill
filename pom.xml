@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gw.seckill</groupId>
+    <artifactId>SecKill</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- common projects -->
+        <seckill-common.version>1.0-SNAPSHOT</seckill-common.version>
+        <seckill-common-config.version>1.0-SNAPSHOT</seckill-common-config.version>
+        <seckill-common-core.version>1.0-SNAPSHOT</seckill-common-core.version>
+        <seckill-common-web.version>1.0-SNAPSHOT</seckill-common-web.version>
+
+        <!-- facade projects -->
+        <seckill-facade-mall.version>1.0-SNAPSHOT</seckill-facade-mall.version>
+
+        <!-- service projects -->
+        <seckill-service-mall.version>1.0-SNAPSHOT</seckill-service-mall.version>
+
+        <!-- web projects -->
+        <seckill-web-boss.version>1.0-SNAPSHOT</seckill-web-boss.version>
+
+        <!-- app projects -->
+
+        <!-- timer projects -->
+
+        <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
+        <mysql-connector>5.1.39</mysql-connector>
+
+        <dubbo-spring-boot>1.0.0</dubbo-spring-boot>
+    </properties>
+
+    <!-- Spring Boot 启动父依赖 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.1.RELEASE</version>
+    </parent>
+    <modules>
+        <module>seckill-common</module>
+        <module>seckill-common-config</module>
+        <module>seckill-common-core</module>
+        <module>seckill-common-web</module>
+        <module>seckill-facade-mall</module>
+        <module>seckill-service-mall</module>
+        <module>seckill-web-boss</module>
+    </modules>
+
+    <!--<dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        &lt;!&ndash; spring热部署&ndash;&gt;
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>springloaded</artifactId>
+            <version>1.2.1.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>-->
+
+</project>
