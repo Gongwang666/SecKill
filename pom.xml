@@ -20,9 +20,11 @@
 
         <!-- facade projects -->
         <seckill-facade-mall.version>1.0-SNAPSHOT</seckill-facade-mall.version>
+        <seckill-facade-admin.version>1.0-SNAPSHOT</seckill-facade-admin.version>
 
         <!-- service projects -->
         <seckill-service-mall.version>1.0-SNAPSHOT</seckill-service-mall.version>
+        <seckill-service-admin.version>1.0-SNAPSHOT</seckill-service-admin.version>
 
         <!-- web projects -->
         <seckill-web-boss.version>1.0-SNAPSHOT</seckill-web-boss.version>
@@ -51,6 +53,9 @@
         <module>seckill-facade-mall</module>
         <module>seckill-service-mall</module>
         <module>seckill-web-boss</module>
+        <module>seckill-facade-admin</module>
+        <module>seckill-service-admin</module>
+        <module>seckill-web-admin</module>
     </modules>
 
     <!--<dependencies>

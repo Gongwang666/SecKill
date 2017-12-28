@@ -3,12 +3,11 @@ package com.gw.seckill.page;
 import java.io.Serializable;
 
 /**
- * 
- * @描述: 分页参数传递工具类 .
- * @作者: WuShuicheng .
- * @创建时间: 2013-9-4,下午2:23:47 .
- * @版本: 1.0 .
- */
+　* @描述:     分页参数传递类
+　* @异常:     
+　* @作者:     gongwang
+　* @创建时间: 2017/12/28 14:23
+  */
 public class PageParam implements Serializable{
 	
 	/**

@@ -6,8 +6,11 @@
     <file url="file://$PROJECT_DIR$/seckill-common-config" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/seckill-common-core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/seckill-common-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seckill-facade-admin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/seckill-facade-mall" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seckill-service-admin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/seckill-service-mall" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seckill-web-admin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/seckill-web-boss" charset="UTF-8" />
   </component>
 </project>

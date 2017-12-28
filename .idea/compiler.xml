@@ -10,8 +10,11 @@
         <module name="seckill-common-config" />
         <module name="seckill-common-core" />
         <module name="seckill-common-web" />
+        <module name="seckill-facade-admin" />
         <module name="seckill-facade-mall" />
+        <module name="seckill-service-admin" />
         <module name="seckill-service-mall" />
+        <module name="seckill-web-admin" />
         <module name="seckill-web-boss" />
       </profile>
     </annotationProcessing>
@@ -21,8 +24,11 @@
       <module name="seckill-common-config" target="1.6" />
       <module name="seckill-common-core" target="1.6" />
       <module name="seckill-common-web" target="1.6" />
+      <module name="seckill-facade-admin" target="1.6" />
       <module name="seckill-facade-mall" target="1.6" />
+      <module name="seckill-service-admin" target="1.6" />
       <module name="seckill-service-mall" target="1.6" />
+      <module name="seckill-web-admin" target="1.6" />
       <module name="seckill-web-boss" target="1.6" />
     </bytecodeTargetLevel>
   </component>

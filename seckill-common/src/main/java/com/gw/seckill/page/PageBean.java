@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
- * @描述: 分页组件.
- * @作者: WuShuicheng .
- * @创建时间: 2013-7-25,下午11:33:41 .
- * @版本: 1.0 .
- */
+　* @描述:     分页组件
+　* @异常:     
+　* @作者:     gongwang
+　* @创建时间: 2017/12/28 14:23
+  */
 public class PageBean implements Serializable{
 	/**
 	 * 

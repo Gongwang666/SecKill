@@ -4,20 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
- * @描述: 基础实体类，包含各实体公用属性 .
- * @作者: WuShuicheng .
- * @创建时间: 2013-7-28,下午8:53:52 .
- * @版本: 1.0 .
- */
+　* @描述:     基础实体类，包含各实体公用属性 .
+　* @异常:     
+　* @作者:     gongwang
+　* @创建时间: 2017/12/28 14:20
+  */
 public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/** 主键ID **/
 	private Long id;
-	
-	/** 版本号 **/
-	private Integer version = 0;
 	
 	/** 创建时间 **/
 	private Date createTime;
@@ -31,16 +27,6 @@ public class BaseEntity implements Serializable {
 	/** 主键ID **/
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	/** 版本号 **/
-	public Integer getVersion() {
-		return version;
-	}
-
-	/** 版本号 **/
-	public void setVersion(Integer version) {
-		this.version = version;
 	}
 
 	/** 创建时间 **/

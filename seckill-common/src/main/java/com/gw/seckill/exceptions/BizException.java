@@ -1,12 +1,11 @@
 package com.gw.seckill.exceptions;
 
 /**
- *
- * @描述: 业务异常基类，所有业务异常都必须继承于此异常 . <br/>
- * @作者: WuShuicheng . <br/>
- * @创建时间: 2014-10-14,上午12:31:57 . <br/>
- * @版本号: V1.0 . <br/>
- */
+　* @描述:     业务异常基类，所有业务异常都必须继承于此异常 .
+　* @异常:     
+　* @作者:     gongwang
+　* @创建时间: 2017/12/28 14:22
+  */
 public class BizException extends RuntimeException {
 
 	private static final long serialVersionUID = -5875371379845226068L;
