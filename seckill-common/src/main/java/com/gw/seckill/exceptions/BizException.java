@@ -1,7 +1,7 @@
 package com.gw.seckill.exceptions;
 
 /**
- * 
+ *
  * @描述: 业务异常基类，所有业务异常都必须继承于此异常 . <br/>
  * @作者: WuShuicheng . <br/>
  * @创建时间: 2014-10-14,上午12:31:57 . <br/>
