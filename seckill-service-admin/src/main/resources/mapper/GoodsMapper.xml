@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.gw.seckill.facade.admin.entity.Goods">
+    <id column="GOODS_ID" jdbcType="INTEGER" property="goodsId" />
+    <result column="GOODS_SN" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName" />
+    <result column="GOODS_IMG" jdbcType="VARCHAR" property="goodsImg" />
+    <result column="MARKET_PRICE" jdbcType="DECIMAL" property="marketPrice" />
+    <result column="SHOP_PRICE" jdbcType="DECIMAL" property="shopPrice" />
+    <result column="WARN_STOCK" jdbcType="INTEGER" property="warnStock" />
+    <result column="GOODS_STOCK" jdbcType="INTEGER" property="goodsStock" />
+    <result column="GOODS_TIPS" jdbcType="VARCHAR" property="goodsTips" />
+    <result column="IS_SALE" jdbcType="TINYINT" property="isSale" />
+    <result column="IS_BEST" jdbcType="TINYINT" property="isBest" />
+    <result column="IS_HOT" jdbcType="TINYINT" property="isHot" />
+    <result column="IS_NEW" jdbcType="TINYINT" property="isNew" />
+    <result column="GOODS_CAT_ID_PATH" jdbcType="VARCHAR" property="goodsCatIdPath" />
+    <result column="GOODS_CAT_ID" jdbcType="INTEGER" property="goodsCatId" />
+    <result column="GOODS_DESC" jdbcType="VARCHAR" property="goodsDesc" />
+    <result column="SALE_NUM" jdbcType="INTEGER" property="saleNum" />
+    <result column="SALE_TIME" jdbcType="TIMESTAMP" property="saleTime" />
+    <result column="DATA_FLAG" jdbcType="TINYINT" property="dataFlag" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    GOODS_ID, GOODS_SN, GOODS_NAME, GOODS_IMG, MARKET_PRICE, SHOP_PRICE, WARN_STOCK, 
+    GOODS_STOCK, GOODS_TIPS, IS_SALE, IS_BEST, IS_HOT, IS_NEW, GOODS_CAT_ID_PATH, GOODS_CAT_ID, 
+    GOODS_DESC, SALE_NUM, SALE_TIME, DATA_FLAG, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where GOODS_ID = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where GOODS_ID = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gw.seckill.facade.admin.entity.Goods">
+    insert into goods (GOODS_ID, GOODS_SN, GOODS_NAME, 
+      GOODS_IMG, MARKET_PRICE, SHOP_PRICE, 
+      WARN_STOCK, GOODS_STOCK, GOODS_TIPS, 
+      IS_SALE, IS_BEST, IS_HOT, 
+      IS_NEW, GOODS_CAT_ID_PATH, GOODS_CAT_ID, 
+      GOODS_DESC, SALE_NUM, SALE_TIME, 
+      DATA_FLAG, CREATE_TIME)
+    values (#{goodsId,jdbcType=INTEGER}, #{goodsSn,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
+      #{goodsImg,jdbcType=VARCHAR}, #{marketPrice,jdbcType=DECIMAL}, #{shopPrice,jdbcType=DECIMAL}, 
+      #{warnStock,jdbcType=INTEGER}, #{goodsStock,jdbcType=INTEGER}, #{goodsTips,jdbcType=VARCHAR}, 
+      #{isSale,jdbcType=TINYINT}, #{isBest,jdbcType=TINYINT}, #{isHot,jdbcType=TINYINT}, 
+      #{isNew,jdbcType=TINYINT}, #{goodsCatIdPath,jdbcType=VARCHAR}, #{goodsCatId,jdbcType=INTEGER}, 
+      #{goodsDesc,jdbcType=VARCHAR}, #{saleNum,jdbcType=INTEGER}, #{saleTime,jdbcType=TIMESTAMP}, 
+      #{dataFlag,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gw.seckill.facade.admin.entity.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        GOODS_ID,
+      </if>
+      <if test="goodsSn != null">
+        GOODS_SN,
+      </if>
+      <if test="goodsName != null">
+        GOODS_NAME,
+      </if>
+      <if test="goodsImg != null">
+        GOODS_IMG,
+      </if>
+      <if test="marketPrice != null">
+        MARKET_PRICE,
+      </if>
+      <if test="shopPrice != null">
+        SHOP_PRICE,
+      </if>
+      <if test="warnStock != null">
+        WARN_STOCK,
+      </if>
+      <if test="goodsStock != null">
+        GOODS_STOCK,
+      </if>
+      <if test="goodsTips != null">
+        GOODS_TIPS,
+      </if>
+      <if test="isSale != null">
+        IS_SALE,
+      </if>
+      <if test="isBest != null">
+        IS_BEST,
+      </if>
+      <if test="isHot != null">
+        IS_HOT,
+      </if>
+      <if test="isNew != null">
+        IS_NEW,
+      </if>
+      <if test="goodsCatIdPath != null">
+        GOODS_CAT_ID_PATH,
+      </if>
+      <if test="goodsCatId != null">
+        GOODS_CAT_ID,
+      </if>
+      <if test="goodsDesc != null">
+        GOODS_DESC,
+      </if>
+      <if test="saleNum != null">
+        SALE_NUM,
+      </if>
+      <if test="saleTime != null">
+        SALE_TIME,
+      </if>
+      <if test="dataFlag != null">
+        DATA_FLAG,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSn != null">
+        #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null">
+        #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null">
+        #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopPrice != null">
+        #{shopPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="warnStock != null">
+        #{warnStock,jdbcType=INTEGER},
+      </if>
+      <if test="goodsStock != null">
+        #{goodsStock,jdbcType=INTEGER},
+      </if>
+      <if test="goodsTips != null">
+        #{goodsTips,jdbcType=VARCHAR},
+      </if>
+      <if test="isSale != null">
+        #{isSale,jdbcType=TINYINT},
+      </if>
+      <if test="isBest != null">
+        #{isBest,jdbcType=TINYINT},
+      </if>
+      <if test="isHot != null">
+        #{isHot,jdbcType=TINYINT},
+      </if>
+      <if test="isNew != null">
+        #{isNew,jdbcType=TINYINT},
+      </if>
+      <if test="goodsCatIdPath != null">
+        #{goodsCatIdPath,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCatId != null">
+        #{goodsCatId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDesc != null">
+        #{goodsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="saleNum != null">
+        #{saleNum,jdbcType=INTEGER},
+      </if>
+      <if test="saleTime != null">
+        #{saleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataFlag != null">
+        #{dataFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gw.seckill.facade.admin.entity.Goods">
+    update goods
+    <set>
+      <if test="goodsSn != null">
+        GOODS_SN = #{goodsSn,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImg != null">
+        GOODS_IMG = #{goodsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null">
+        MARKET_PRICE = #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shopPrice != null">
+        SHOP_PRICE = #{shopPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="warnStock != null">
+        WARN_STOCK = #{warnStock,jdbcType=INTEGER},
+      </if>
+      <if test="goodsStock != null">
+        GOODS_STOCK = #{goodsStock,jdbcType=INTEGER},
+      </if>
+      <if test="goodsTips != null">
+        GOODS_TIPS = #{goodsTips,jdbcType=VARCHAR},
+      </if>
+      <if test="isSale != null">
+        IS_SALE = #{isSale,jdbcType=TINYINT},
+      </if>
+      <if test="isBest != null">
+        IS_BEST = #{isBest,jdbcType=TINYINT},
+      </if>
+      <if test="isHot != null">
+        IS_HOT = #{isHot,jdbcType=TINYINT},
+      </if>
+      <if test="isNew != null">
+        IS_NEW = #{isNew,jdbcType=TINYINT},
+      </if>
+      <if test="goodsCatIdPath != null">
+        GOODS_CAT_ID_PATH = #{goodsCatIdPath,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCatId != null">
+        GOODS_CAT_ID = #{goodsCatId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDesc != null">
+        GOODS_DESC = #{goodsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="saleNum != null">
+        SALE_NUM = #{saleNum,jdbcType=INTEGER},
+      </if>
+      <if test="saleTime != null">
+        SALE_TIME = #{saleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataFlag != null">
+        DATA_FLAG = #{dataFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where GOODS_ID = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gw.seckill.facade.admin.entity.Goods">
+    update goods
+    set GOODS_SN = #{goodsSn,jdbcType=VARCHAR},
+      GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      GOODS_IMG = #{goodsImg,jdbcType=VARCHAR},
+      MARKET_PRICE = #{marketPrice,jdbcType=DECIMAL},
+      SHOP_PRICE = #{shopPrice,jdbcType=DECIMAL},
+      WARN_STOCK = #{warnStock,jdbcType=INTEGER},
+      GOODS_STOCK = #{goodsStock,jdbcType=INTEGER},
+      GOODS_TIPS = #{goodsTips,jdbcType=VARCHAR},
+      IS_SALE = #{isSale,jdbcType=TINYINT},
+      IS_BEST = #{isBest,jdbcType=TINYINT},
+      IS_HOT = #{isHot,jdbcType=TINYINT},
+      IS_NEW = #{isNew,jdbcType=TINYINT},
+      GOODS_CAT_ID_PATH = #{goodsCatIdPath,jdbcType=VARCHAR},
+      GOODS_CAT_ID = #{goodsCatId,jdbcType=INTEGER},
+      GOODS_DESC = #{goodsDesc,jdbcType=VARCHAR},
+      SALE_NUM = #{saleNum,jdbcType=INTEGER},
+      SALE_TIME = #{saleTime,jdbcType=TIMESTAMP},
+      DATA_FLAG = #{dataFlag,jdbcType=TINYINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where GOODS_ID = #{goodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

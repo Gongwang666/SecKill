@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gw.seckill.core.admin.dao.GoodsCatsMapper">
+  <resultMap id="BaseResultMap" type="com.gw.seckill.facade.admin.entity.GoodsCats">
+    <id column="CAT_ID" jdbcType="INTEGER" property="catId" />
+    <result column="PARENT_ID" jdbcType="INTEGER" property="parentId" />
+    <result column="CAT_NAME" jdbcType="VARCHAR" property="catName" />
+    <result column="IS_SHOW" jdbcType="TINYINT" property="isShow" />
+    <result column="CAT_SORT" jdbcType="INTEGER" property="catSort" />
+    <result column="DATA_FLAG" jdbcType="TINYINT" property="dataFlag" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CAT_ID, PARENT_ID, CAT_NAME, IS_SHOW, CAT_SORT, DATA_FLAG, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods_cats
+    where CAT_ID = #{catId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllCats" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM goods_cats
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods_cats
+    where CAT_ID = #{catId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gw.seckill.facade.admin.entity.GoodsCats">
+    insert into goods_cats (CAT_ID, PARENT_ID, CAT_NAME, 
+      IS_SHOW, CAT_SORT, DATA_FLAG, 
+      CREATE_TIME)
+    values (#{catId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{catName,jdbcType=VARCHAR}, 
+      #{isShow,jdbcType=TINYINT}, #{catSort,jdbcType=INTEGER}, #{dataFlag,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gw.seckill.facade.admin.entity.GoodsCats">
+    insert into goods_cats
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="catId != null">
+        CAT_ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="catName != null">
+        CAT_NAME,
+      </if>
+      <if test="isShow != null">
+        IS_SHOW,
+      </if>
+      <if test="catSort != null">
+        CAT_SORT,
+      </if>
+      <if test="dataFlag != null">
+        DATA_FLAG,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="catId != null">
+        #{catId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="catName != null">
+        #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=TINYINT},
+      </if>
+      <if test="catSort != null">
+        #{catSort,jdbcType=INTEGER},
+      </if>
+      <if test="dataFlag != null">
+        #{dataFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gw.seckill.facade.admin.entity.GoodsCats">
+    update goods_cats
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="catName != null">
+        CAT_NAME = #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        IS_SHOW = #{isShow,jdbcType=TINYINT},
+      </if>
+      <if test="catSort != null">
+        CAT_SORT = #{catSort,jdbcType=INTEGER},
+      </if>
+      <if test="dataFlag != null">
+        DATA_FLAG = #{dataFlag,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where CAT_ID = #{catId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gw.seckill.facade.admin.entity.GoodsCats">
+    update goods_cats
+    set PARENT_ID = #{parentId,jdbcType=INTEGER},
+      CAT_NAME = #{catName,jdbcType=VARCHAR},
+      IS_SHOW = #{isShow,jdbcType=TINYINT},
+      CAT_SORT = #{catSort,jdbcType=INTEGER},
+      DATA_FLAG = #{dataFlag,jdbcType=TINYINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where CAT_ID = #{catId,jdbcType=INTEGER}
+  </update>
+</mapper>

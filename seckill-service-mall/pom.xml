@@ -39,10 +39,10 @@
         </dependency>
 
         <!-- Spring Boot Web 依赖 -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Spring Boot Test 依赖 -->
         <dependency>
@@ -63,6 +63,13 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector}</version>
+        </dependency>
+
+       <!--Druid数据库连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid-connection-pool}</version>
         </dependency>
 
         <!-- Junit -->

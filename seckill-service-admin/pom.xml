@@ -65,6 +65,13 @@
             <version>${mysql-connector}</version>
         </dependency>
 
+        <!--Druid数据库连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid-connection-pool}</version>
+        </dependency>
+
         <!-- Junit -->
         <dependency>
             <groupId>junit</groupId>

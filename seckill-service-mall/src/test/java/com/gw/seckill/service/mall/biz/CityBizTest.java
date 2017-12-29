@@ -30,9 +30,8 @@ public class CityBizTest {
     　* @作者:     gongwang
     　* @创建时间: 2017/12/28 14:11
       */
-    public String findCityByName(String name) {
+    public void findCityByName() {
         City city = cityBiz.findCityByName("温岭市");
         System.out.print(city.toString());
-        return "aa";
     }
 }

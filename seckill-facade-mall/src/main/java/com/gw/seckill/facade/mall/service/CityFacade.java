@@ -2,6 +2,7 @@ package com.gw.seckill.facade.mall.service;
 
 import com.gw.seckill.facade.mall.entity.City;
 
+
 public interface CityFacade {
 
     /**

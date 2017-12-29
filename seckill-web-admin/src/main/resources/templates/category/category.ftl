@@ -86,7 +86,7 @@
                                     </thead>
                                     <tbody>
                                     <tr class="gradeX">
-                                        <td>Amaze UI 模式窗口</td>
+                                        <td>${goodsCats.catName}</td>
                                         <td>张鹏飞</td>
                                         <td>2016-09-26</td>
                                         <td>
