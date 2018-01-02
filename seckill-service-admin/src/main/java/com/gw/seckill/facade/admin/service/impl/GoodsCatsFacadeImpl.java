@@ -33,7 +33,9 @@ public class GoodsCatsFacadeImpl implements GoodsCatsFacade {
     }
 
     @Override
-    public Map<String, List<GoodsCatsVO>> getAllGoodsCats() {
-        return null;
+    public Map<GoodsCats, List<GoodsCatsVO>> getAllCatsWithLevel() {
+        return goodsCatsBiz.getAllCatsWithLevel();
     }
+
+
 }

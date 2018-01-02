@@ -34,12 +34,12 @@ public interface GoodsCatsFacade {
      */
     List<GoodsCats> findAllGoodsCats();
     /**
-    　* @描述:     获取所有商品的分类
-    　* @参数描述: key:分类名称  value:每种分类及其子类
+    　* @描述:     获取所有商品的分类（分层后）
+    　* @参数描述:
     　* @返回值:
     　* @异常:     
     　* @作者:     gongwang
     　* @创建时间: 2017/12/29 20:16
       */
-    Map<String,List<GoodsCatsVO>> getAllGoodsCats();
+    Map<GoodsCats,List<GoodsCatsVO>> getAllCatsWithLevel();
 }

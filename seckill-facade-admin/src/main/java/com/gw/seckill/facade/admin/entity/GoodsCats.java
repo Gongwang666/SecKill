@@ -1,5 +1,7 @@
 package com.gw.seckill.facade.admin.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,7 +17,7 @@ public class GoodsCats implements Serializable {
     private Integer catSort;
 
     private Byte dataFlag;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date createTime;
 
     public Integer getCatId() {

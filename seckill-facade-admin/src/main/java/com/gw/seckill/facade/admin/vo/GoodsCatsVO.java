@@ -6,28 +6,31 @@ import java.io.Serializable;
 import java.util.List;
 
 public class GoodsCatsVO implements Serializable{
-    //
-    private GoodsCats parent;
-    private List<GoodsCats> childrens = null;
+    private Integer level;
+    private GoodsCats goodsCats;
 
-    public GoodsCatsVO(GoodsCats parent, List<GoodsCats> childrens) {
-        this.parent = parent;
-        this.childrens = childrens;
+    public GoodsCatsVO() {
     }
 
-    public GoodsCats getParent() {
-        return parent;
+    public GoodsCatsVO(Integer level, GoodsCats goodsCats) {
+        this.level = level;
+        this.goodsCats = goodsCats;
     }
 
-    public void setParent(GoodsCats parent) {
-        this.parent = parent;
+
+    public Integer getLevel() {
+        return level;
     }
 
-    public List<GoodsCats> getChildrens() {
-        return childrens;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
-    public void setChildrens(List<GoodsCats> childrens) {
-        this.childrens = childrens;
+    public GoodsCats getGoodsCats() {
+        return goodsCats;
+    }
+
+    public void setGoodsCats(GoodsCats goodsCats) {
+        this.goodsCats = goodsCats;
     }
 }

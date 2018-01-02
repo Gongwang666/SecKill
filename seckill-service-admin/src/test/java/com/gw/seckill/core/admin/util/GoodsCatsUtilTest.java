@@ -1,5 +1,6 @@
-package com.gw.seckill.core.admin.biz;
+package com.gw.seckill.core.admin.util;
 
+import com.gw.seckill.facade.admin.entity.GoodsCats;
 import com.gw.seckill.facade.admin.vo.GoodsCatsVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,24 +11,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GoodsCatsBizTest {
-
-    @Autowired
-    private GoodsCatsBiz goodsCatsBiz;
+public class GoodsCatsUtilTest {
+    //@Autowired
+    private GoodsCatsUtil goodsCatsUtil = new GoodsCatsUtil();
     @Test
-    public void findGoodsCatsById() {
-    }
-
-    @Test
-    public void findAllGoodsCats() {
-    }
-
-    @Test
-    public void getAllGoodsCats() {
-        //Map<String, List<GoodsCatsVO>> map = goodsCatsBiz.getAllGoodsCats();
+    public void getGoodsCatsTree() {
+        //Map<GoodsCats,List<GoodsCatsVO>> map =goodsCatsUtil.getAllCatsWithLevel();
         System.out.print(0);
     }
 }

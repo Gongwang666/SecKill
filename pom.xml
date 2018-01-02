@@ -41,6 +41,8 @@
         <dubbo-spring-boot>1.0.0</dubbo-spring-boot>
 
         <druid-connection-pool>1.1.6</druid-connection-pool>
+
+        <spring-boot-starter>1.5.1.RELEASE</spring-boot-starter>
     </properties>
 
     <!-- Spring Boot 启动父依赖 -->
