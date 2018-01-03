@@ -75,4 +75,16 @@ public class GoodsCatsBiz {
         }
         return catsMap;
     }
+    /**
+    　* @描述:     添加分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/3 14:23
+      */
+    public int addGoodsCat(GoodsCats goodsCats) {
+        goodsCats.setCreateTime(new Date());
+        return goodsCatsDAO.insertSelective(goodsCats);
+    }
 }

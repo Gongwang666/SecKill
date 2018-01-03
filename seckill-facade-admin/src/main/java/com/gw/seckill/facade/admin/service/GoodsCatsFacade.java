@@ -42,4 +42,13 @@ public interface GoodsCatsFacade {
     　* @创建时间: 2017/12/29 20:16
       */
     Map<GoodsCats,List<GoodsCatsVO>> getAllCatsWithLevel();
+    /**
+    　* @描述:     添加商品分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/3 14:22
+      */
+    int addGoodsCat(GoodsCats goodsCats);
 }

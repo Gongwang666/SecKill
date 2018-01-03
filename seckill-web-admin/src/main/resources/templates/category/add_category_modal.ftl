@@ -8,7 +8,7 @@
 
                         <div class="widget-body am-fr">
 
-                            <form class="tpl-form-border-form tpl-form-border-br">
+                            <form id="add_cat_form" enctype="multipart/form-data" method="post" class="tpl-form-border-form tpl-form-border-br">
 
                                 <div class="am-form-group">
                                     <label for="user-phone" class="am-u-sm-3 am-form-label">
@@ -16,11 +16,22 @@
                                     </label>
                                     <div class="am-u-sm-9">
                                         <div class="am-u-sm-9">
-                                            <select  data-am-selected="{searchBox: 1}" style="display: none;">
-                                                <option value="a">-The.CC</option>
-                                                <option value="b">夕风色</option>
-                                                <option value="o">Orange</option>
+                                            <select id="my-select" name="catId" data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chosen-select-deselect" tabindex="9">
 
+                                                <#list goodsCats as cat>
+                                                    <#if cat.dataFlag == 1>
+                                                        <option value="${cat.catId}">${cat.catName}</option>
+                                                    <#else >
+                                                        <option disabled value="${cat.catId}">${cat.catName}</option>
+                                                    </#if>
+                                                </#list>
+                                                <#--<option value=""></option>
+
+                                                <option selected disabled>Sloth Bear</option>
+                                                <option disabled>Sun Bear</option>
+                                                <option selected disabled>Paddington Bear</option>
+                                                <option selected>Polar Bear</option>
+                                                <option disabled>Spectacled Bear</option>-->
                                             </select>
                                         </div>
                                         <div class="am-u-sm-3"></div>
@@ -33,7 +44,7 @@
                                     </label>
                                     <div class="am-u-sm-9">
                                         <div class="am-u-sm-9">
-                                            <input type="text" class="tpl-form-input" id="user-name" placeholder="请输入标题文字">
+                                            <input type="text" name="catName" class="tpl-form-input" id="cat-name" placeholder="请输入分类名称"/>
                                         </div>
                                         <div class="am-u-sm-3"></div>
                                     </div>
@@ -48,13 +59,13 @@
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-6">
                                                 <label class="am-radio-inline">
-                                                    <input type="radio" name="radio10" value="male" data-am-ucheck> 是
+                                                    <input type="radio" name="isShow" value="1" data-am-ucheck> 是
                                                 </label>
                                             </div>
 
                                             <div class="am-u-sm-6">
                                                 <label class="am-radio-inline">
-                                                    <input type="radio" name="radio10" value="female" data-am-ucheck> 否
+                                                    <input type="radio" name="isShow" value="0" data-am-ucheck> 否
                                                 </label>
                                             </div>
                                         </div>

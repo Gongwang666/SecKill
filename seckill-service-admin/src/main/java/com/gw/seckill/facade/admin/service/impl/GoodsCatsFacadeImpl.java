@@ -37,5 +37,10 @@ public class GoodsCatsFacadeImpl implements GoodsCatsFacade {
         return goodsCatsBiz.getAllCatsWithLevel();
     }
 
+    @Override
+    public int addGoodsCat(GoodsCats goodsCats) {
+        return goodsCatsBiz.addGoodsCat(goodsCats);
+    }
+
 
 }
