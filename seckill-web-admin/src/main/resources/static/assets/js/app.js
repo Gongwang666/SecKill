@@ -364,6 +364,52 @@ $('.sidebar-nav-sub-title').on('click', function() {
         .find('.sidebar-nav-sub-ico').toggleClass('sidebar-nav-sub-ico-rotate');
 })
 
+
+
+var data =[{"title":"华为","type":"folder","products":[{"title":"IPHONE","type":"item"},{"title":"iMac","type":"item"},{"title":"MacBook Pro","type":"item"},{"title":"MacBook Air","type":"item"}]},{"title":"苹果公司","type":"folder","products":[{"title":"IPHONE","type":"item"},{"title":"iMac","type":"item"},{"title":"MacBook Pro","type":"item"},{"title":"MacBook Air","type":"item"}]}];
+
+$('#firstTree').tree({
+    dataSource: function(options, callback) {
+        // 模拟异步加载
+        var menu = null;
+        $.ajax({
+            url:'/menu',
+            type:'POST', //GET
+            async:true,    //或false,是否异步
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            beforeSend:function(xhr){
+                console.log(xhr)
+                console.log('发送前')
+            },
+            success:function(data,textStatus,jqXHR){
+                menu = data;
+                //alert(JSON.stringify(menu));
+                console.log(data)
+                console.log(textStatus)
+                console.log(jqXHR)
+            },
+            error:function(xhr,textStatus){
+                console.log('错误')
+                console.log(xhr)
+                console.log(textStatus)
+            },
+            complete:function(){
+                console.log('结束')
+            }
+        });
+        //var data = JSON.stringify(menu);
+        //console.log(data);
+        setTimeout(function() {
+            callback({data: options.products || data});
+        }, 400);
+    },
+    multiSelect: false,
+    cacheItems: true,
+    folderSelect: false
+});
+
+
 //添加分类弹出的模态窗口
 $('#doc-prompt-toggle').on('click', function() {
     $('#cat-name').val("");
@@ -432,3 +478,6 @@ $('#doc-prompt-toggle').on('click', function() {
 
 //下拉选项卡js代码
 $('#my-select').chosen({ width: '95%'});
+
+
+

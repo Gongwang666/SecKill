@@ -51,7 +51,25 @@
                 <i class="am-icon-table sidebar-nav-link-logo"></i> 商品管理
                 <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
             </a>
-            <ul class="sidebar-nav sidebar-nav-sub">
+            <ul class="am-tree sidebar-nav sidebar-nav-sub" id="firstTree">
+                <li class="am-tree-branch am-hide sidebar-tree" data-template="treebranch">
+                    <div class="am-tree-branch-header">
+                        <button class="am-tree-branch-name">
+                            <span class="am-tree-icon am-tree-icon-folder"></span>
+                            <span class="am-tree-label"></span>
+                        </button>
+                    </div>
+                    <ul class="am-tree-branch-children"></ul>
+                    <div class="am-tree-loader"><span class="am-icon-spin am-icon-spinner"></span></div>
+                </li>
+                <li class="am-tree-item am-hide sidebar-tree" data-template="treeitem">
+                    <button class="am-tree-item-name">
+                        <span class="am-tree-icon am-tree-icon-item"></span>
+                        <span class="am-tree-label"></span>
+                    </button>
+                </li>
+            </ul>
+            <#--<ul class="sidebar-nav sidebar-nav-sub">
                 <li class="sidebar-nav-link">
                     <a href="/category.do">
                         <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 品类管理
@@ -63,7 +81,7 @@
                         <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图文列表
                     </a>
                 </li>
-            </ul>
+            </ul>-->
         </li>
         <li class="sidebar-nav-link">
             <a href="sign-up.html">
@@ -82,5 +100,23 @@
             </a>
         </li>
 
+    </ul>
+    <ul class="am-tree sidebar-nav sidebar-nav-sub" id="firstTree">
+        <li class="am-tree-branch am-hide sidebar-tree" data-template="treebranch">
+            <div class="am-tree-branch-header">
+                <button class="am-tree-branch-name">
+                    <span class="am-tree-icon am-tree-icon-folder"></span>
+                    <span class="am-tree-label"></span>
+                </button>
+            </div>
+            <ul class="am-tree-branch-children"></ul>
+            <div class="am-tree-loader"><span class="am-icon-spin am-icon-spinner"></span></div>
+        </li>
+        <li class="am-tree-item am-hide sidebar-tree" data-template="treeitem">
+            <button class="am-tree-item-name">
+                <span class="am-tree-icon am-tree-icon-item"></span>
+                <span class="am-tree-label"></span>
+            </button>
+        </li>
     </ul>
 </div>

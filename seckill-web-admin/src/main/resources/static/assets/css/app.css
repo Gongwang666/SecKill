@@ -310,6 +310,10 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 .tpl-user-panel-action-link:hover {
   color: #a2aaad;
 }
+.sidebar-tree{
+  font-size: 18px;
+  padding-left: 20px;
+}
 .sidebar-nav {
   list-style-type: none;
   padding: 0;
@@ -320,7 +324,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 }
 .sidebar-nav-sub .sidebar-nav-link {
   font-size: 12px;
-  padding-left: 30px;
+  padding-left: 20px;
 }
 .sidebar-nav-sub .sidebar-nav-link a {
   font-size: 12px;

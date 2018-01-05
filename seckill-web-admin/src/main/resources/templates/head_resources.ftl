@@ -11,6 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
 <script src="../assets/js/echarts.min.js"></script>
 <link rel="stylesheet" href="../assets/css/amazeui.min.css" />
+<link rel="stylesheet" href="../assets/css/amazeui.tree.min.css"/>
 <link rel="stylesheet" href="../assets/css/amazeui.chosen.css"/>
 <link rel="stylesheet" href="../assets/css/amazeui.datatables.min.css" />
 <link rel="stylesheet" href="../assets/css/app.css">
