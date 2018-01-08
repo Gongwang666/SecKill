@@ -366,7 +366,7 @@ $('.sidebar-nav-sub-title').on('click', function() {
 
 
 
-var data =[{"title":"华为","type":"folder","products":[{"title":"IPHONE","type":"item"},{"title":"iMac","type":"item"},{"title":"MacBook Pro","type":"item"},{"title":"MacBook Air","type":"item"}]},{"title":"苹果公司","type":"folder","products":[{"title":"IPHONE","type":"item"},{"title":"iMac","type":"item"},{"title":"MacBook Pro","type":"item"},{"title":"MacBook Air","type":"item"}]}];
+//var data =[{"title":"华为","type":"folder","products":[{"title":"IPHONE","type":"item"},{"title":"iMac","type":"item"},{"title":"MacBook Pro","type":"item"},{"title":"MacBook Air","type":"item"}]},{"title":"苹果公司","type":"folder","products":[{"title":"IPHONE","type":"item"},{"title":"iMac","type":"item"},{"title":"MacBook Pro","type":"item"},{"title":"MacBook Air","type":"item"}]}];
 
 $('#firstTree').tree({
     dataSource: function(options, callback) {
@@ -375,7 +375,7 @@ $('#firstTree').tree({
         $.ajax({
             url:'/menu',
             type:'POST', //GET
-            async:true,    //或false,是否异步
+            async:false,    //或false,是否异步
             timeout:5000,    //超时时间
             dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
             beforeSend:function(xhr){
@@ -398,8 +398,7 @@ $('#firstTree').tree({
                 console.log('结束')
             }
         });
-        //var data = JSON.stringify(menu);
-        //console.log(data);
+        var data = menu;
         setTimeout(function() {
             callback({data: options.products || data});
         }, 400);

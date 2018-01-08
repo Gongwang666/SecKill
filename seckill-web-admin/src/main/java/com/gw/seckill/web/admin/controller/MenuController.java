@@ -17,7 +17,7 @@ public class MenuController {
     @RequestMapping("/menu")
     public List<MenuVO> menu(){
         MenuVO menuVO = new MenuVO();
-        MenuVO menuVO1 = new MenuVO("华为",EnumTreeType.FOLDER.getName());
+        MenuVO menuVO1 = new MenuVO("华",EnumTreeType.FOLDER.getName());
         List<MenuVO> mlist = new ArrayList<MenuVO>();
         menuVO.setTitle("苹果公司");
         menuVO.setType(EnumTreeType.FOLDER.getName());

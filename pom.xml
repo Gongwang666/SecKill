@@ -72,24 +72,22 @@
         <module>seckill-web-admin</module>
     </modules>
 
-    <!--<dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        &lt;!&ndash; spring热部署&ndash;&gt;
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>springloaded</artifactId>
-            <version>1.2.1.RELEASE</version>
-        </dependency>
-    </dependencies>
 
-    <build>
+    <!--<build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.8.RELEASE</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <mainClass>cn.springboot.Mainspringboot</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>-->
