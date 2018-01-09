@@ -385,14 +385,14 @@ $('#firstTree').tree({
             success:function(data,textStatus,jqXHR){
                 menu = data;
                 //alert(JSON.stringify(menu));
-                console.log(data)
-                console.log(textStatus)
-                console.log(jqXHR)
+                //console.log(data)
+                //console.log(textStatus)
+                //console.log(jqXHR)
             },
             error:function(xhr,textStatus){
-                console.log('错误')
-                console.log(xhr)
-                console.log(textStatus)
+                //console.log('错误')
+                //console.log(xhr)
+                //console.log(textStatus)
             },
             complete:function(){
                 console.log('结束')
@@ -408,75 +408,12 @@ $('#firstTree').tree({
     folderSelect: false
 });
 
+$('#firstTree').on('selected.tree.amui', function (event, data) {
+    // do something with data: { selected: [array], target: [object] }
 
-//添加分类弹出的模态窗口
-$('#doc-prompt-toggle').on('click', function() {
-    $('#cat-name').val("");
-    $('.am-alert').alert('close')
-    $('#my-prompt').modal({
-        relatedTarget: this,
-        closeOnConfirm:false,
-        onConfirm: function(e) {
-            //alert('你输入的是：' + e.data || '')
-            var form = $('#add_cat_form');
-            var parentId = $('#my-select').val();
-            var catName = $('#cat-name').val();
-            var isShow = $("input[name='isShow']:checked").val();
-
-            if(catName == null || catName == ""){
-                alert("分类名称不能为空！");
-                return;
-            }
-            if(parentId == null || parentId == ""){
-                alert("父级分类不能为空！");
-                return;
-            }
-            if(isShow == null || isShow == ""){
-                alert("是否显示不能为空！");
-                return;
-            }
-            var allData = {
-                catName:catName,
-                parentId:parentId,
-                isShow:isShow
-            };
-            $.ajax({
-                url:'/addCat.do',
-                contentType:"application/json;charset=utf-8",
-                type:form.attr("method"), //GET
-                async:true,    //或false,是否异步
-                data:JSON.stringify(allData),
-                timeout:5000,    //超时时间
-                dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-                beforeSend:function(xhr){
-                    //console.log(xhr)
-                    console.log('发送前')
-                },
-                success:function(data,textStatus,jqXHR){
-                    console.log(data)
-                    //console.log(textStatus)
-                    //console.log(jqXHR)
-                },
-                error:function(xhr,textStatus){
-                    //console.log('错误')
-                    //console.log(xhr)
-                    //console.log(textStatus)
-                },
-                complete:function(){
-                    console.log('结束')
-                    $('#my-prompt').modal('close');
-                }
-            })
-        },
-        onCancel: function(e) {
-            //alert('不想说!');
-        }
-    });
+    $('#content').load(data.selected[0].url);
 
 });
-
-//下拉选项卡js代码
-$('#my-select').chosen({ width: '95%'});
 
 
 

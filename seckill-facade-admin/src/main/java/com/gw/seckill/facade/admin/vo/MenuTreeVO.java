@@ -1,16 +1,20 @@
 package com.gw.seckill.facade.admin.vo;
 
-public class ItemVO {
+import com.gw.seckill.utils.BaseTreeObj;
+
+public class MenuTreeVO extends BaseTreeObj<MenuTreeVO,Long>{
     private String title;
     private String type;
+    private String url;
 
-    public ItemVO() {
+    public MenuTreeVO() {
     }
 
-    public ItemVO(String title, String type) {
-
+    public MenuTreeVO(String title, String type,String url) {
         this.title = title;
         this.type = type;
+        this.url = url;
+
     }
 
     public String getTitle() {
@@ -28,5 +32,13 @@ public class ItemVO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

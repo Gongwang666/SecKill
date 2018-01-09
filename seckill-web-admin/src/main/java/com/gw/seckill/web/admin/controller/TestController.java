@@ -1,8 +1,10 @@
 package com.gw.seckill.web.admin.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.gw.seckill.common.web.exception.enums.ExceptionEnum;
 import com.gw.seckill.common.web.exception.handler.WebGlobalExceptionHandler;
 import com.gw.seckill.common.web.exception.pojo.Result;
+import com.gw.seckill.common.web.exception.utils.ResultUtil;
 import com.gw.seckill.facade.admin.entity.GoodsCats;
 import com.gw.seckill.facade.admin.service.GoodsCatsFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class TestController {
         return "index";
     }
 
-    @RequestMapping("/category.do")
+    @RequestMapping("/goods/cats.do")
     public String toCategory(Model model){
         List<GoodsCats> goodsCatsList = goodsCatsFacade.findAllGoodsCats();
         model.addAttribute("goodsCats",goodsCatsList);
@@ -38,21 +40,22 @@ public class TestController {
 
 
 
-    @ResponseBody
-    @RequestMapping("/getAllCats.do")
-    public void getAllCats(Model model){
-        //model.addAttribute("")
+    @RequestMapping("/goods/cats/create")
+    public String addCats(Model model){
+        List<GoodsCats> goodsCatsList = goodsCatsFacade.findAllGoodsCats();
+        model.addAttribute("goodsCats",goodsCatsList);
+        return "/category/add_cat_page";
     }
 
     @ResponseBody
     @RequestMapping("/addCat.do")
-    public String addCat(@RequestBody GoodsCats goodsCats, Model model){
+    public Result addCat(@RequestBody GoodsCats goodsCats, Model model){
         //model.addAttribute("")
         if(goodsCats != null){
             goodsCatsFacade.addGoodsCat(goodsCats);
-            return "成功";
+            return ResultUtil.success();
         }
-        return "失败";
+        return ResultUtil.error(ExceptionEnum.UNKNOW_ERROR);
     }
 
     @RequestMapping("/errorMessage")

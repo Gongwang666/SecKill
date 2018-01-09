@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.gw.seckill.facade.admin.entity.SysUser">
+    <id column="SYS_USER_ID" jdbcType="BIGINT" property="sysUserId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="PASS_WORD" jdbcType="VARCHAR" property="passWord" />
+    <result column="SALT" jdbcType="VARCHAR" property="salt" />
+    <result column="ROLE_IDS" jdbcType="VARCHAR" property="roleIds" />
+    <result column="LOCKED" jdbcType="BIT" property="locked" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    SYS_USER_ID, USER_NAME, PASS_WORD, SALT, ROLE_IDS, LOCKED
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where SYS_USER_ID = #{sysUserId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_user
+    where SYS_USER_ID = #{sysUserId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gw.seckill.facade.admin.entity.SysUser">
+    insert into sys_user (SYS_USER_ID, USER_NAME, PASS_WORD, 
+      SALT, ROLE_IDS, LOCKED)
+    values (#{sysUserId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{roleIds,jdbcType=VARCHAR}, #{locked,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gw.seckill.facade.admin.entity.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysUserId != null">
+        SYS_USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="passWord != null">
+        PASS_WORD,
+      </if>
+      <if test="salt != null">
+        SALT,
+      </if>
+      <if test="roleIds != null">
+        ROLE_IDS,
+      </if>
+      <if test="locked != null">
+        LOCKED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysUserId != null">
+        #{sysUserId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIds != null">
+        #{roleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gw.seckill.facade.admin.entity.SysUser">
+    update sys_user
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        SALT = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="roleIds != null">
+        ROLE_IDS = #{roleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        LOCKED = #{locked,jdbcType=BIT},
+      </if>
+    </set>
+    where SYS_USER_ID = #{sysUserId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gw.seckill.facade.admin.entity.SysUser">
+    update sys_user
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      SALT = #{salt,jdbcType=VARCHAR},
+      ROLE_IDS = #{roleIds,jdbcType=VARCHAR},
+      LOCKED = #{locked,jdbcType=BIT}
+    where SYS_USER_ID = #{sysUserId,jdbcType=BIGINT}
+  </update>
+</mapper>

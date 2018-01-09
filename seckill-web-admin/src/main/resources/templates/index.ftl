@@ -16,7 +16,7 @@
         <#include "left_sidebar.ftl">
 
         <!-- 内容区域 -->
-        <div class="tpl-content-wrapper">
+        <div id="content" class="tpl-content-wrapper">
 
             <div class="container-fluid am-cf">
                 <div class="row">
@@ -269,6 +269,7 @@
     <script src="../assets/js/amazeui.datatables.min.js"></script>
     <script src="../assets/js/dataTables.responsive.min.js"></script>
     <script src="../assets/js/amazeui.tree.min.js"></script>
+    <script src="../assets/js/amazeui.chosen.min.js"></script>
     <script src="../assets/js/app.js"></script>
 
 </body>

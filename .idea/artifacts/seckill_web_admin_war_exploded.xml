@@ -13,6 +13,10 @@
           <element id="archive" name="seckill-facade-admin-1.0-SNAPSHOT.jar">
             <element id="module-output" name="seckill-facade-admin" />
           </element>
+          <element id="archive" name="seckill-common-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="seckill-common" />
+          </element>
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.44" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-data-rest:1.5.1.RELEASE" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-rest-webmvc:2.6.0.RELEASE" />

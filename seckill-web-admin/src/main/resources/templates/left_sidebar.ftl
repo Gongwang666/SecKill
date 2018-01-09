@@ -48,7 +48,7 @@
         <#--<li class="sidebar-nav-heading">Page<span class="sidebar-nav-heading-info"> 常用页面</span></li>-->
         <li class="sidebar-nav-link">
             <a href="javascript:;" class="sidebar-nav-sub-title">
-                <i class="am-icon-table sidebar-nav-link-logo"></i> 商品管理
+                <i class="am-icon-table sidebar-nav-link-logo"></i> 资源
                 <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
             </a>
             <ul class="am-tree sidebar-nav sidebar-nav-sub" id="firstTree">

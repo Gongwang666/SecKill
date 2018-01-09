@@ -1,23 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-   <#include "head_resources.ftl">
-</head>
-
-<body data-type="widgets">
-<script src="../assets/js/theme.js"></script>
-<div class="am-g tpl-g">
-    <!-- 头部 -->
-        <#include "header.ftl">
-    <!-- 风格切换 -->
-        <#include "change_style.ftl">
-    <!-- 侧边导航栏 -->
-        <#include "left_sidebar.ftl">
-
-        <#include "/category/add_category_modal.ftl">
-    <!-- 内容区域 -->
-    <div class="tpl-content-wrapper">
+        <!-- 内容区域 -->
         <div class="row-content am-cf">
             <div class="row">
                 <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -29,12 +11,13 @@
                         </div>
                         <div class="widget-body  am-fr">
 
-                            <#--表头新增保存按钮栏-->
+                        <#--表头新增保存按钮栏-->
                             <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
                                 <div class="am-form-group">
                                     <div class="am-btn-toolbar">
                                         <div class="am-btn-group am-btn-group-xs">
-                                            <button id="doc-prompt-toggle" type="button" class="am-btn am-btn-default am-btn-success"><span
+                                            <button id="doc-prompt-toggle" type="button"
+                                                    class="am-btn am-btn-default am-btn-success"><span
                                                     class="am-icon-plus"></span> 新增
                                             </button>
                                             <button type="button" class="am-btn am-btn-default am-btn-secondary"><span
@@ -51,7 +34,7 @@
                                 </div>
                             </div>
 
-                            <#--选择分类-->
+                        <#--选择分类-->
                             <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
                                 <div class="am-form-group tpl-table-list-select">
                                     <select data-am-selected="{btnSize: 'sm'}">
@@ -62,32 +45,32 @@
                                 </div>
                             </div>
 
-                            <#--搜索分类-->
+                        <#--搜索分类-->
                             <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
                                 <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
                                     <input type="text" class="am-form-field ">
                                     <span class="am-input-group-btn">
                                     <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
-                                    type="button"></button>
+                                            type="button"></button>
                                     </span>
                                 </div>
                             </div>
-                            <#--分类展示表格-->
+                        <#--分类展示表格-->
                             <div class="am-u-sm-12">
-                                    <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black "
-                                           id="example-r">
-                                        <thead>
-                                        <tr>
-                                            <th>分类ID</th>
-                                            <th>分类名称</th>
-                                            <th>父分类ID</th>
-                                            <th>是否显示</th>
-                                            <th>是否删除</th>
-                                            <th>创建时间</th>
-                                            <th>操作</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black "
+                                       id="example-r">
+                                    <thead>
+                                    <tr>
+                                        <th>分类ID</th>
+                                        <th>分类名称</th>
+                                        <th>父分类ID</th>
+                                        <th>是否显示</th>
+                                        <th>是否删除</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
                                         <#list goodsCats as cat>
                                             <tr class="gradeX">
                                                 <td>${cat.catId}</td>
@@ -128,30 +111,15 @@
                                             </tr>
                                         </#list>
 
-                                        <!-- more data -->
-                                        </tbody>
-                                    </table>
+                                    <!-- more data -->
+                                    </tbody>
+                                </table>
 
                             </div>
-                            <#--分页-->
+                        <#--分页-->
                             <#include "pagination.ftl">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
-
-<script src="../assets/js/amazeui.min.js"></script>
-<script src="../assets/js/amazeui.chosen.min.js"></script>
-<script src="../assets/js/amazeui.datatables.min.js"></script>
-<script src="../assets/js/dataTables.responsive.min.js"></script>
-<script src="../assets/js/amazeui.tree.min.js"></script>
-<script src="../assets/js/app.js"></script>
-
-
-</body>
-
-</html>
