@@ -35,4 +35,8 @@ public class MenuBiz {
         MenuUtil menuUtil = new MenuUtil();
         return menuUtil.getChildTreeObjects(menuTreeVOList,(long)1);
     }
+
+    public List<SysResource> getAllResources() {
+        return sysResourceDAO.selectAllRes();
+    }
 }

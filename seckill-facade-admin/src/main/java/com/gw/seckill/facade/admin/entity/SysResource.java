@@ -1,6 +1,8 @@
 package com.gw.seckill.facade.admin.entity;
 
-public class SysResource {
+import java.io.Serializable;
+
+public class SysResource implements Serializable {
     private Long resId;
 
     private String resName;

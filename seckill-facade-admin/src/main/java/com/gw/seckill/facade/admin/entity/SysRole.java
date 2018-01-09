@@ -1,6 +1,8 @@
 package com.gw.seckill.facade.admin.entity;
 
-public class SysRole {
+import java.io.Serializable;
+
+public class SysRole implements Serializable {
     private Long roleId;
 
     private String role;

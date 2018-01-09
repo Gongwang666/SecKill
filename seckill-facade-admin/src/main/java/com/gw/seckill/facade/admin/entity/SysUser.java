@@ -1,6 +1,8 @@
 package com.gw.seckill.facade.admin.entity;
 
-public class SysUser {
+import java.io.Serializable;
+
+public class SysUser implements Serializable {
     private Long sysUserId;
 
     private String userName;

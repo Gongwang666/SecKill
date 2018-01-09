@@ -2,6 +2,7 @@ package com.gw.seckill.facade.admin.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.gw.seckill.core.admin.biz.MenuBiz;
+import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.service.MenuFacade;
 import com.gw.seckill.facade.admin.vo.MenuTreeVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,10 @@ public class MenuFacadeImpl implements MenuFacade {
     @Override
     public List<MenuTreeVO> getMenuTree() {
         return menuBiz.getMenuTree();
+    }
+
+    @Override
+    public List<SysResource> getAllResources() {
+        return menuBiz.getAllResources();
     }
 }
