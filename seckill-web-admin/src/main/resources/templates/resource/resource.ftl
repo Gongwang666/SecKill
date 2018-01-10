@@ -85,11 +85,11 @@
                                                 <td>${res.available}</td>
                                                 <td>
                                                     <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;">
+                                                        <a href="javascript:;" data-res-id="${res.resId}" class="update-res">
                                                             <i class="am-icon-pencil"></i> 编辑
                                                         </a>
-                                                        <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
+                                                        <a href="javascript:;" data-res-id="${res.resId}" class="del-res tpl-table-black-operation-del">
+                                                            <i class="am-icon-trash" ></i> 删除
                                                         </a>
                                                     </div>
                                                 </td>
@@ -99,7 +99,6 @@
                                     <!-- more data -->
                                     </tbody>
                                 </table>
-
                             </div>
                             <#--分页-->
                             <#include "pagination.ftl">
@@ -108,3 +107,47 @@
                 </div>
             </div>
         </div>
+<script>
+    //编辑资源
+    $(function () {
+        $('.update-res').on('click', function () {
+            var id = $(this).attr('data-res-id');
+
+        })
+    });
+    //删除资源
+    $(function () {
+        $('.del-res').on('click', function () {
+            var id = $(this).attr('data-res-id');
+            $.ajax({
+                url:'/resource/delete',
+                contentType:"application/json;charset=utf-8",
+                type:'PSOT', //GET
+                async:true,    //或false,是否异步
+                data:id,
+                timeout:5000,    //超时时间
+                dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend:function(xhr){
+                    //console.log(xhr)
+                    console.log('发送前')
+                },
+                success:function(data,textStatus,jqXHR){
+                    console.log(data)
+                    $('#add_cat_alert').show();
+                    setTimeout("$('#content').load('/resource/view')",1500);
+                    //console.log(textStatus)
+                    //console.log(jqXHR)
+                },
+                error:function(xhr,textStatus){
+                    console.log('错误')
+                    console.log(xhr)
+                    //console.log(textStatus)
+                },
+                complete:function(){
+                    console.log('结束');
+                }
+            })
+        })
+    });
+
+</script>

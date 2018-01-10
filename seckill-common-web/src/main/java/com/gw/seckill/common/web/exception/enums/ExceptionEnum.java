@@ -7,6 +7,7 @@ package com.gw.seckill.common.web.exception.enums;
   */
 public enum ExceptionEnum {
     UNKNOW_ERROR(-1,"未知错误"),
+    ADD_ERROR(-2,"添加错误"),
     USER_NOT_FIND(-101,"用户不存在");
 
     private Integer code;

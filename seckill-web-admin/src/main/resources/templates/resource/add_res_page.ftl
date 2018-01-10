@@ -14,7 +14,7 @@
                         <!-- col start -->
                         <div class="am-u-md-6">
                             <div class="card-box">
-                                <form id="add_cat_form" enctype="multipart/form-data" method="post" class="tpl-form-border-form tpl-form-border-br">
+                                <form id="add_res_form" enctype="multipart/form-data" method="post" class="tpl-form-border-form tpl-form-border-br">
 
                                     <div class="am-form-group">
                                         <label for="user-phone" class="am-u-sm-3 am-form-label">
@@ -22,7 +22,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <select id="my-select" name="catId" data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chosen-select-deselect" tabindex="9">
+                                                <select id="res_parent_select" name="catId" data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chosen-select-deselect" tabindex="9">
 
                                                     <#list resList as res>
                                                         <#--<#if cat.dataFlag == 1>
@@ -44,7 +44,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input type="text" class="tpl-form-input" placeholder="请输入资源名称"/>
+                                                <input id="res_name" type="text" class="tpl-form-input" placeholder="请输入资源名称"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -56,9 +56,9 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <select id="res_type"  data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chosen-select-deselect" tabindex="9">
-                                                    <option value="0">folder</option>
-                                                    <option value="1">item</option>
+                                                <select id="res_type_select"  data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chosen-select-deselect" tabindex="9">
+                                                    <option value="folder">folder</option>
+                                                    <option value="item">item</option>
                                                 </select>
                                             </div>
                                             <div class="am-u-sm-3"></div>
@@ -71,7 +71,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input type="text" class="tpl-form-input" placeholder="请输入资源URL"/>
+                                                <input id="res_url" type="text" class="tpl-form-input" placeholder="请输入资源URL"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -83,7 +83,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input type="text" class="tpl-form-input" placeholder="请输入所有父类资源ID"/>
+                                                <input id="all_parents" type="text" class="tpl-form-input" placeholder="请输入所有父类资源ID"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -94,7 +94,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input type="text" class="tpl-form-input" placeholder="请输入权限"/>
+                                                <input id="res_permission" type="text" class="tpl-form-input" placeholder="请输入权限"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -130,7 +130,7 @@
                                             <div class="am-u-sm-4">
                                             </div>
                                             <div class="am-u-sm-8">
-                                                <button id="add_cat" type="button" class="am-btn am-btn-primary">提交</button>
+                                                <button id="add_res" type="button" class="am-btn am-btn-primary">提交</button>
                                             </div>
                                         </div>
                                     </div>
@@ -147,7 +147,71 @@
 </div>
 <script>
     //下拉选项卡js代码
-    $('#my-select').chosen({ width: '95%'});
-    $('#res_type').chosen({ width: '95%'});
+    $('#res_parent_select').chosen({ width: '95%'});
+    $('#res_type_select').chosen({ width: '95%'});
+
+    $('#add_res').on('click',function () {
+        var form = $('#add_res_form');
+        var resParentId = $('#res_parent_select').val();
+        var resName = $('#res_name').val();
+        var resType = $('#res_type_select').val();
+        var resUrl = $('#res_url').val();
+        var allParents = $('#all_parents').val();
+        var resPermission = $('#res_permission').val();
+        //var isShow = $("input[name='isShow']:checked").val();
+        if(resName == null || resName == ""){
+            alert("资源名称不能为空！");
+            return;
+        }
+        if(resUrl == null || resUrl == ""){
+            alert("资源不能为空！");
+            return;
+        }
+        if(allParents == null || allParents == ""){
+            alert("所有父类资源不能为空！");
+            return;
+        }
+        if(resPermission == null || resPermission == ""){
+            alert("权限不能为空！");
+            return;
+        }
+
+        var allData = {
+                        resName:resName,
+                        resType:resType,
+                        resUrl:resUrl,
+                        parentId:resParentId,
+                        parentIds:allParents,
+                        permission:resPermission
+                        };
+        $.ajax({
+            url:'/resource/create.do',
+            contentType:"application/json;charset=utf-8",
+            type:form.attr("method"), //GET
+            async:true,    //或false,是否异步
+            data:JSON.stringify(allData),
+            timeout:5000,    //超时时间
+            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            beforeSend:function(xhr){
+                //console.log(xhr)
+                console.log('发送前')
+            },
+            success:function(data,textStatus,jqXHR){
+                console.log(data)
+                //$('#add_cat_alert').show();
+                setTimeout("$('#content').load('/resource/create')",1500);
+                //console.log(textStatus)
+                //console.log(jqXHR)
+            },
+            error:function(xhr,textStatus){
+                console.log('错误')
+                console.log(xhr)
+                //console.log(textStatus)
+            },
+            complete:function(){
+                console.log('结束');
+            }
+        })
+    });
 
 </script>

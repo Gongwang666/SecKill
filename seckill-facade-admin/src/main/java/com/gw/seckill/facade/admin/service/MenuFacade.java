@@ -30,4 +30,22 @@ public interface MenuFacade {
     　* @创建时间: 2018/1/9 21:30
       */
     List<SysResource> getAllResources();
+    /**
+    　* @描述:     添加资源
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/10 16:21
+      */
+    void addSysRes(SysResource sysResource);
+    /**
+    　* @描述:     删除资源
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/10 22:10
+      */
+    void deleteSysResource(Long resID);
 }

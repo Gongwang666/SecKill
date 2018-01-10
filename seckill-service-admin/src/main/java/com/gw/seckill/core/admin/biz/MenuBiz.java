@@ -39,4 +39,22 @@ public class MenuBiz {
     public List<SysResource> getAllResources() {
         return sysResourceDAO.selectAllRes();
     }
+
+    public void addSysRes(SysResource sysResource) {
+        sysResourceDAO.insertSelective(sysResource);
+    }
+    /**
+    　* @描述:     删除资源业务逻辑
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/10 22:11
+      */
+    public void deleteSysResource(Long resID) {
+        SysResource sysResource = new SysResource();
+        sysResource.setResId(resID);
+        sysResource.setAvailable(false);
+        sysResourceDAO.updateByPrimaryKeySelective(sysResource);
+    }
 }

@@ -27,4 +27,14 @@ public class MenuFacadeImpl implements MenuFacade {
     public List<SysResource> getAllResources() {
         return menuBiz.getAllResources();
     }
+
+    @Override
+    public void addSysRes(SysResource sysResource) {
+        menuBiz.addSysRes(sysResource);
+    }
+
+    @Override
+    public void deleteSysResource(Long resID) {
+        menuBiz.deleteSysResource(resID);
+    }
 }
