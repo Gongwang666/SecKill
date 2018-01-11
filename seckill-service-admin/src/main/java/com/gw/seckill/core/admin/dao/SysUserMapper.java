@@ -1,7 +1,11 @@
 package com.gw.seckill.core.admin.dao;
 
 import com.gw.seckill.facade.admin.entity.SysUser;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Repository("sysUserDAO")
+@Mapper
 public interface SysUserMapper {
     int deleteByPrimaryKey(Long sysUserId);
 
@@ -14,4 +18,6 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+    SysUser selectByUserName(String userName);
 }

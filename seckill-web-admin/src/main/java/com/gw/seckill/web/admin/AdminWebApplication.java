@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
   */
 @SpringBootApplication
 @PropertySource(value = {"classpath:service.properties"})
-@ComponentScan(basePackages = {"com.gw.seckill.common.web.exception"})
+@ComponentScan(basePackages = {"com.gw.seckill.common.web.exception","com.gw.seckill.web.admin.config"})
 public class AdminWebApplication {
     public static void main(String [] args){
         SpringApplication.run(AdminWebApplication.class,args);

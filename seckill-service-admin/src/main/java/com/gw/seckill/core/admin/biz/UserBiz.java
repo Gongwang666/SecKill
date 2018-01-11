@@ -1,5 +1,8 @@
 package com.gw.seckill.core.admin.biz;
 
+import com.gw.seckill.core.admin.dao.SysUserMapper;
+import com.gw.seckill.facade.admin.entity.SysUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,4 +13,11 @@ import org.springframework.stereotype.Service;
   */
 @Service("userBiz")
 public class UserBiz {
+    @Autowired
+    private SysUserMapper sysUserDAO;
+
+
+    public SysUser findByAccount(String userName) {
+        return sysUserDAO.selectByUserName(userName);
+    }
 }

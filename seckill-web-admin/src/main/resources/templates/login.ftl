@@ -18,14 +18,14 @@
 
                 </div>
 
-                <form class="am-form tpl-form-line-form">
+                <form id="login-form" action="/user/login.do" method="post" enctype="multipart/form-data" name="sysUser" class="am-form tpl-form-line-form" >
                     <div class="am-form-group">
-                        <input type="text" class="tpl-form-input" id="user-name" placeholder="请输入账号">
+                        <input type="text" name="userName" class="tpl-form-input" id="user-name" placeholder="请输入账号">
 
                     </div>
 
                     <div class="am-form-group">
-                        <input type="password" class="tpl-form-input" id="user-name" placeholder="请输入密码">
+                        <input type="password" name="passWord" class="tpl-form-input" id="user-name" placeholder="请输入密码">
 
                     </div>
                     <div class="am-form-group tpl-login-remember-me">
@@ -39,7 +39,7 @@
 
                     <div class="am-form-group">
 
-                        <button type="button" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交</button>
+                        <button id="login-submit" type="button" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">提交</button>
 
                     </div>
                 </form>
@@ -48,7 +48,13 @@
     </div>
     <script src="../assets/js/amazeui.min.js"></script>
     <script src="../assets/js/app.js"></script>
-
+    <script>
+        //登录提交表单
+        $('#login-submit').on('click',function () {
+            alert("aaa");
+            $('#login-form').submit();
+        });
+    </script>
 </body>
 
 </html>
