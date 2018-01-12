@@ -1,11 +1,14 @@
 package com.gw.seckill.web.admin.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.gw.seckill.common.web.exception.enums.ExceptionEnum;
 import com.gw.seckill.common.web.exception.handler.WebGlobalExceptionHandler;
 import com.gw.seckill.facade.admin.entity.SysUser;
+import com.gw.seckill.facade.admin.service.UserFacade;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
 
+    @Reference(version = "1.0.0")
+    private UserFacade userFacade;
     //统一异常处理
     @Autowired
     private WebGlobalExceptionHandler webGlobalExceptionHandler;
@@ -46,6 +51,8 @@ public class UserController {
         }
         String account = sysUser.getUserName();
         String password = sysUser.getPassWord();
+
+
         UsernamePasswordToken token = new UsernamePasswordToken(account, password);
         Subject subject = SecurityUtils.getSubject();
         try {

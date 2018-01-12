@@ -12,6 +12,14 @@ import java.util.Set;
 　* @创建时间: 2018/1/5 16:56
   */
 public interface UserFacade {
+    /**
+    　* @描述:     通过用户名查找权限
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/12 14:55
+      */
     Set<String> findPermissions(String username);
 
     /**

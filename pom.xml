@@ -79,6 +79,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.2.1</version>
         </dependency>
+        <!--JAVA BEAN的工具包-->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
+        </dependency>
     </dependencies>
     <!--<build>
         <plugins>

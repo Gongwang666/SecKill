@@ -1,7 +1,11 @@
 package com.gw.seckill.core.admin.dao;
 
 import com.gw.seckill.facade.admin.entity.SysRole;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Repository("sysRoleDAO")
+@Mapper
 public interface SysRoleMapper {
     int deleteByPrimaryKey(Long roleId);
 

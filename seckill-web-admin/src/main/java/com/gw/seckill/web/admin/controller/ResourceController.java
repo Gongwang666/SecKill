@@ -6,6 +6,7 @@ import com.gw.seckill.common.web.exception.pojo.Result;
 import com.gw.seckill.common.web.exception.utils.ResultUtil;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.service.MenuFacade;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ public class ResourceController {
     　* @作者:     gongwang
     　* @创建时间: 2018/1/10 16:52
       */
+    @RequiresPermissions("resource:view")
     @RequestMapping("/resource/view")
     public String showAllRes(Model model){
         model.addAttribute("resList",menuFacade.getAllResources());
