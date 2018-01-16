@@ -2,6 +2,7 @@ package com.gw.seckill.facade.admin.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.gw.seckill.core.admin.biz.UserBiz;
+import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.entity.SysUser;
 import com.gw.seckill.facade.admin.service.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public List<String> findPermissionUrl(String s) {
-        return null;
+    public Set<String> findPermissionUrl(String userName) {
+        return userBiz.findPermissionUrl(userName);
     }
 }

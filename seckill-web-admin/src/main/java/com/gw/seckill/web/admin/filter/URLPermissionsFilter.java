@@ -1,7 +1,7 @@
 package com.gw.seckill.web.admin.filter;
 
 import java.io.IOException;
-import java.util.List;
+
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.gw.seckill.facade.admin.service.UserFacade;
+import com.gw.seckill.web.admin.enums.EnumWithOutPermissionUrls;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -26,16 +27,37 @@ public class URLPermissionsFilter extends PermissionsAuthorizationFilter{
 		String curUrl = getRequestUrl(request);
 		String url = StringUtils.substringBefore(curUrl,";");
 		Subject subject = SecurityUtils.getSubject();
+		//属于不需要权限的URL放行
+		for(EnumWithOutPermissionUrls e :EnumWithOutPermissionUrls.values()){
+			if(e.getUrl().equals(url)){
+				return true;
+			}
+		}
+		//访问静态资源不需要权限，放行
 		if(StringUtils.endsWithAny(curUrl, ".js",".css",".html")
-				|| StringUtils.endsWithAny(curUrl, ".jpg",".png",".gif", ".jpeg")
-				|| StringUtils.equals(curUrl, "/unauthor")) {
+				||StringUtils.endsWithAny(curUrl, ".jpg",".png",".gif", ".jpeg")
+				||StringUtils.startsWith(curUrl,"/assets")) {
 			return true;
 		}
-		//userFacade.findPermissions(username)
-
-		return true;
+		//如果用户登录了且访问的是主页，放行
+		if(subject.getPrincipal()!=null&&url.equals("/index.do")){
+			return true;
+		}
+		//获得用户的可访问URL列表
+		//Set<String> urlSet = userFacade.findPermissionUrl((String)subject.getPrincipal());
+		//如果没有权限，返回false
+		//return urlSet.contains(url);
+		return false;
 	}
-	
+
+	@Override
+	protected boolean onAccessDenied(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+		if(SecurityUtils.getSubject().getPrincipal()!=null){
+			return true;
+		}
+		return super.onAccessDenied(request, response, mappedValue);
+	}
+
 	/**
 	 * 获取当前URL+Parameter
 	 * @author lance

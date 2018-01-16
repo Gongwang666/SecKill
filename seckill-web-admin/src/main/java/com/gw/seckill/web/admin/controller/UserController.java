@@ -61,6 +61,6 @@ public class UserController {
             e.printStackTrace();
             webGlobalExceptionHandler.exceptionGet(new Exception(ExceptionEnum.USER_NOT_FIND.getMsg()));
         }
-        return "redirect:/index.do";
+         return "redirect:/index.do";
     }
 }

@@ -4,11 +4,14 @@ import com.gw.seckill.common.web.exception.DescribeException;
 import com.gw.seckill.common.web.exception.enums.ExceptionEnum;
 import com.gw.seckill.common.web.exception.pojo.Result;
 import com.gw.seckill.common.web.exception.utils.ResultUtil;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class WebGlobalExceptionHandler {
@@ -19,7 +22,7 @@ public class WebGlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(value = Exception.class)
+    /*@ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Result exceptionGet(Exception e){
         if(e instanceof DescribeException){
@@ -29,5 +32,28 @@ public class WebGlobalExceptionHandler {
 
         LOGGER.error("【系统异常】{}",e);
         return ResultUtil.error(ExceptionEnum.UNKNOW_ERROR);
+    }*/
+
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView exceptionGet(Exception e){
+        ModelAndView modelAndView = new ModelAndView("/404");
+        if(e instanceof DescribeException){
+            DescribeException pingjiaException = (DescribeException) e;
+            modelAndView.addObject("message",
+                    ResultUtil.error(pingjiaException.getCode(),pingjiaException.getMessage()));
+            return modelAndView;
+        }
+
+        LOGGER.error("【系统异常】{}",e);
+        modelAndView.addObject("message",e.getMessage());
+        return modelAndView;
+    }
+
+    @ExceptionHandler(value = UnauthorizedException.class)
+    public ModelAndView unauthorizedExceptionGet(Exception e){
+        ModelAndView modelAndView = new ModelAndView("/404");
+        LOGGER.error("权限异常:",e);
+        modelAndView.addObject("message","对不起，您没有此权限！");
+        return modelAndView;
     }
 }

@@ -1,5 +1,6 @@
 package com.gw.seckill.facade.admin.service;
 
+import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.entity.SysUser;
 
 import java.util.List;
@@ -31,6 +32,13 @@ public interface UserFacade {
     　* @创建时间: 2018/1/11 17:03
       */
     SysUser findByAccount(String userName);
-
-    List<String> findPermissionUrl(String s);
+    /**
+    　* @描述:     通过用户名查找用户可以访问的URL
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/16 18:10
+      */
+    Set<String> findPermissionUrl(String userName);
 }

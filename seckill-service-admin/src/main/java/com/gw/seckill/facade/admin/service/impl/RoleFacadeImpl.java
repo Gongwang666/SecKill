@@ -18,8 +18,9 @@ public class RoleFacadeImpl implements RoleFacade {
     @Autowired
     private RoleBiz roleBiz;
 
+
     @Override
-    public Set<String> findPermissions(Long[] roleIds) {
-        return roleBiz.findPermissions(roleIds);
+    public Set<Long> findRoleResourceIDs(Long[] roleIds) {
+        return roleBiz.findRoleResourceIDs(roleIds);
     }
 }

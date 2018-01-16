@@ -51,7 +51,6 @@
     <script>
         //登录提交表单
         $('#login-submit').on('click',function () {
-            alert("aaa");
             $('#login-form').submit();
         });
     </script>
