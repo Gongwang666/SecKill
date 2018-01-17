@@ -7,6 +7,7 @@ import com.gw.seckill.common.web.exception.utils.ResultUtil;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.entity.SysUser;
 import com.gw.seckill.facade.admin.service.MenuFacade;
+import com.gw.seckill.facade.admin.service.ResourceFacade;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ResourceController {
     @Reference(version = "1.0.0")
-    private MenuFacade menuFacade;
+    private ResourceFacade resourceFacade;
 
     /**
     　* @描述:     资源浏览页面
@@ -35,7 +36,7 @@ public class ResourceController {
     @RequestMapping("/resource/view")
     public String showAllRes(Model model){
 
-        model.addAttribute("resList",menuFacade.getAllResources());
+        model.addAttribute("resList",resourceFacade.getAllResources());
         return "/resource/resource";
     }
     /**
@@ -52,7 +53,7 @@ public class ResourceController {
         Subject subject = SecurityUtils.getSubject();
         String userName =(String) subject.getPrincipal();
         boolean flag =subject.isPermitted("resource:view");
-        model.addAttribute("resList",menuFacade.getAllResources());
+        model.addAttribute("resList",resourceFacade.getAllResources());
         return "/resource/add_res_page";
     }
     /**
@@ -67,7 +68,7 @@ public class ResourceController {
     @RequestMapping("/resource/create.do")
     public Result addRes(@RequestBody SysResource sysResource, Model model){
         if(sysResource != null){
-            menuFacade.addSysRes(sysResource);
+            resourceFacade.addSysRes(sysResource);
             return ResultUtil.success();
         }
         return ResultUtil.error(ExceptionEnum.ADD_ERROR);
@@ -85,7 +86,7 @@ public class ResourceController {
     @RequestMapping("/resource/delete")
     public Result delRes(@RequestBody Long resID){
         if(resID != null){
-            menuFacade.deleteSysResource(resID);
+            resourceFacade.deleteSysResource(resID);
         }
         return ResultUtil.error(ExceptionEnum.ADD_ERROR);
     }

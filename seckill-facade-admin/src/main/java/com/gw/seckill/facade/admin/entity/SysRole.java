@@ -11,7 +11,7 @@ public class SysRole implements Serializable {
 
     private String resourceIds;
 
-    private Boolean available;
+    private Byte available;
 
     public Long getRoleId() {
         return roleId;
@@ -45,11 +45,11 @@ public class SysRole implements Serializable {
         this.resourceIds = resourceIds == null ? null : resourceIds.trim();
     }
 
-    public Boolean getAvailable() {
+    public Byte getAvailable() {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(Byte available) {
         this.available = available;
     }
 }

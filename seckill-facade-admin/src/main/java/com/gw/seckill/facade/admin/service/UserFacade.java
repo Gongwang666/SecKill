@@ -41,4 +41,13 @@ public interface UserFacade {
     　* @创建时间: 2018/1/16 18:10
       */
     Set<String> findPermissionUrl(String userName);
+    /**
+    　* @描述:     添加用户
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/17 21:45
+      */
+    void addSysUser(SysUser sysUser);
 }

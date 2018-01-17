@@ -1,9 +1,12 @@
 package com.gw.seckill.core.admin.biz;
 
+import com.gw.seckill.constants.ConstantClassFunction;
 import com.gw.seckill.core.admin.dao.SysUserMapper;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.entity.SysUser;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,5 +88,34 @@ public class UserBiz {
         Set<Long> resourceIDs = roleBiz.findRoleResourceIDs(ids);
         Set<String> sysResourceSet =resourceBiz.findResourceURLs(resourceIDs);
         return sysResourceSet;
+    }
+    /**
+    　* @描述:    添加用户
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/1/17 21:45
+      */
+    public void addSysUser(SysUser sysUser) {
+        String username = sysUser.getUserName();
+        String password = sysUser.getPassWord();
+        //以用户名为第一个盐值
+        String salt1 = username;
+        //以随机数为第二个盐值，要存储到数据库
+        String salt2 = new SecureRandomNumberGenerator().nextBytes().toHex();
+        //哈希次数
+        int hashIterations = ConstantClassFunction.getHASH_ITERATIONS();
+        //加密算法
+        String algorithmName = ConstantClassFunction.getALGORITHM_NAME();
+
+        SimpleHash hash = new SimpleHash(algorithmName, password, salt1 + salt2, hashIterations);
+        //加密后的密码串，存入数据库
+        String encodedPassword = hash.toHex();
+
+        sysUser.setPassWord(encodedPassword);
+        sysUser.setSalt(salt2);
+        sysUser.setRoleIds(ConstantClassFunction.getVISITOR());
+        sysUserDAO.insertSelective(sysUser);
     }
 }

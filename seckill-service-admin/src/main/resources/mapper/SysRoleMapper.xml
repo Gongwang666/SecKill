@@ -6,7 +6,7 @@
     <result column="ROLE" jdbcType="VARCHAR" property="role" />
     <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="RESOURCE_IDS" jdbcType="VARCHAR" property="resourceIds" />
-    <result column="AVAILABLE" jdbcType="BIT" property="available" />
+    <result column="AVAILABLE" jdbcType="TINYINT" property="available" />
   </resultMap>
   <sql id="Base_Column_List">
     ROLE_ID, ROLE, DESCRIPTION, RESOURCE_IDS, AVAILABLE
@@ -25,7 +25,7 @@
     insert into sys_role (ROLE_ID, ROLE, DESCRIPTION, 
       RESOURCE_IDS, AVAILABLE)
     values (#{roleId,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{resourceIds,jdbcType=VARCHAR}, #{available,jdbcType=BIT})
+      #{resourceIds,jdbcType=VARCHAR}, #{available,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.gw.seckill.facade.admin.entity.SysRole">
     insert into sys_role
@@ -60,7 +60,7 @@
         #{resourceIds,jdbcType=VARCHAR},
       </if>
       <if test="available != null">
-        #{available,jdbcType=BIT},
+        #{available,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -77,7 +77,7 @@
         RESOURCE_IDS = #{resourceIds,jdbcType=VARCHAR},
       </if>
       <if test="available != null">
-        AVAILABLE = #{available,jdbcType=BIT},
+        AVAILABLE = #{available,jdbcType=TINYINT},
       </if>
     </set>
     where ROLE_ID = #{roleId,jdbcType=BIGINT}
@@ -87,7 +87,7 @@
     set ROLE = #{role,jdbcType=VARCHAR},
       DESCRIPTION = #{description,jdbcType=VARCHAR},
       RESOURCE_IDS = #{resourceIds,jdbcType=VARCHAR},
-      AVAILABLE = #{available,jdbcType=BIT}
+      AVAILABLE = #{available,jdbcType=TINYINT}
     where ROLE_ID = #{roleId,jdbcType=BIGINT}
   </update>
 </mapper>

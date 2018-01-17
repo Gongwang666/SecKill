@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
+import com.gw.seckill.constants.ConstantClassFunction;
 import com.gw.seckill.web.admin.cache.SpringCacheManagerWrapper;
 import com.gw.seckill.web.admin.credentials.RetryLimitHashedCredentialsMatcher;
 import com.gw.seckill.web.admin.filter.URLPermissionsFilter;
@@ -88,6 +89,7 @@ public class ShiroConfig {
 	}
 	
 	/**
+	 * 会话管理器设置
 	 * @see DefaultWebSessionManager
 	 * @return
 	 */
@@ -103,23 +105,48 @@ public class ShiroConfig {
 	}
 	
 	/**
+	 * 自定义域
 	 * @see UserRealm--->AuthorizingRealm
 	 * @return
 	 */
 	@Bean
 	@DependsOn(value="lifecycleBeanPostProcessor")
-	public UserRealm userRealm(RetryLimitHashedCredentialsMatcher credentialsMatcher) {
+	public UserRealm userRealm(SpringCacheManagerWrapper shiroCacheManager,RetryLimitHashedCredentialsMatcher credentialsMatcher) {
 		UserRealm userRealm = new UserRealm();
-		userRealm.setCachingEnabled(false);
-		//userRealm.setCredentialsMatcher(credentialsMatcher);
+		//启用缓存
+		userRealm.setCachingEnabled(true);
+		//注入缓存管理器
+		userRealm.setCacheManager(shiroCacheManager);
+		//容许授权使用缓存
+		userRealm.setAuthorizationCachingEnabled(true);
+		//容许认证使用缓存
+		userRealm.setAuthenticationCachingEnabled(true);
+		//设置使用哪个缓存，name对应ecache.xml配置文件中的定义
+		userRealm.setAuthorizationCacheName("authorizationCache");
+		userRealm.setAuthenticationCacheName("authenticationCache");
+		userRealm.setCredentialsMatcher(credentialsMatcher);
 		return userRealm;
 	}
-	
+	/**
+	　* @描述:     自定义URL过滤器
+	　* @参数描述: 
+	　* @返回值:
+	　* @异常:     
+	　* @作者:     gongwang
+	　* @创建时间: 2018/1/17 21:11
+	  */
 	@Bean
 	public URLPermissionsFilter urlPermissionsFilter() {
 		return new URLPermissionsFilter();
 	}
-	
+	/**
+	　* @描述:     将缓存管理器添加到bean容器
+	　* @参数描述: 
+	　* @返回值:
+	　* @异常:     
+	　* @作者:     gongwang
+	　* @创建时间: 2018/1/17 21:11
+	  */
 	@Bean
 	public SpringCacheManagerWrapper shiroCacheManager(EhCacheCacheManager springCacheManager) {
 		SpringCacheManagerWrapper springCacheManagerWrapper = new SpringCacheManagerWrapper();
@@ -136,12 +163,19 @@ public class ShiroConfig {
 	public JavaUuidSessionIdGenerator javaUuidSessionIdGenerator(){
 		return new JavaUuidSessionIdGenerator();
 	}
-
+	/**
+	　* @描述:     自定义认证匹配器
+	　* @参数描述: 缓存管理器
+	　* @返回值:
+	　* @异常:     
+	　* @作者:     gongwang
+	　* @创建时间: 2018/1/17 21:12
+	  */
 	@Bean
 	public RetryLimitHashedCredentialsMatcher credentialsMatcher(SpringCacheManagerWrapper shiroCacheManager){
 		RetryLimitHashedCredentialsMatcher credentialsMatcher = new RetryLimitHashedCredentialsMatcher(shiroCacheManager);
-		credentialsMatcher.setHashAlgorithmName("md5");
-		credentialsMatcher.setHashIterations(2);
+		credentialsMatcher.setHashAlgorithmName(ConstantClassFunction.getALGORITHM_NAME());
+		credentialsMatcher.setHashIterations(ConstantClassFunction.getHASH_ITERATIONS());
 		credentialsMatcher.setStoredCredentialsHexEncoded(true);
 		return credentialsMatcher;
 	}

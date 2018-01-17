@@ -17,7 +17,7 @@ public class SysResource implements Serializable {
 
     private String permission;
 
-    private Boolean available;
+    private Byte available;
 
     public Long getResId() {
         return resId;
@@ -75,11 +75,11 @@ public class SysResource implements Serializable {
         this.permission = permission == null ? null : permission.trim();
     }
 
-    public Boolean getAvailable() {
+    public Byte getAvailable() {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(Byte available) {
         this.available = available;
     }
 }

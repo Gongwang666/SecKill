@@ -7,6 +7,12 @@
 
 <body data-type="login">
     <script src="../assets/js/theme.js"></script>
+    <#if message?exists>
+       <div class="am-alert am-alert-danger" data-am-alert>
+           <button type="button" class="am-close">&times;</button>
+           <p>${message}</p>
+       </div>
+    </#if>
     <div class="am-g tpl-g">
         <!-- 风格切换 -->
         <#include "change_style.ftl">

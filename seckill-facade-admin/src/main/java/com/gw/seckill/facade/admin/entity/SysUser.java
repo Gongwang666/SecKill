@@ -13,7 +13,7 @@ public class SysUser implements Serializable {
 
     private String roleIds;
 
-    private Boolean locked;
+    private Byte locked;
 
     public Long getSysUserId() {
         return sysUserId;
@@ -55,11 +55,11 @@ public class SysUser implements Serializable {
         this.roleIds = roleIds == null ? null : roleIds.trim();
     }
 
-    public Boolean getLocked() {
+    public Byte getLocked() {
         return locked;
     }
 
-    public void setLocked(Boolean locked) {
+    public void setLocked(Byte locked) {
         this.locked = locked;
     }
 }

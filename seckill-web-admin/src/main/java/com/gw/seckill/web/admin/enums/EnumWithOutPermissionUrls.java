@@ -7,7 +7,7 @@ package com.gw.seckill.web.admin.enums;
   */
 public enum EnumWithOutPermissionUrls {
     LOGIN_PAGE("/user/login"),DO_LOGIN("/user/login.do"),
-    UNAUTHER_PAGE("/unauthor");
+    UNAUTHER_PAGE("/unauthor"),ERROR_INFO("/404");
     private String url;
 
     EnumWithOutPermissionUrls(String url) {

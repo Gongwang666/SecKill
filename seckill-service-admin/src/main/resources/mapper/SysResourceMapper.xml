@@ -9,7 +9,7 @@
     <result column="PARENT_ID" jdbcType="BIGINT" property="parentId" />
     <result column="PARENT_IDS" jdbcType="VARCHAR" property="parentIds" />
     <result column="PERMISSION" jdbcType="VARCHAR" property="permission" />
-    <result column="AVAILABLE" jdbcType="BIT" property="available" />
+    <result column="AVAILABLE" jdbcType="TINYINT" property="available" />
   </resultMap>
   <sql id="Base_Column_List">
     RES_ID, RES_NAME, RES_TYPE, RES_URL, PARENT_ID, PARENT_IDS, PERMISSION, AVAILABLE
@@ -41,7 +41,7 @@
       PERMISSION, AVAILABLE)
     values (#{resId,jdbcType=BIGINT}, #{resName,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR}, 
       #{resUrl,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=VARCHAR}, 
-      #{permission,jdbcType=VARCHAR}, #{available,jdbcType=BIT})
+      #{permission,jdbcType=VARCHAR}, #{available,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.gw.seckill.facade.admin.entity.SysResource">
     insert into sys_resource
@@ -94,7 +94,7 @@
         #{permission,jdbcType=VARCHAR},
       </if>
       <if test="available != null">
-        #{available,jdbcType=BIT},
+        #{available,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -120,7 +120,7 @@
         PERMISSION = #{permission,jdbcType=VARCHAR},
       </if>
       <if test="available != null">
-        AVAILABLE = #{available,jdbcType=BIT},
+        AVAILABLE = #{available,jdbcType=TINYINT},
       </if>
     </set>
     where RES_ID = #{resId,jdbcType=BIGINT}
@@ -133,7 +133,7 @@
       PARENT_ID = #{parentId,jdbcType=BIGINT},
       PARENT_IDS = #{parentIds,jdbcType=VARCHAR},
       PERMISSION = #{permission,jdbcType=VARCHAR},
-      AVAILABLE = #{available,jdbcType=BIT}
+      AVAILABLE = #{available,jdbcType=TINYINT}
     where RES_ID = #{resId,jdbcType=BIGINT}
   </update>
 </mapper>

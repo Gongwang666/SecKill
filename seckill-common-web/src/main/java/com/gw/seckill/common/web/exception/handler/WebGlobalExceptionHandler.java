@@ -4,6 +4,7 @@ import com.gw.seckill.common.web.exception.DescribeException;
 import com.gw.seckill.common.web.exception.enums.ExceptionEnum;
 import com.gw.seckill.common.web.exception.pojo.Result;
 import com.gw.seckill.common.web.exception.utils.ResultUtil;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,9 +52,18 @@ public class WebGlobalExceptionHandler {
 
     @ExceptionHandler(value = UnauthorizedException.class)
     public ModelAndView unauthorizedExceptionGet(Exception e){
-        ModelAndView modelAndView = new ModelAndView("/404");
+        ModelAndView modelAndView = new ModelAndView("/user/login");
         LOGGER.error("权限异常:",e);
         modelAndView.addObject("message","对不起，您没有此权限！");
+        return modelAndView;
+    }
+    //登录次数超过5次，没有登陆成功
+    @ResponseBody
+    @ExceptionHandler(value = ExcessiveAttemptsException.class)
+    public ModelAndView excessiveAttemptsExceptionGet(Exception e){
+        ModelAndView modelAndView = new ModelAndView("/user/login");
+        LOGGER.error("尝试登录超过次数限制:",e);
+        modelAndView.addObject("message","对不起，超过登录次数，10分钟内，帐号将被锁定！");
         return modelAndView;
     }
 }

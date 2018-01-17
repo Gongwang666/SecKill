@@ -2,8 +2,11 @@ package com.gw.seckill.facade.admin.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.gw.seckill.core.admin.biz.ResourceBiz;
+import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.service.ResourceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  　* @描述:     角色管理dubbo实现
@@ -15,4 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ResourceFacadeImpl implements ResourceFacade{
     @Autowired
     private ResourceBiz resourceBiz;
+
+    @Override
+    public void deleteSysResource(Long resID) {
+        resourceBiz.deleteSysResource(resID);
+    }
+
+    @Override
+    public List<SysResource> getAllResources() {
+        return resourceBiz.getAllResources();
+    }
+
+    @Override
+    public void addSysRes(SysResource sysResource) {
+        resourceBiz.addSysRes(sysResource);
+    }
 }

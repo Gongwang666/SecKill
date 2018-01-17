@@ -33,4 +33,9 @@ public class UserFacadeImpl implements UserFacade {
     public Set<String> findPermissionUrl(String userName) {
         return userBiz.findPermissionUrl(userName);
     }
+
+    @Override
+    public void addSysUser(SysUser sysUser) {
+        userBiz.addSysUser(sysUser);
+    }
 }
