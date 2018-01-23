@@ -10,6 +10,7 @@ import com.gw.seckill.web.admin.cache.SpringCacheManagerWrapper;
 import com.gw.seckill.web.admin.credentials.RetryLimitHashedCredentialsMatcher;
 import com.gw.seckill.web.admin.filter.URLPermissionsFilter;
 import com.gw.seckill.web.admin.realm.UserRealm;
+import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -123,6 +124,8 @@ public class ShiroConfig {
 		userRealm.setAuthenticationCachingEnabled(true);
 		//设置使用哪个缓存，name对应ecache.xml配置文件中的定义
 		userRealm.setAuthorizationCacheName("authorizationCache");
+		//不加这句会报空指针异常
+		userRealm.setAuthorizationCache(shiroCacheManager.<Object, AuthorizationInfo>getCache("authorizationCache"));
 		userRealm.setAuthenticationCacheName("authenticationCache");
 		userRealm.setCredentialsMatcher(credentialsMatcher);
 		return userRealm;
