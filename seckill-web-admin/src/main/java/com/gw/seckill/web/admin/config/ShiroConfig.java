@@ -8,14 +8,19 @@ import javax.servlet.Filter;
 import com.gw.seckill.constants.ConstantClassFunction;
 import com.gw.seckill.web.admin.cache.SpringCacheManagerWrapper;
 import com.gw.seckill.web.admin.credentials.RetryLimitHashedCredentialsMatcher;
+import com.gw.seckill.web.admin.enums.EnumWithOutPermissionUrls;
+import com.gw.seckill.web.admin.filter.KickoutSessionControlFilter;
 import com.gw.seckill.web.admin.filter.URLPermissionsFilter;
 import com.gw.seckill.web.admin.realm.UserRealm;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
+import org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
@@ -50,13 +55,15 @@ public class ShiroConfig {
 	 * @return
 	 */
 	@Bean(name = "shiroFilter")
-	public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager){
+	public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager,
+											  KickoutSessionControlFilter kickoutSessionControlFilter){
 		ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
 		bean.setSecurityManager(securityManager);
 		bean.setLoginUrl("/user/login");
 		bean.setUnauthorizedUrl("/404");
 		
 		Map<String, Filter>filters = Maps.newHashMap();
+		filters.put("kickout",kickoutSessionControlFilter);
 		filters.put("perms", urlPermissionsFilter());
 		filters.put("anon", new AnonymousFilter());
 		bean.setFilters(filters);
@@ -65,11 +72,12 @@ public class ShiroConfig {
 		chains.put("/user/login", "anon");
 		chains.put("/user/login.do", "anon");
 		chains.put("/404", "anon");
+		chains.put("/user/kickout", "anon");
 		chains.put("/logout", "logout");
 		chains.put("/base/**", "anon");
 		chains.put("/css/**", "anon");
 		chains.put("/layer/**", "anon");
-		chains.put("/**", "perms");
+		chains.put("/**", "perms,kickout");
 		bean.setFilterChainDefinitionMap(chains);
 		return bean;
 	}
@@ -181,5 +189,63 @@ public class ShiroConfig {
 		credentialsMatcher.setHashIterations(ConstantClassFunction.getHASH_ITERATIONS());
 		credentialsMatcher.setStoredCredentialsHexEncoded(true);
 		return credentialsMatcher;
+	}
+	@Bean
+	public KickoutSessionControlFilter kickoutSessionControlFilter(DefaultWebSessionManager sessionManager,
+																   SpringCacheManagerWrapper shiroCacheManager){
+		KickoutSessionControlFilter kickoutSessionControlFilter = new KickoutSessionControlFilter();
+		//kickoutAfter：是否踢出后来登录的，默认是false；即后者登录的用户踢出前者登录的用户；
+		kickoutSessionControlFilter.setKickoutAfter(false);
+		kickoutSessionControlFilter.setMaxSession(1);
+		kickoutSessionControlFilter.setSessionManager(sessionManager);
+		kickoutSessionControlFilter.setCacheManager(shiroCacheManager);
+		kickoutSessionControlFilter.setKickoutUrl(EnumWithOutPermissionUrls.USER_KICK_OUT.getUrl());
+		return kickoutSessionControlFilter;
+	}
+	//会话ID生成器
+	@Bean
+    public JavaUuidSessionIdGenerator sessionIdGenerator(){
+	    return new JavaUuidSessionIdGenerator();
+    }
+    @Bean
+    public SimpleCookie sessionIdCookie(){
+        SimpleCookie simpleCookie = new SimpleCookie("sid");
+        simpleCookie.setHttpOnly(true);
+        //30天
+        simpleCookie.setMaxAge(2592000);
+        return simpleCookie;
+    }
+    //会话DAO
+	@Bean
+    public EnterpriseCacheSessionDAO sessionDAO(JavaUuidSessionIdGenerator sessionIdGenerator){
+        EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
+        sessionDAO.setActiveSessionsCacheName("shiro-activeSessionCache");
+        sessionDAO.setSessionIdGenerator(sessionIdGenerator);
+        return sessionDAO;
+    }
+	//会话验证调度器
+	@Bean
+	public QuartzSessionValidationScheduler quartzSessionValidationScheduler(DefaultWebSessionManager sessionManager){
+        QuartzSessionValidationScheduler quartzSessionValidationScheduler = new QuartzSessionValidationScheduler();
+        quartzSessionValidationScheduler.setSessionManager(sessionManager);
+        quartzSessionValidationScheduler.setSessionValidationInterval(1800000);
+        return quartzSessionValidationScheduler;
+    }
+
+	//会话管理器
+	@Bean
+	public DefaultWebSessionManager sessionManager(
+			QuartzSessionValidationScheduler quartzSessionValidationScheduler,
+			EnterpriseCacheSessionDAO sessionDAO,
+			SimpleCookie sessionIdCookie){
+		DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
+		defaultWebSessionManager.setGlobalSessionTimeout(1800000);
+		defaultWebSessionManager.setDeleteInvalidSessions(true);
+		defaultWebSessionManager.setSessionValidationSchedulerEnabled(true);
+		defaultWebSessionManager.setSessionValidationScheduler(quartzSessionValidationScheduler);
+		defaultWebSessionManager.setSessionDAO(sessionDAO);
+		defaultWebSessionManager.setSessionIdCookieEnabled(true);
+		defaultWebSessionManager.setSessionIdCookie(sessionIdCookie);
+		return defaultWebSessionManager;
 	}
 }

@@ -86,8 +86,80 @@ public class ResourceController {
     @RequestMapping("/resource/delete")
     public Result delRes(@RequestBody Long resID){
         if(resID != null){
+            SysResource sysResource = resourceFacade.getResourcesByID(resID);
+            String url = sysResource.getResUrl();
+            Result result = new Result();
+            if(url.equals("/resource")||url.equals("/resource/view")){
+                result.setStatus(-1);
+                result.setMsg("该资源不能被删除！");
+                result.setData(resID);
+                return result;
+            }
             resourceFacade.deleteSysResource(resID);
+            result = new Result();
+            result.setStatus(0);
+            result.setMsg("删除成功!");
+            result.setData(resID);
+            return result;
         }
         return ResultUtil.error(ExceptionEnum.ADD_ERROR);
+    }
+
+    @RequiresPermissions("resource:update")
+    @RequestMapping("/resource/update")
+    /**
+     * 类名: editRes
+     * 参数: [sysResource]
+     * 描述: 修改资源信息页面
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午2:27
+     **/
+    public String editResPage(@RequestParam Long resID,Model model){
+        if(resID != null){
+            model.addAttribute("resourceInfo",resourceFacade.getResourcesByID(resID));
+            model.addAttribute("resList",resourceFacade.getAllResources());
+            return "/resource/edit_res_page";
+        }
+        return null;
+    }
+    @RequiresPermissions("resource:update")
+    @RequestMapping("/resource/update.do")
+    @ResponseBody
+    /**
+     * 类名: editRes
+     * 参数: [resID, model]
+     * 描述: 执行修改操作
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午3:36
+     **/
+    public Result editRes(@RequestBody SysResource sysResource,Model model){
+        Result result = new Result();
+        int code = resourceFacade.updateResources(sysResource);
+        if(code == 1){
+            result.setStatus(0);
+            result.setMsg("添加成功！");
+            return result;
+        }
+        result.setStatus(-1);
+        result.setMsg("添加遇到未知错误！");
+        return result;
+    }
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 启用资源
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午5:10
+     **/
+    @RequiresPermissions("resource:update")
+    @ResponseBody
+    @RequestMapping("/resource/enable.do")
+    public Result enableRes(@RequestBody Long resId){
+        Result result = new Result();
+        int num = resourceFacade.enableRes(resId);
+        return result;
     }
 }

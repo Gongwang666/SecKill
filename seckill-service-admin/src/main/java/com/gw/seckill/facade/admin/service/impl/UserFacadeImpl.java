@@ -35,7 +35,22 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void addSysUser(SysUser sysUser) {
-        userBiz.addSysUser(sysUser);
+    public int addSysUser(SysUser sysUser) {
+        return userBiz.addSysUserDefault(sysUser);
+    }
+
+    @Override
+    public List<SysUser> getAllUsers() {
+        return userBiz.getAllUsers();
+    }
+
+    @Override
+    public int deBlockingUser(Long userID) {
+        return userBiz.deBlockingUser(userID);
+    }
+
+    @Override
+    public int blockingUser(Long userID) {
+        return userBiz.blockingUser(userID);
     }
 }

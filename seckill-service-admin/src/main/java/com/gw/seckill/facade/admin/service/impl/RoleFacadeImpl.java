@@ -2,9 +2,11 @@ package com.gw.seckill.facade.admin.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.gw.seckill.core.admin.biz.RoleBiz;
+import com.gw.seckill.facade.admin.entity.SysRole;
 import com.gw.seckill.facade.admin.service.RoleFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,5 +24,10 @@ public class RoleFacadeImpl implements RoleFacade {
     @Override
     public Set<Long> findRoleResourceIDs(Long[] roleIds) {
         return roleBiz.findRoleResourceIDs(roleIds);
+    }
+
+    @Override
+    public List<SysRole> getAllRoles() {
+        return roleBiz.getAllRoles();
     }
 }

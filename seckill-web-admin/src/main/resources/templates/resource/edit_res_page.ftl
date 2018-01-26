@@ -3,7 +3,8 @@
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div id="add_cat_alert" hidden="hidden" class="am-alert am-alert-success" data-am-alert>
+                <#--信息提示-->
+                    <div id="message-show" hidden="hidden" class="am-alert am-alert-danger" data-am-alert>
                         <button type="button" class="am-close">&times;</button>
                         <p>添加成功</p>
                     </div>
@@ -25,12 +26,12 @@
                                                 <select id="res_parent_select" name="catId" data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chosen-select-deselect" tabindex="9">
 
                                                     <#list resList as res>
-                                                        <#--<#if cat.dataFlag == 1>
-                                                            <option value="${cat.catId}">${cat.catName}</option>
-                                                        <#else >
-                                                            <option disabled value="${cat.catId}">${cat.catName}</option>
-                                                        </#if>-->
-                                                        <option value="${res.resId}">${res.resName}</option>
+                                                        <#if res.resId == resourceInfo.parentId>
+                                                            <option selected value="${res.resId}">${res.resName}</option>
+                                                        <#else>
+                                                            <option value="${res.resId}">${res.resName}</option>
+                                                        </#if>
+
                                                     </#list>
                                                 </select>
                                             </div>
@@ -44,7 +45,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input id="res_name" type="text" class="tpl-form-input" placeholder="请输入资源名称"/>
+                                                <input id="res_name" value="${resourceInfo.resName}" type="text" class="tpl-form-input" placeholder="请输入资源名称"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -57,9 +58,22 @@
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
                                                 <select id="res_type_select"  data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chosen-select-deselect" tabindex="9">
-                                                    <option value="folder">菜单</option>
-                                                    <option value="item">菜单项</option>
-                                                    <option value="doAction">动作</option>
+                                                    <#if resourceInfo.resType == "folder">
+                                                        <option selected value="folder">菜单</option>
+                                                        <option value="item">菜单项</option>
+                                                        <option value="doAction">动作</option>
+                                                    </#if>
+                                                    <#if resourceInfo.resType == "item">
+                                                        <option value="folder">菜单</option>
+                                                        <option selected value="item">菜单项</option>
+                                                        <option value="doAction">动作</option>
+                                                    </#if>
+                                                    <#if resourceInfo.resType == "doAction">
+                                                        <option value="folder">菜单</option>
+                                                        <option value="item">菜单项</option>
+                                                        <option selected value="doAction">动作</option>
+                                                    </#if>
+
                                                 </select>
                                             </div>
                                             <div class="am-u-sm-3"></div>
@@ -72,7 +86,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input id="res_url" type="text" class="tpl-form-input" placeholder="请输入资源URL"/>
+                                                <input id="res_url" value="${resourceInfo.resUrl}" type="text" class="tpl-form-input" placeholder="请输入资源URL"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -84,7 +98,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input id="all_parents" type="text" class="tpl-form-input" placeholder="请输入所有父类资源ID"/>
+                                                <input id="all_parents" value="${resourceInfo.parentIds}" type="text" class="tpl-form-input" placeholder="请输入所有父类资源ID"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -95,7 +109,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input id="res_permission" type="text" class="tpl-form-input" placeholder="请输入权限"/>
+                                                <input id="res_permission" value="${resourceInfo.permission}" type="text" class="tpl-form-input" placeholder="请输入权限"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -131,7 +145,7 @@
                                             <div class="am-u-sm-4">
                                             </div>
                                             <div class="am-u-sm-8">
-                                                <button id="add_res" type="button" class="am-btn am-btn-primary">提交</button>
+                                                <button id="update_res" type="button" class="am-btn am-btn-primary">提交</button>
                                             </div>
                                         </div>
                                     </div>
@@ -151,7 +165,7 @@
     $('#res_parent_select').chosen({ width: '95%'});
     $('#res_type_select').chosen({ width: '95%'});
 
-    $('#add_res').on('click',function () {
+    $('#update_res').on('click',function () {
         var form = $('#add_res_form');
         var resParentId = $('#res_parent_select').val();
         var resName = $('#res_name').val();
@@ -159,6 +173,7 @@
         var resUrl = $('#res_url').val();
         var allParents = $('#all_parents').val();
         var resPermission = $('#res_permission').val();
+        var resId = "${resourceInfo.resId}";
         //var isShow = $("input[name='isShow']:checked").val();
         if(resName == null || resName == ""){
             alert("资源名称不能为空！");
@@ -178,6 +193,7 @@
         }
 
         var allData = {
+                        resId:resId,
                         resName:resName,
                         resType:resType,
                         resUrl:resUrl,
@@ -186,7 +202,7 @@
                         permission:resPermission
                         };
         $.ajax({
-            url:'/resource/create.do',
+            url:'/resource/update.do',
             contentType:"application/json;charset=utf-8",
             type:form.attr("method"), //GET
             async:true,    //或false,是否异步
@@ -199,8 +215,8 @@
             },
             success:function(data,textStatus,jqXHR){
                 console.log(data)
-                //$('#add_cat_alert').show();
-                setTimeout("$('#content').load('/resource/create')",1500);
+                $('#message-show').show();
+                setTimeout("$('#content').load('/resource/view')", 1500);
                 //console.log(textStatus)
                 //console.log(jqXHR)
             },

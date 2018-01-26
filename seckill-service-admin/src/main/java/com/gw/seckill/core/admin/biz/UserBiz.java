@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,7 +54,8 @@ public class UserBiz {
     　* @创建时间: 2018/1/16 18:43
       */
     public SysUser findByAccount(String userName) {
-        return sysUserDAO.selectByUserName(userName);
+        //只返回一个结果，多个结果会抛出异常
+        return sysUserDAO.selectOne(new SysUser(userName));
     }
     /**
      　* @描述:     查找用户所拥有的角色id
@@ -64,7 +66,7 @@ public class UserBiz {
      　* @创建时间: 2018/1/16 18:21
      */
     public Long[] findUserRoleIDs(String userName) {
-        SysUser sysUser =sysUserDAO.selectByUserName(userName);
+        SysUser sysUser =sysUserDAO.selectOne(new SysUser(userName));
         if(sysUser == null) {
             return null;
         }
@@ -97,7 +99,7 @@ public class UserBiz {
     　* @作者:     gongwang
     　* @创建时间: 2018/1/17 21:45
       */
-    public void addSysUser(SysUser sysUser) {
+    public int addSysUser(SysUser sysUser) {
         String username = sysUser.getUserName();
         String password = sysUser.getPassWord();
         //以用户名为第一个盐值
@@ -115,7 +117,36 @@ public class UserBiz {
 
         sysUser.setPassWord(encodedPassword);
         sysUser.setSalt(salt2);
-        sysUser.setRoleIds(ConstantClassFunction.getVISITOR());
-        sysUserDAO.insertSelective(sysUser);
+        return sysUserDAO.insertSelective(sysUser);
+    }
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 添加用户，默认密码为123456
+     * 作者: gongwang
+     * 日期: 2018/1/26
+     * 时间: 下午5:51
+     **/
+    public int addSysUserDefault(SysUser sysUser){
+        sysUser.setPassWord(ConstantClassFunction.getDEFAULT_PASSWORD());
+        return addSysUser(sysUser);
+    }
+
+    public List<SysUser> getAllUsers() {
+        return sysUserDAO.selectAll();
+    }
+
+    public int deBlockingUser(Long userID) {
+        SysUser sysUser = new SysUser();
+        sysUser.setSysUserId(userID);
+        sysUser.setLocked((byte)0);
+        return sysUserDAO.updateByPrimaryKeySelective(sysUser);
+    }
+
+    public int blockingUser(Long userID) {
+        SysUser sysUser = new SysUser();
+        sysUser.setSysUserId(userID);
+        sysUser.setLocked((byte)1);
+        return sysUserDAO.updateByPrimaryKeySelective(sysUser);
     }
 }

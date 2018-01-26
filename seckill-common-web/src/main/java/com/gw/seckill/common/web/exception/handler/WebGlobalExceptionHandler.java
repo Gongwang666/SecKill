@@ -40,8 +40,7 @@ public class WebGlobalExceptionHandler {
         ModelAndView modelAndView = new ModelAndView("/404");
         if(e instanceof DescribeException){
             DescribeException pingjiaException = (DescribeException) e;
-            modelAndView.addObject("message",
-                    ResultUtil.error(pingjiaException.getCode(),pingjiaException.getMessage()));
+            modelAndView.addObject("message",e.getMessage());
             return modelAndView;
         }
 
@@ -52,7 +51,7 @@ public class WebGlobalExceptionHandler {
 
     @ExceptionHandler(value = UnauthorizedException.class)
     public ModelAndView unauthorizedExceptionGet(Exception e){
-        ModelAndView modelAndView = new ModelAndView("/user/login");
+        ModelAndView modelAndView = new ModelAndView("/404");
         LOGGER.error("权限异常:",e);
         modelAndView.addObject("message","对不起，您没有此权限！");
         return modelAndView;

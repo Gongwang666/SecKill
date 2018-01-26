@@ -372,32 +372,37 @@ $('#firstTree').tree({
     dataSource: function(options, callback) {
         // 模拟异步加载
         var menu = null;
-        $.ajax({
-            url:'/menu',
-            type:'POST', //GET
-            async:false,    //或false,是否异步
-            timeout:5000,    //超时时间
-            dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-            beforeSend:function(xhr){
-                console.log(xhr)
-                console.log('发送前')
-            },
-            success:function(data,textStatus,jqXHR){
-                menu = data;
-                //alert(JSON.stringify(menu));
-                //console.log(data)
-                //console.log(textStatus)
-                //console.log(jqXHR)
-            },
-            error:function(xhr,textStatus){
-                //console.log('错误')
-                //console.log(xhr)
-                //console.log(textStatus)
-            },
-            complete:function(){
-                console.log('结束')
-            }
-        });
+        var flag = false;
+        if(!flag){
+            $.ajax({
+                url:'/menu',
+                type:'POST', //GET
+                async:false,    //或false,是否异步
+                timeout:5000,    //超时时间
+                dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend:function(xhr){
+                    console.log(xhr)
+                    console.log('发送前')
+                },
+                success:function(data,textStatus,jqXHR){
+                    menu = data;
+                    flag = true;
+                    //alert(JSON.stringify(menu));
+                    //console.log(data)
+                    //console.log(textStatus)
+                    //console.log(jqXHR)
+                },
+                error:function(xhr,textStatus){
+                    //console.log('错误')
+                    //console.log(xhr)
+                    //console.log(textStatus)
+                },
+                complete:function(){
+                    console.log('结束')
+                }
+            });
+        }
+
         var data = menu;
         setTimeout(function() {
             callback({data: options.products || data});
@@ -410,7 +415,7 @@ $('#firstTree').tree({
 
 $('#firstTree').on('selected.tree.amui', function (event, data) {
     // do something with data: { selected: [array], target: [object] }
-
+    //console.log(data.selected[0]);
     $('#content').load(data.selected[0].url);
 
 });

@@ -49,5 +49,33 @@ public interface UserFacade {
     　* @作者:     gongwang
     　* @创建时间: 2018/1/17 21:45
       */
-    void addSysUser(SysUser sysUser);
+    int addSysUser(SysUser sysUser);
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 获取所有用户
+     * 作者: gongwang
+     * 日期: 2018/1/26
+     * 时间: 下午7:37
+     **/
+    List<SysUser> getAllUsers();
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 解锁用户
+     * 作者: gongwang
+     * 日期: 2018/1/26
+     * 时间: 下午7:54
+     **/
+    int deBlockingUser(Long userID);
+
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 停用用户
+     * 作者: gongwang
+     * 日期: 2018/1/26
+     * 时间: 下午8:35
+     **/
+    int blockingUser(Long userID);
 }

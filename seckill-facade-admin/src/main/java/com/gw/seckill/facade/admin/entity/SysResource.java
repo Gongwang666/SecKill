@@ -1,23 +1,44 @@
 package com.gw.seckill.facade.admin.entity;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 public class SysResource implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long resId;
 
+    @Column(name = "RES_NAME")
     private String resName;
 
+    @Column(name = "RES_TYPE")
     private String resType;
 
+    @Column(name = "RES_URL")
     private String resUrl;
 
+    @Column(name = "PARENT_ID")
     private Long parentId;
 
+    @Column(name = "PARENT_IDS")
     private String parentIds;
 
+    @Column(name = "PERMISSION")
     private String permission;
 
+    @Column(name = "AVAILABLE")
     private Byte available;
+
+    public SysResource() {
+    }
+
+    public SysResource(Long parentId) {
+
+        this.parentId = parentId;
+    }
 
     public Long getResId() {
         return resId;

@@ -38,4 +38,31 @@ public interface ResourceFacade {
      　* @创建时间: 2018/1/10 16:21
      */
     void addSysRes(SysResource sysResource);
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 通过资源id获取资源
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午2:45
+     **/
+    SysResource getResourcesByID(Long resID);
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 更新资源信息
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午2:50
+     **/
+    int updateResources(SysResource sysResource);
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 启用资源
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午5:14
+     **/
+    int enableRes(Long resId);
 }

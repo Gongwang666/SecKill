@@ -1,13 +1,15 @@
 package com.gw.seckill.core.admin.dao;
 
+import com.gw.seckill.core.admin.util.BaseMapper;
 import com.gw.seckill.facade.admin.entity.SysRole;
+import com.gw.seckill.facade.admin.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Repository("sysRoleDAO")
 @Mapper
-public interface SysRoleMapper {
-    int deleteByPrimaryKey(Long roleId);
+public interface SysRoleMapper extends BaseMapper<SysRole> {
+    /*int deleteByPrimaryKey(Long roleId);
 
     int insert(SysRole record);
 
@@ -17,5 +19,5 @@ public interface SysRoleMapper {
 
     int updateByPrimaryKeySelective(SysRole record);
 
-    int updateByPrimaryKey(SysRole record);
+    int updateByPrimaryKey(SysRole record);*/
 }

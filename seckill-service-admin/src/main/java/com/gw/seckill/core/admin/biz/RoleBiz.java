@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service("roleBiz")
@@ -41,5 +42,16 @@ public class RoleBiz {
             }
         }
         return resourceIds;
+    }
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 获取所有角色
+     * 作者: gongwang
+     * 日期: 2018/1/26
+     * 时间: 下午4:31
+     **/
+    public List<SysRole> getAllRoles() {
+        return sysRoleDAO.selectAll();
     }
 }

@@ -33,4 +33,19 @@ public class ResourceFacadeImpl implements ResourceFacade{
     public void addSysRes(SysResource sysResource) {
         resourceBiz.addSysRes(sysResource);
     }
+
+    @Override
+    public SysResource getResourcesByID(Long resID) {
+        return resourceBiz.getResourceByID(resID);
+    }
+
+    @Override
+    public int updateResources(SysResource sysResource) {
+        return resourceBiz.updateResources(sysResource);
+    }
+
+    @Override
+    public int enableRes(Long resId) {
+        return resourceBiz.enableRes(resId);
+    }
 }

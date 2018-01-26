@@ -42,7 +42,7 @@ public class ResourceBiz {
             if(sysResParent != null && !StringUtils.isEmpty(sysResParent.getResUrl())) {
                 resourceSet.add(sysResParent);
             }
-            List<SysResource> sysList = sysResourceDAO.selectSysResByParentId(id);
+            List<SysResource> sysList = sysResourceDAO.select(new SysResource(id));
             if(sysList!=null){
                 //子节点
                 resourceSet.addAll(sysList);
@@ -77,7 +77,7 @@ public class ResourceBiz {
     　* @创建时间: 2018/1/17 16:00
       */
     public List<SysResource> getAllResources() {
-        return sysResourceDAO.selectAllRes();
+        return sysResourceDAO.selectAll();
     }
     /**
     　* @描述:     添加资源
@@ -90,5 +90,40 @@ public class ResourceBiz {
     public void addSysRes(SysResource sysResource) {
         sysResourceDAO.insertSelective(sysResource);
     }
-
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 通过资源id获取资源
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午2:48
+     **/
+    public SysResource getResourceByID(Long resID) {
+        return sysResourceDAO.selectByPrimaryKey(resID);
+    }
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 更新资源信息
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午5:17
+     **/
+    public int updateResources(SysResource sysResource) {
+        return sysResourceDAO.updateByPrimaryKeySelective(sysResource);
+    }
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 启用资源
+     * 作者: gongwang
+     * 日期: 2018/1/24
+     * 时间: 下午5:18
+     **/
+    public int enableRes(Long resId) {
+        SysResource sysResource = new SysResource();
+        sysResource.setResId(resId);
+        sysResource.setAvailable((byte)1);
+        return sysResourceDAO.updateByPrimaryKeySelective(sysResource);
+    }
 }

@@ -1,19 +1,35 @@
 package com.gw.seckill.facade.admin.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
-
+@Table(name = "sys_user")
 public class SysUser implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sysUserId;
 
+    @Column(name = "USER_NAME")
     private String userName;
 
+    @Column(name = "PASS_WORD")
     private String passWord;
 
+    @Column(name = "SALT")
     private String salt;
 
+    @Column(name = "ROLE_IDS")
     private String roleIds;
 
+    @Column(name = "LOCKED")
     private Byte locked;
+
+    public SysUser() {
+    }
+
+    public SysUser(String userName) {
+
+        this.userName = userName;
+    }
 
     public Long getSysUserId() {
         return sysUserId;

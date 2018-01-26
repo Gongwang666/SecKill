@@ -6,7 +6,7 @@
                     <div class="widget am-cf">
                     <#--表头标题-->
                         <div class="widget-head am-cf">
-                            <div class="widget-title  am-cf">资源列表</div>
+                            <div class="widget-title  am-cf">用户列表</div>
                             <#--信息提示-->
                             <div id="message-show" hidden="hidden" class="am-alert am-alert-danger" data-am-alert>
                                 <button type="button" class="am-close">&times;</button>
@@ -65,47 +65,35 @@
                                        id="example-r">
                                     <thead>
                                     <tr>
-                                        <th>资源ID</th>
-                                        <th>资源名称</th>
-                                        <th>资源类型</th>
-                                        <th>资源URL</th>
-                                        <th>父节点</th>
-                                        <th>所有父节点</th>
-                                        <th>权限</th>
-                                        <th>是否可用</th>
+                                        <th>用户ID</th>
+                                        <th>用户名</th>
+                                        <th>用户角色</th>
+                                        <th>是否锁定</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <#list resList as res>
+                                        <#list userList as user>
                                             <tr class="gradeX">
-                                                <td>${res.resId}</td>
-                                                <td>${res.resName}</td>
-                                                <td>${res.resType}</td>
-                                                <td>${res.resUrl}</td>
-                                                <td>${res.parentId}</td>
-                                                <td>${res.parentIds}</td>
-                                                <td>${res.permission}</td>
+                                                <td>${user.sysUserId}</td>
+                                                <td>${user.userName}</td>
+                                                <td>${user.roleIds}</td>
                                                 <td>
-                                                    <#if res.available == 0>
-                                                        <p style="color: red">不可使用，已删除</p>
+                                                    <#if user.locked == 0>
+                                                        <p>正常</p>
                                                     <#else>
-                                                        可以使用
+                                                        <p  style="color: red">被锁定</p>
                                                     </#if>
 
                                                 </td>
                                                 <td>
                                                     <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;" data-res-id="${res.resId}"
-                                                           class="update-res">
-                                                            <i class="am-icon-pencil"></i> 编辑
+                                                        <a href="javascript:;" data-user-id="${user.sysUserId}"
+                                                           class="blocking-user tpl-table-black-operation-del">
+                                                            <i class="am-icon-trash"></i> 停用
                                                         </a>
-                                                        <a href="javascript:;" data-res-id="${res.resId}"
-                                                           class="del-res tpl-table-black-operation-del">
-                                                            <i class="am-icon-trash"></i> 删除
-                                                        </a>
-                                                        <a href="javascript:;" data-res-id="${res.resId}"
-                                                           class="enable-res tpl-table-black-operation-enable">
+                                                        <a href="javascript:;" data-user-id="${user.sysUserId}"
+                                                           class="deblocking-user tpl-table-black-operation-enable">
                                                             <i class="am-icon-deaf"></i> 启用节点
                                                         </a>
                                                     </div>
@@ -126,19 +114,12 @@
         </div>
 <script>
     //$('#message-show').alert('close');
-    //编辑资源
+    //启用用户
     $(function () {
-        $('.update-res').on('click', function () {
-            var id = $(this).attr('data-res-id');
-            $('#content').load('/resource/update?resID='+id);
-        })
-    });
-
-    $(function () {
-        $('.enable-res').on('click', function () {
-            var id = $(this).attr('data-res-id');
+        $('.deblocking-user').on('click', function () {
+            var id = $(this).attr('data-user-id');
             $.ajax({
-                url: '/resource/enable.do',
+                url: '/sysuser/deblocking.do',
                 contentType: "application/json;charset=utf-8",
                 type: 'POST', //GET
                 async: false,    //或false,是否异步
@@ -151,35 +132,31 @@
                 },
                 success: function (data, textStatus, jqXHR) {
                     console.log(data);
-                    //result = data;
-                    //$('#message-show').show();
-                    $('#content').load('/resource/view');
+                    AMUI.dialog.alert({
+                        title: '提示信息',
+                        content: '启用成功!',
+                        onConfirm: function() {
+                            $('#content').load('/sysuser/view');
+                        }
+                    });
                     //console.log(textStatus)
                     //console.log(jqXHR)
-                },
-                error: function (xhr, textStatus) {
-                    console.log('错误')
-                    console.log(xhr)
-                    //console.log(textStatus)
-                },
-                complete: function () {
-                    console.log('结束');
                 }
             });
         })
     });
-    //删除资源
+    //停用用户
     $(function () {
-        $('.del-res').on('click', function () {
-            var id = $(this).attr('data-res-id');
+        $('.blocking-user').on('click', function () {
+            var id = $(this).attr('data-user-id');
             //$('#message-show').alert();
             var result = null;
             AMUI.dialog.alert({
-                title: '删除提示',
-                content: '您确定要删除该资源？',
+                title: '停用提示',
+                content: '您确定要停用该用户？',
                 onConfirm: function() {
                     $.ajax({
-                        url: '/resource/delete',
+                        url: '/sysuser/blocking.do',
                         contentType: "application/json;charset=utf-8",
                         type: 'POST', //GET
                         async: false,    //或false,是否异步
@@ -196,26 +173,18 @@
                             if(data.status == 0){
                                 $('#message-show').text(data.msg);
                                 $('#message-show').show();
-                                setTimeout("$('#content').load('/resource/view')", 1500);
+                                setTimeout("$('#content').load('/sysuser/view')", 1500);
                             }else if(data.status == -1){
                                 AMUI.dialog.alert({
                                     title: 'Message',
                                     content: data.msg,
                                     onConfirm: function() {
-                                        console.log("删除失败，错误提示：该资源不能被删除！");
+                                        console.log("停用失败！");
                                     }
                                 });
                             }
                             //console.log(textStatus)
                             //console.log(jqXHR)
-                        },
-                        error: function (xhr, textStatus) {
-                            console.log('错误')
-                            console.log(xhr)
-                            //console.log(textStatus)
-                        },
-                        complete: function () {
-                            console.log('结束');
                         }
                     });
                 }

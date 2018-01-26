@@ -80,4 +80,22 @@ public class UserController {
         mv.setViewName("redirect:/index.do");
         return mv;
     }
+
+    @RequestMapping("/user/logout.do")
+    public String userLogOut(){
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+
+        return "redirect:/user/login";
+    }
+
+    @RequestMapping("/user/kickout")
+    public ModelAndView userKickOut(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/404");
+        mv.addObject("message","对不起，该账户在其他地方登录，请重新登录!");
+        mv.addObject("url","/user/login");
+        return mv;
+    }
+
 }

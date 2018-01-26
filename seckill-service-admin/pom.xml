@@ -83,6 +83,18 @@
             <artifactId>shiro-core</artifactId>
             <version>${shiro-version}</version>
         </dependency>
+        <!--tk.mybatis，定制自己的通用mapper-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+        <!--mybatis分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.1</version>
+        </dependency>
         <!-- Junit -->
         <dependency>
             <groupId>junit</groupId>
@@ -90,5 +102,24 @@
             <version>4.12</version>
         </dependency>
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <jvmArguments>
+                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+                    </jvmArguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.5.RELEASE</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>

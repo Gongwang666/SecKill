@@ -22,15 +22,17 @@ public class MenuBiz {
     private SysResourceMapper sysResourceDAO;
 
     public List<MenuTreeVO> getMenuTree() {
-        List<SysResource> resList = sysResourceDAO.selectAllRes();
+        List<SysResource> resList = sysResourceDAO.selectAll();
         List<MenuTreeVO> menuTreeVOList = new ArrayList<MenuTreeVO>();
         for(SysResource sysResource : resList){
-            MenuTreeVO menuTreeVO = new MenuTreeVO(sysResource.getResName(),
-                                                   sysResource.getResType(),
-                                                   sysResource.getResUrl());
-            menuTreeVO.setId(sysResource.getResId());
-            menuTreeVO.setParentId(sysResource.getParentId());
-            menuTreeVOList.add(menuTreeVO);
+            if(sysResource.getAvailable() == (byte)1){
+                MenuTreeVO menuTreeVO = new MenuTreeVO(sysResource.getResName(),
+                        sysResource.getResType(),
+                        sysResource.getResUrl());
+                menuTreeVO.setId(sysResource.getResId());
+                menuTreeVO.setParentId(sysResource.getParentId());
+                menuTreeVOList.add(menuTreeVO);
+            }
         }
         MenuUtil menuUtil = new MenuUtil();
         return menuUtil.getChildTreeObjects(menuTreeVOList,(long)1);

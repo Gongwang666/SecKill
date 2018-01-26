@@ -27,6 +27,7 @@
           <element id="library" level="project" name="Maven: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.atteo:evo-inflector:1.2.1" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.22" />
+          <element id="library" level="project" name="Maven: javax.persistence:persistence-api:1.0" />
           <element id="archive" name="seckill-common-web-1.0-SNAPSHOT.jar">
             <element id="module-output" name="seckill-common-web" />
           </element>
@@ -73,6 +74,8 @@
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-spring:1.3.2" />
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-ehcache:1.3.2" />
           <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache-core:2.5.3" />
+          <element id="library" level="project" name="Maven: org.apache.shiro:shiro-quartz:1.3.2" />
+          <element id="library" level="project" name="Maven: org.opensymphony.quartz:quartz:1.6.1" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:19.0" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-aop:1.5.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.6.RELEASE" />
