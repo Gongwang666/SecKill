@@ -9,6 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.gw.seckill</groupId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
     <artifactId>seckill-service-mall</artifactId>
 
     <dependencies>
@@ -48,6 +51,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot-starter}</version>
             <scope>test</scope>
         </dependency>
 

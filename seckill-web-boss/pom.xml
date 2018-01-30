@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>seckill-web-boss</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>seckill-web-boss Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
@@ -35,12 +35,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot-starter}</version>
         </dependency>
 
         <!-- Spring Boot Test 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot-starter}</version>
             <scope>test</scope>
         </dependency>
 

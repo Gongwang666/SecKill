@@ -9,7 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.gw.seckill</groupId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
     <artifactId>seckill-facade-admin</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>com.gw.seckill</groupId>
@@ -28,4 +32,20 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <!--${JAVA8_HOME}为maven的setting.xml中定义的-->
+                <configuration>
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                    <executable>${JAVA8_HOME}/bin/javac</executable>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
