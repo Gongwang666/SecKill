@@ -1,12 +1,11 @@
 package com.gw.seckill.facade.admin.entity;
 
+import com.gw.seckill.entity.BaseEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 @Table(name = "sys_user")
-public class SysUser implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sysUserId;
+public class SysUser extends BaseEntity implements Serializable {
 
     @Column(name = "USER_NAME")
     private String userName;
@@ -31,13 +30,6 @@ public class SysUser implements Serializable {
         this.userName = userName;
     }
 
-    public Long getSysUserId() {
-        return sysUserId;
-    }
-
-    public void setSysUserId(Long sysUserId) {
-        this.sysUserId = sysUserId;
-    }
 
     public String getUserName() {
         return userName;

@@ -29,7 +29,7 @@ public class MenuBiz {
                 MenuTreeVO menuTreeVO = new MenuTreeVO(sysResource.getResName(),
                         sysResource.getResType(),
                         sysResource.getResUrl());
-                menuTreeVO.setId(sysResource.getResId());
+                menuTreeVO.setId(sysResource.getId());
                 menuTreeVO.setParentId(sysResource.getParentId());
                 menuTreeVOList.add(menuTreeVO);
             }

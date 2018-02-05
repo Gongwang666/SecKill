@@ -1,5 +1,6 @@
 package com.gw.seckill.core.admin.biz;
 
+import com.github.pagehelper.PageHelper;
 import com.gw.seckill.core.admin.dao.SysResourceMapper;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import org.apache.commons.lang3.StringUtils;
@@ -63,7 +64,7 @@ public class ResourceBiz {
      */
     public void deleteSysResource(Long resID) {
         SysResource sysResource = new SysResource();
-        sysResource.setResId(resID);
+        sysResource.setId(resID);
         sysResource.setAvailable((byte)0);
         sysResourceDAO.updateByPrimaryKeySelective(sysResource);
     }
@@ -77,6 +78,20 @@ public class ResourceBiz {
     　* @创建时间: 2018/1/17 16:00
       */
     public List<SysResource> getAllResources() {
+        return sysResourceDAO.selectAll();
+    }
+    /**
+    　* @描述:     分页查询所有资源
+    　* @参数描述:
+    　* @返回值:
+    　* @异常:
+    　* @作者:     gongwang
+    　* @创建时间: 2018/2/5 16:37
+      */
+    public List<SysResource> getAllResourcesPaged(SysResource sysResource){
+        if (sysResource.getPage() != null && sysResource.getRows() != null) {
+            PageHelper.startPage(sysResource.getPage(), sysResource.getRows());
+        }
         return sysResourceDAO.selectAll();
     }
     /**
@@ -122,7 +137,7 @@ public class ResourceBiz {
      **/
     public int enableRes(Long resId) {
         SysResource sysResource = new SysResource();
-        sysResource.setResId(resId);
+        sysResource.setId(resId);
         sysResource.setAvailable((byte)1);
         return sysResourceDAO.updateByPrimaryKeySelective(sysResource);
     }

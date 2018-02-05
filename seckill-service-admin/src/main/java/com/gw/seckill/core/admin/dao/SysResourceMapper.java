@@ -1,6 +1,6 @@
 package com.gw.seckill.core.admin.dao;
 
-import com.gw.seckill.core.admin.util.BaseMapper;
+import com.gw.seckill.common.core.dao.BaseMapper;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository("sysResourceDAO")
 @Mapper
-public interface SysResourceMapper extends BaseMapper<SysResource>{
+public interface SysResourceMapper extends BaseMapper<SysResource> {
     /*int deleteByPrimaryKey(Long resId);
 
     int insert(SysResource record);

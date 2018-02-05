@@ -1,5 +1,6 @@
 package com.gw.seckill.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,12 +14,37 @@ public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/** 主键ID **/
+	@Id
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	//分页，当前页数
+	@Transient
+	private Integer page = 1;
+	//分页，每页行数
+	@Transient
+	private Integer rows = 10;
+
+	@Transient
 	/** 创建时间 **/
 	private Date createTime;
-	
-	
+
+	public Integer getPage() {
+		return page;
+	}
+
+	public void setPage(Integer page) {
+		this.page = page;
+	}
+
+	public Integer getRows() {
+		return rows;
+	}
+
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
+
 	/** 主键ID **/
 	public Long getId() {
 		return id;

@@ -1,15 +1,14 @@
 package com.gw.seckill.facade.admin.entity;
 
+import com.gw.seckill.entity.BaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class SysRole implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roleId;
+public class SysRole extends BaseEntity implements Serializable {
 
     @Column(name = "ROLE")
     private String role;
@@ -23,13 +22,6 @@ public class SysRole implements Serializable {
     @Column(name = "AVAILABLE")
     private Byte available;
 
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
 
     public String getRole() {
         return role;

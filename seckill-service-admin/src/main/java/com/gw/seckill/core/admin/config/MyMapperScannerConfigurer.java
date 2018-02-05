@@ -1,6 +1,6 @@
 package com.gw.seckill.core.admin.config;
 
-import com.gw.seckill.core.admin.util.BaseMapper;
+import com.gw.seckill.common.core.dao.BaseMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;

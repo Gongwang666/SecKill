@@ -138,14 +138,14 @@ public class UserBiz {
 
     public int deBlockingUser(Long userID) {
         SysUser sysUser = new SysUser();
-        sysUser.setSysUserId(userID);
+        sysUser.setId(userID);
         sysUser.setLocked((byte)0);
         return sysUserDAO.updateByPrimaryKeySelective(sysUser);
     }
 
     public int blockingUser(Long userID) {
         SysUser sysUser = new SysUser();
-        sysUser.setSysUserId(userID);
+        sysUser.setId(userID);
         sysUser.setLocked((byte)1);
         return sysUserDAO.updateByPrimaryKeySelective(sysUser);
     }

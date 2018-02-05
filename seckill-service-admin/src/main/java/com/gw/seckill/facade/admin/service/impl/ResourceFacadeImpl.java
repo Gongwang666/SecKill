@@ -48,4 +48,9 @@ public class ResourceFacadeImpl implements ResourceFacade{
     public int enableRes(Long resId) {
         return resourceBiz.enableRes(resId);
     }
+
+    @Override
+    public List<SysResource> getAllResourcesPaged(SysResource sysResource) {
+        return resourceBiz.getAllResourcesPaged(sysResource);
+    }
 }

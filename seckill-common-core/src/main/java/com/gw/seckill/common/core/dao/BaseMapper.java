@@ -1,4 +1,4 @@
-package com.gw.seckill.core.admin.util;
+package com.gw.seckill.common.core.dao;
 
 import org.springframework.data.repository.NoRepositoryBean;
 import tk.mybatis.mapper.common.Mapper;

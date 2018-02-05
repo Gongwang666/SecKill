@@ -65,4 +65,13 @@ public interface ResourceFacade {
      * 时间: 下午5:14
      **/
     int enableRes(Long resId);
+    /**
+    　* @描述:     分页查询所有资源
+    　* @参数描述:
+    　* @返回值:
+    　* @异常:
+    　* @作者:     gongwang
+    　* @创建时间: 2018/2/5 16:38
+      */
+    List<SysResource> getAllResourcesPaged(SysResource sysResource);
 }

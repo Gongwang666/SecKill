@@ -1,16 +1,14 @@
 package com.gw.seckill.facade.admin.entity;
 
+import com.gw.seckill.entity.BaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-public class SysResource implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long resId;
-
+public class SysResource extends BaseEntity implements Serializable {
     @Column(name = "RES_NAME")
     private String resName;
 
@@ -38,14 +36,6 @@ public class SysResource implements Serializable {
     public SysResource(Long parentId) {
 
         this.parentId = parentId;
-    }
-
-    public Long getResId() {
-        return resId;
-    }
-
-    public void setResId(Long resId) {
-        this.resId = resId;
     }
 
     public String getResName() {
