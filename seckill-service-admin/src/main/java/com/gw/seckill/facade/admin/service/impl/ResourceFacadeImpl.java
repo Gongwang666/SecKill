@@ -1,6 +1,7 @@
 package com.gw.seckill.facade.admin.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.core.admin.biz.ResourceBiz;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.service.ResourceFacade;
@@ -50,7 +51,12 @@ public class ResourceFacadeImpl implements ResourceFacade{
     }
 
     @Override
-    public List<SysResource> getAllResourcesPaged(SysResource sysResource) {
+    public PageInfo<SysResource> getAllResourcesPaged(SysResource sysResource) {
         return resourceBiz.getAllResourcesPaged(sysResource);
+    }
+
+    @Override
+    public Integer getResTotalCount() {
+        return resourceBiz.getResTotalCount();
     }
 }

@@ -1,6 +1,7 @@
 package com.gw.seckill.facade.admin.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.core.admin.biz.RoleBiz;
 import com.gw.seckill.facade.admin.entity.SysRole;
 import com.gw.seckill.facade.admin.service.RoleFacade;
@@ -29,5 +30,15 @@ public class RoleFacadeImpl implements RoleFacade {
     @Override
     public List<SysRole> getAllRoles() {
         return roleBiz.getAllRoles();
+    }
+
+    @Override
+    public PageInfo<SysRole> getAllRolesPaged(SysRole sysRole) {
+        return roleBiz.getAllRolesPaged(sysRole);
+    }
+
+    @Override
+    public int addRole(SysRole sysRole) {
+        return roleBiz.addRole(sysRole);
     }
 }

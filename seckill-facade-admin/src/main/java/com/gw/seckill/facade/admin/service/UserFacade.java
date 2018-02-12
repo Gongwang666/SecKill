@@ -1,5 +1,6 @@
 package com.gw.seckill.facade.admin.service;
 
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.entity.SysUser;
 
@@ -78,4 +79,14 @@ public interface UserFacade {
      * 时间: 下午8:35
      **/
     int blockingUser(Long userID);
+
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 分页查询所有用户
+     * 作者: gongwang
+     * 日期: 2018/2/8
+     * 时间: 下午12:15
+     **/
+    PageInfo<SysUser> getAllUsersPaged(SysUser sysUser);
 }

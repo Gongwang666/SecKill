@@ -1,5 +1,6 @@
 package com.gw.seckill.core.admin.biz;
 
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,12 +19,12 @@ public class ResourceBizTest {
     @Test
     public void getAllResourcesPaged() {
         SysResource sysResource = new SysResource();
-        sysResource.setRows(10);
-        List<SysResource> list = resourceBiz.getAllResourcesPaged(sysResource);
-        sysResource.setPage(2);
-        List<SysResource> list2 = resourceBiz.getAllResourcesPaged(sysResource);
-        sysResource.setPage(3);
-        List<SysResource> list3 = resourceBiz.getAllResourcesPaged(sysResource);
+        PageInfo<SysResource> list = resourceBiz.getAllResourcesPaged(sysResource);
+        System.out.print(0);
+    }
+    @Test
+    public void getResTotalCount() {
+        Integer count =  resourceBiz.getResTotalCount();
         System.out.print(0);
     }
 }

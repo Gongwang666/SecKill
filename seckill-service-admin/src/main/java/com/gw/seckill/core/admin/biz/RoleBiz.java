@@ -1,7 +1,10 @@
 package com.gw.seckill.core.admin.biz;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.core.admin.dao.SysRoleMapper;
 import com.gw.seckill.core.admin.dao.SysUserMapper;
+import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.entity.SysRole;
 import com.gw.seckill.facade.admin.entity.SysUser;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -53,5 +56,30 @@ public class RoleBiz {
      **/
     public List<SysRole> getAllRoles() {
         return sysRoleDAO.selectAll();
+    }
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 分页获取所有角色
+     * 作者: gongwang
+     * 日期: 2018/2/8
+     * 时间: 下午1:26
+     **/
+    public PageInfo<SysRole> getAllRolesPaged(SysRole sysRole) {
+        if (sysRole.getPage() != null && sysRole.getRows() != null) {
+            PageHelper.startPage(sysRole.getPage(), sysRole.getRows());
+        }
+        return new PageInfo<SysRole>(sysRoleDAO.selectAll());
+    }
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 添加角色
+     * 作者: gongwang
+     * 日期: 2018/2/12
+     * 时间: 上午9:15
+     **/
+    public int addRole(SysRole sysRole) {
+        return sysRoleDAO.insertSelective(sysRole);
     }
 }

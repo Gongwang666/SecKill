@@ -1,6 +1,7 @@
 package com.gw.seckill.facade.admin.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.core.admin.biz.UserBiz;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import com.gw.seckill.facade.admin.entity.SysUser;
@@ -52,5 +53,10 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public int blockingUser(Long userID) {
         return userBiz.blockingUser(userID);
+    }
+
+    @Override
+    public PageInfo<SysUser> getAllUsersPaged(SysUser sysUser) {
+        return userBiz.getAllUsersPaged(sysUser);
     }
 }

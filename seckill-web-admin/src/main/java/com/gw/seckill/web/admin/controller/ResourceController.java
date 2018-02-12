@@ -1,6 +1,7 @@
 package com.gw.seckill.web.admin.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.common.web.exception.enums.ExceptionEnum;
 import com.gw.seckill.common.web.exception.pojo.Result;
 import com.gw.seckill.common.web.exception.utils.ResultUtil;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 
 @Controller
 public class ResourceController {
@@ -34,9 +37,12 @@ public class ResourceController {
       */
     @RequiresPermissions("resource:view")
     @RequestMapping("/resource/view")
-    public String showAllRes(Model model){
-
-        model.addAttribute("resList",resourceFacade.getAllResources());
+    public String showAllRes(@RequestParam Integer page, Model model){
+        SysResource sysResource = new SysResource();
+        sysResource.setRows(15);
+        sysResource.setPage(page);
+        PageInfo<SysResource> pageInfo = resourceFacade.getAllResourcesPaged(sysResource);
+        model.addAttribute("pageInfo",pageInfo);
         return "/resource/resource";
     }
     /**

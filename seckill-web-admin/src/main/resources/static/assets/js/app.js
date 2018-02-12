@@ -416,7 +416,14 @@ $('#firstTree').tree({
 $('#firstTree').on('selected.tree.amui', function (event, data) {
     // do something with data: { selected: [array], target: [object] }
     //console.log(data.selected[0]);
-    $('#content').load(data.selected[0].url);
+    var viewUrl = data.selected[0].url;
+    if(viewUrl == "/resource/view"||
+       viewUrl == "/sysuser/view"||
+        viewUrl == "/role/view"){
+        $('#content').load(viewUrl+"?page=1");
+    }else {
+        $('#content').load(viewUrl);
+    }
 
 });
 

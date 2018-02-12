@@ -73,9 +73,9 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <#list userList as user>
+                                        <#list pageInfo.list as user>
                                             <tr class="gradeX">
-                                                <td>${user.sysUserId}</td>
+                                                <td>${user.id}</td>
                                                 <td>${user.userName}</td>
                                                 <td>${user.roleIds}</td>
                                                 <td>
@@ -88,11 +88,11 @@
                                                 </td>
                                                 <td>
                                                     <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;" data-user-id="${user.sysUserId}"
+                                                        <a href="javascript:;" data-user-id="${user.id}"
                                                            class="blocking-user tpl-table-black-operation-del">
                                                             <i class="am-icon-trash"></i> 停用
                                                         </a>
-                                                        <a href="javascript:;" data-user-id="${user.sysUserId}"
+                                                        <a href="javascript:;" data-user-id="${user.id}"
                                                            class="deblocking-user tpl-table-black-operation-enable">
                                                             <i class="am-icon-deaf"></i> 启用节点
                                                         </a>
@@ -106,7 +106,31 @@
                                 </table>
                             </div>
                         <#--分页-->
-                            <#include "pagination.ftl">
+                            <div class="am-u-lg-12 am-cf">
+
+                                <div class="am-fr">
+                                    <ul class="am-pagination tpl-pagination">
+                                        <#if pageInfo.hasPreviousPage>
+                                            <li><a class="user-page" href="javascript:;" data-user-page="1">首页</a></li>
+                                            <li><a class="user-page"  href="javascript:;" data-user-page="${pageInfo.prePage}">«</a></li>
+                                        </#if>
+
+                                        <#list pageInfo.navigatepageNums as nav>
+                                            <#if nav == pageInfo.pageNum>
+                                                <li class="am-active"><a href="javascript:;">${nav}</a></li>
+                                            </#if>
+                                            <#if nav != pageInfo.pageNum>
+                                                <li ><a class="user-page" href="javascript:;" data-user-page="${nav}">${nav}</a></li>
+                                            </#if>
+                                        </#list>
+
+                                        <#if pageInfo.hasNextPage>
+                                            <li><a class="user-page" href="javascript:;" data-user-page="${pageInfo.nextPage}">»</a></li>
+                                            <li><a class="user-page" href="javascript:;" data-user-page="${pageInfo.total}">尾页</a></li>
+                                        </#if>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -193,6 +217,13 @@
 
 
         })
+    });
+
+    $(function () {
+        $('.user-page').on('click',function () {
+            var page = $(this).attr('data-user-page');
+            $('#content').load("/sysuser/view?page="+page);
+        });
     });
 
 </script>

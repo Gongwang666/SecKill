@@ -1,5 +1,7 @@
 package com.gw.seckill.core.admin.biz;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.constants.ConstantClassFunction;
 import com.gw.seckill.core.admin.dao.SysUserMapper;
 import com.gw.seckill.facade.admin.entity.SysResource;
@@ -148,5 +150,12 @@ public class UserBiz {
         sysUser.setId(userID);
         sysUser.setLocked((byte)1);
         return sysUserDAO.updateByPrimaryKeySelective(sysUser);
+    }
+
+    public PageInfo<SysUser> getAllUsersPaged(SysUser sysUser) {
+        if (sysUser.getPage() != null && sysUser.getRows() != null) {
+            PageHelper.startPage(sysUser.getPage(), sysUser.getRows());
+        }
+        return new PageInfo<SysUser>(sysUserDAO.selectAll());
     }
 }

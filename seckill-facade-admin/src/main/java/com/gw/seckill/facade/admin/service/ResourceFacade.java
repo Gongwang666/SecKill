@@ -1,5 +1,6 @@
 package com.gw.seckill.facade.admin.service;
 
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.facade.admin.entity.SysResource;
 
 import java.util.List;
@@ -73,5 +74,14 @@ public interface ResourceFacade {
     　* @作者:     gongwang
     　* @创建时间: 2018/2/5 16:38
       */
-    List<SysResource> getAllResourcesPaged(SysResource sysResource);
+    PageInfo<SysResource> getAllResourcesPaged(SysResource sysResource);
+    /**
+     * 类名:
+     * 参数:
+     * 描述: 获取总记录数
+     * 作者: gongwang
+     * 日期: 2018/2/6
+     * 时间: 下午7:41
+     **/
+    Integer getResTotalCount();
 }

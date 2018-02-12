@@ -1,6 +1,7 @@
 package com.gw.seckill.web.admin.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.common.web.exception.pojo.Result;
 import com.gw.seckill.facade.admin.entity.SysRole;
 import com.gw.seckill.facade.admin.entity.SysUser;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -89,9 +91,12 @@ public class UserManagerController {
      **/
     @RequiresPermissions("sysuser:view")
     @RequestMapping("/sysuser/view")
-    public String showSysUserPage(Model model){
-        List<SysUser> sysUsers = userFacade.getAllUsers();
-        model.addAttribute("userList",sysUsers);
+    public String showSysUserPage(@RequestParam Integer page, Model model){
+        SysUser sysUser = new SysUser();
+        sysUser.setPage(page);
+        sysUser.setRows(15);
+        PageInfo<SysUser> pageInfo = userFacade.getAllUsersPaged(sysUser);
+        model.addAttribute("pageInfo",pageInfo);
         return "/sysuser/sysUser";
     }
     /**

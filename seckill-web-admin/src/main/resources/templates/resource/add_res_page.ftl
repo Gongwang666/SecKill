@@ -30,7 +30,7 @@
                                                         <#else >
                                                             <option disabled value="${cat.catId}">${cat.catName}</option>
                                                         </#if>-->
-                                                        <option value="${res.resId}">${res.resName}</option>
+                                                        <option value="${res.id}">${res.resName}</option>
                                                     </#list>
                                                 </select>
                                             </div>
@@ -159,6 +159,7 @@
         var resUrl = $('#res_url').val();
         var allParents = $('#all_parents').val();
         var resPermission = $('#res_permission').val();
+        var isShow = $("input[name='isShow']:checked").val();
         //var isShow = $("input[name='isShow']:checked").val();
         if(resName == null || resName == ""){
             alert("资源名称不能为空！");
@@ -183,7 +184,8 @@
                         resUrl:resUrl,
                         parentId:resParentId,
                         parentIds:allParents,
-                        permission:resPermission
+                        permission:resPermission,
+                        available:isShow
                         };
         $.ajax({
             url:'/resource/create.do',

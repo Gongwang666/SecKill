@@ -1,6 +1,7 @@
 package com.gw.seckill.core.admin.biz;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.core.admin.dao.SysResourceMapper;
 import com.gw.seckill.facade.admin.entity.SysResource;
 import org.apache.commons.lang3.StringUtils;
@@ -88,11 +89,11 @@ public class ResourceBiz {
     　* @作者:     gongwang
     　* @创建时间: 2018/2/5 16:37
       */
-    public List<SysResource> getAllResourcesPaged(SysResource sysResource){
+    public PageInfo<SysResource> getAllResourcesPaged(SysResource sysResource){
         if (sysResource.getPage() != null && sysResource.getRows() != null) {
             PageHelper.startPage(sysResource.getPage(), sysResource.getRows());
         }
-        return sysResourceDAO.selectAll();
+        return new PageInfo<SysResource>(sysResourceDAO.selectAll());
     }
     /**
     　* @描述:     添加资源
@@ -140,5 +141,9 @@ public class ResourceBiz {
         sysResource.setId(resId);
         sysResource.setAvailable((byte)1);
         return sysResourceDAO.updateByPrimaryKeySelective(sysResource);
+    }
+
+    public Integer getResTotalCount() {
+        return sysResourceDAO.selectCount(new SysResource());
     }
 }

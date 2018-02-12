@@ -1,5 +1,6 @@
 package com.gw.seckill.facade.admin.service;
 
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.facade.admin.entity.SysRole;
 
 import java.util.List;
@@ -30,4 +31,22 @@ public interface RoleFacade {
      * 时间: 下午4:29
      **/
     List<SysRole> getAllRoles();
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 分页获取所有角色
+     * 作者: gongwang
+     * 日期: 2018/2/8
+     * 时间: 下午1:09
+     **/
+    PageInfo<SysRole> getAllRolesPaged(SysRole sysRole);
+    /**
+     * 类名:
+     * 参数: 
+     * 描述: 添加角色
+     * 作者: gongwang
+     * 日期: 2018/2/12
+     * 时间: 上午9:14
+     **/
+    int addRole(SysRole sysRole);
 }
