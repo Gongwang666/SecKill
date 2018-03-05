@@ -146,17 +146,17 @@
     //$('#message-show').alert('close');
     //编辑资源
     $(function () {
-        $('.update-res').on('click', function () {
-            var id = $(this).attr('data-res-id');
-            $('#content').load('/resource/update?resID='+id);
+        $('.update-role').on('click', function () {
+            var id = $(this).attr('data-role-id');
+            $('#content').load('/role/update?id='+id);
         })
     });
-
+    //启用角色
     $(function () {
-        $('.enable-res').on('click', function () {
-            var id = $(this).attr('data-res-id');
+        $('.enable-role').on('click', function () {
+            var id = $(this).attr('data-role-id');
             $.ajax({
-                url: '/resource/enable.do',
+                url: '/role/enable.do',
                 contentType: "application/json;charset=utf-8",
                 type: 'POST', //GET
                 async: false,    //或false,是否异步
@@ -171,7 +171,7 @@
                     console.log(data);
                     //result = data;
                     //$('#message-show').show();
-                    $('#content').load('/resource/view');
+                    $('#content').load('/role/view?page=${pageInfo.pageNum}');
                     //console.log(textStatus)
                     //console.log(jqXHR)
                 },
@@ -186,18 +186,18 @@
             });
         })
     });
-    //删除资源
+    //删除角色
     $(function () {
-        $('.del-res').on('click', function () {
-            var id = $(this).attr('data-res-id');
+        $('.del-role').on('click', function () {
+            var id = $(this).attr('data-role-id');
             //$('#message-show').alert();
             var result = null;
             AMUI.dialog.alert({
                 title: '删除提示',
-                content: '您确定要删除该资源？',
+                content: '您确定要删除该角色？',
                 onConfirm: function() {
                     $.ajax({
-                        url: '/resource/delete',
+                        url: '/role/delete',
                         contentType: "application/json;charset=utf-8",
                         type: 'POST', //GET
                         async: false,    //或false,是否异步
@@ -214,13 +214,13 @@
                             if(data.status == 0){
                                 $('#message-show').text(data.msg);
                                 $('#message-show').show();
-                                setTimeout("$('#content').load('/resource/view')", 1500);
+                                setTimeout("$('#content').load('/role/view?page=${pageInfo.pageNum}')", 1500);
                             }else if(data.status == -1){
                                 AMUI.dialog.alert({
                                     title: 'Message',
                                     content: data.msg,
                                     onConfirm: function() {
-                                        console.log("删除失败，错误提示：该资源不能被删除！");
+                                        console.log("删除失败！");
                                     }
                                 });
                             }

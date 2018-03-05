@@ -31,32 +31,6 @@ public class TestController {
         return "index";
     }
 
-    @RequestMapping("/goods/cats.do")
-    public String toCategory(Model model){
-        List<GoodsCats> goodsCatsList = goodsCatsFacade.findAllGoodsCats();
-        model.addAttribute("goodsCats",goodsCatsList);
-        return "/category/category";
-    }
-
-
-
-    @RequestMapping("/goods/cats/create")
-    public String addCats(Model model){
-        List<GoodsCats> goodsCatsList = goodsCatsFacade.findAllGoodsCats();
-        model.addAttribute("goodsCats",goodsCatsList);
-        return "/category/add_cat_page";
-    }
-
-    @ResponseBody
-    @RequestMapping("/addCat.do")
-    public Result addCat(@RequestBody GoodsCats goodsCats, Model model){
-        //model.addAttribute("")
-        if(goodsCats != null){
-            goodsCatsFacade.addGoodsCat(goodsCats);
-            return ResultUtil.success();
-        }
-        return ResultUtil.error(ExceptionEnum.UNKNOW_ERROR);
-    }
 
     @RequestMapping("/errorMessage")
     public String error(){

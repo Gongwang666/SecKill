@@ -82,4 +82,55 @@ public class RoleBiz {
     public int addRole(SysRole sysRole) {
         return sysRoleDAO.insertSelective(sysRole);
     }
+    /**
+    　* @描述:     删除角色
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/2 14:52
+      */
+    public int delRoleById(Long id) {
+        SysRole sysRole = new SysRole();
+        sysRole.setId(id);
+        sysRole.setAvailable((byte)0);
+        return sysRoleDAO.updateByPrimaryKeySelective(sysRole);
+    }
+
+    /**
+    　* @描述:     启用角色
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/2 15:16
+      */
+    public int enableRoleById(Long id) {
+        SysRole sysRole = new SysRole();
+        sysRole.setId(id);
+        sysRole.setAvailable((byte)1);
+        return sysRoleDAO.updateByPrimaryKeySelective(sysRole);
+    }
+    /**
+    　* @描述:    通过id获取角色
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/5 18:52
+      */
+    public SysRole getRoleById(Long id) {
+        return sysRoleDAO.selectByPrimaryKey(id);
+    }
+    /**
+    　* @描述:     更新角色属性
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/5 19:27
+      */
+    public int updateRole(SysRole sysRole) {
+        return sysRoleDAO.updateByPrimaryKeySelective(sysRole);
+    }
 }

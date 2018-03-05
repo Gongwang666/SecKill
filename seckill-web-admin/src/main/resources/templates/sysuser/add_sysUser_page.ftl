@@ -30,7 +30,7 @@
                                                         <#else >
                                                             <option disabled value="${cat.catId}">${cat.catName}</option>
                                                         </#if>-->
-                                                        <option value="${role.roleId}">${role.description}</option>
+                                                        <option value="${role.id}">${role.description}</option>
                                                     </#list>
                                                 </select>
                                             </div>
@@ -53,7 +53,7 @@
 
                                     <div class="am-form-group">
                                         <label for="user-name" class="am-u-sm-3 am-form-label">
-                                            是否可用:
+                                            是否锁定:
                                         </label>
                                         <div class="am-u-sm-9 ">
 

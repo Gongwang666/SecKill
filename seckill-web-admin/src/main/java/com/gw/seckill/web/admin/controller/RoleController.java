@@ -66,6 +66,14 @@ public class RoleController {
         return "/role/add_role_page";
     }
 
+    /**
+    　* @描述:     添加角色操作
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/2 14:33
+      */
     @RequiresPermissions("role:create")
     @RequestMapping("/role/create.do")
     @ResponseBody
@@ -81,6 +89,106 @@ public class RoleController {
         }
         result.setStatus(-1);
         result.setMsg("添加失败!");
+        return result;
+    }
+
+    /**
+    　* @描述:     删除角色
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/2 14:45
+      */
+    @RequiresPermissions("role:delete")
+    @RequestMapping("/role/delete")
+    @ResponseBody
+    public Result delRole(@RequestBody Long id,Model model){
+        Result result = new Result();
+        if(id != null){
+            int row = roleFacade.delRoleById(id);
+            if(row == 1){
+                result.setStatus(0);
+                result.setMsg("删除成功!");
+                return result;
+            }
+        }
+        result.setStatus(-1);
+        result.setMsg("删除失败!");
+        return result;
+    }
+
+    /**
+    　* @描述:     启用角色
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/2 15:14
+      */
+    @RequiresPermissions("role:update")
+    @RequestMapping("/role/enable.do")
+    @ResponseBody
+    public Result enableRole(@RequestBody Long id,Model model){
+        Result result = new Result();
+        if(id != null){
+            int row = roleFacade.enableRoleById(id);
+            if(row == 1){
+                result.setStatus(0);
+                result.setMsg("启用成功!");
+                return result;
+            }
+        }
+        result.setStatus(-1);
+        result.setMsg("启用失败!");
+        return result;
+    }
+    /**
+    　* @描述:    跳转到修改页面
+    　* @参数描述: 
+    　* @返回值:   
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/5 18:44
+      */
+    @RequiresPermissions("role:update")
+    @RequestMapping("/role/update")
+    public String toEditPage(@RequestParam Long id,Model model){
+        if(id != null){
+            SysRole role = roleFacade.getRoleById(id);
+            List<SysResource> resList = resourceFacade.getAllResources();
+            if(role != null){
+                model.addAttribute("role",role);
+                model.addAttribute("resList",resList);
+                return "/role/edit_role_page";
+            }
+        }
+        return null;
+    }
+
+    /**
+    　* @描述:     修改角色信息
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/5 18:43
+      */
+    @RequiresPermissions("role:update")
+    @RequestMapping("/role/update.do")
+    @ResponseBody
+    public Result editRole(@RequestBody SysRole sysRole, Model model){
+        Result result = new Result();
+        if(sysRole!=null){
+            int row = roleFacade.updateRole(sysRole);
+            if(row == 1){
+                result.setStatus(0);
+                result.setMsg("修改成功!");
+                return result;
+            }
+        }
+        result.setStatus(-1);
+        result.setMsg("修改失败!");
         return result;
     }
 

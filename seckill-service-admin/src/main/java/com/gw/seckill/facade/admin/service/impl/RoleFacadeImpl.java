@@ -41,4 +41,24 @@ public class RoleFacadeImpl implements RoleFacade {
     public int addRole(SysRole sysRole) {
         return roleBiz.addRole(sysRole);
     }
+
+    @Override
+    public int delRoleById(Long id) {
+        return roleBiz.delRoleById(id);
+    }
+
+    @Override
+    public int enableRoleById(Long id) {
+        return roleBiz.enableRoleById(id);
+    }
+
+    @Override
+    public SysRole getRoleById(Long id) {
+        return roleBiz.getRoleById(id);
+    }
+
+    @Override
+    public int updateRole(SysRole sysRole) {
+        return roleBiz.updateRole(sysRole);
+    }
 }

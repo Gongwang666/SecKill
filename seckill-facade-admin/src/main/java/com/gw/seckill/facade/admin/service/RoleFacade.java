@@ -49,4 +49,42 @@ public interface RoleFacade {
      * 时间: 上午9:14
      **/
     int addRole(SysRole sysRole);
+
+    /**
+    　* @描述:     通过id删除角色
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/2 14:50
+      */
+    int delRoleById(Long id);
+
+    /**
+    　* @描述:     启用角色
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/2 15:16
+      */
+    int enableRoleById(Long id);
+    /**
+    　* @描述:     通过id获取角色
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/5 18:51
+      */
+    SysRole getRoleById(Long id);
+    /**
+    　* @描述:     修改角色属性
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/5 19:26
+      */
+    int updateRole(SysRole sysRole);
 }

@@ -160,7 +160,7 @@
                         title: '提示信息',
                         content: '启用成功!',
                         onConfirm: function() {
-                            $('#content').load('/sysuser/view');
+                            $('#content').load('/sysuser/view?page=${pageInfo.pageNum}');
                         }
                     });
                     //console.log(textStatus)
@@ -197,7 +197,7 @@
                             if(data.status == 0){
                                 $('#message-show').text(data.msg);
                                 $('#message-show').show();
-                                setTimeout("$('#content').load('/sysuser/view')", 1500);
+                                setTimeout("$('#content').load('/sysuser/view?page=${pageInfo.pageNum}')", 1500);
                             }else if(data.status == -1){
                                 AMUI.dialog.alert({
                                     title: 'Message',

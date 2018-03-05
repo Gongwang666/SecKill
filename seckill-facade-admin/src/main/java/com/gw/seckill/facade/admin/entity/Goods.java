@@ -1,56 +1,70 @@
 package com.gw.seckill.facade.admin.entity;
 
+import com.gw.seckill.entity.BaseEntity;
+
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Goods implements Serializable{
-    private Integer goodsId;
+public class Goods extends BaseEntity implements Serializable{
 
+    @Column(name = "GOODS_SN")
     private String goodsSn;
 
+    @Column(name = "GOODS_NAME")
     private String goodsName;
 
+    @Column(name = "GOODS_IMG")
     private String goodsImg;
 
+    @Column(name = "MARKET_PRICE")
     private Long marketPrice;
 
+    @Column(name = "SHOP_PRICE")
     private Long shopPrice;
 
+    @Column(name = "WARN_STOCK")
     private Integer warnStock;
 
+    @Column(name = "GOODS_STOCK")
     private Integer goodsStock;
 
+    @Column(name = "GOODS_TIPS")
     private String goodsTips;
 
+    @Column(name = "IS_SALE")
     private Byte isSale;
 
+    @Column(name = "IS_BEST")
     private Byte isBest;
 
+    @Column(name = "IS_HOT")
     private Byte isHot;
 
+    @Column(name = "IS_NEW")
     private Byte isNew;
 
+    @Column(name = "GOODS_CAT_ID_PATH")
     private String goodsCatIdPath;
 
+    @Column(name = "GOODS_CAT_ID")
     private Integer goodsCatId;
 
+    @Column(name = "GOODS_DESC")
     private String goodsDesc;
 
+    @Column(name = "SALE_NUM")
     private Integer saleNum;
 
+    @Column(name = "SALE_TIME")
     private Date saleTime;
 
+    @Column(name = "DATA_FLAG")
     private Byte dataFlag;
 
+    @Column(name = "CREATE_TIME")
     private Date createTime;
 
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
 
     public String getGoodsSn() {
         return goodsSn;

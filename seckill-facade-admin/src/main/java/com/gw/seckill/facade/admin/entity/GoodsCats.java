@@ -1,38 +1,38 @@
 package com.gw.seckill.facade.admin.entity;
 
+import com.gw.seckill.entity.BaseEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Date;
 
-public class GoodsCats implements Serializable {
-    private Integer catId;
+public class GoodsCats extends BaseEntity implements Serializable {
+    @Column(name = "PARENT_ID")
+    private Long parentId;
 
-    private Integer parentId;
-
+    @Column(name = "CAT_NAME")
     private String catName;
 
+    @Column(name = "IS_SHOW")
     private Byte isShow;
 
+    @Column(name = "CAT_SORT")
     private Integer catSort;
 
+    @Column(name = "DATA_FLAG")
     private Byte dataFlag;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "CREATE_TIME")
     private Date createTime;
 
-    public Integer getCatId() {
-        return catId;
-    }
 
-    public void setCatId(Integer catId) {
-        this.catId = catId;
-    }
-
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

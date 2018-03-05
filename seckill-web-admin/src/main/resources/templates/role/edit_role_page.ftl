@@ -7,7 +7,7 @@
                         <button type="button" class="am-close">&times;</button>
                         <p id="show_message"></p>
                     </div>
-                    <div class="widget-title  am-cf">添加角色</div>
+                    <div class="widget-title  am-cf">编辑角色</div>
                 </div>
                 <div class="widget-body  am-fr">
                     <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -21,7 +21,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input id="role_name" type="text" class="tpl-form-input" placeholder="请输入角色名称"/>
+                                                <input id="role_name" type="text" value="${role.role}" class="tpl-form-input" placeholder="请输入角色名称"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -33,7 +33,7 @@
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input id="role_des" type="text" class="tpl-form-input" placeholder="请输入角色描述"/>
+                                                <input id="role_des" type="text" value="${role.description}" class="tpl-form-input" placeholder="请输入角色描述"/>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
@@ -46,15 +46,15 @@
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
                                                 <select id="res_select" name="catId" data-placeholder="请选择资源" style="width:350px;" multiple class="chosen-select-no-results" tabindex="9">
+                                                     <#assign resourceIds = role.resourceIds?split(",")>
+                                                     <#list resList as res>
+                                                        <#if resourceIds?seq_contains("${res.id}")>
+                                                            <option selected value="${res.id}">${res.resName}</option>
+                                                        <#else>
+                                                            <option value="${res.id}">${res.resName}</option>
+                                                        </#if>
 
-                                                    <#list resList as res>
-                                                    <#--<#if cat.dataFlag == 1>
-                                                        <option value="${cat.catId}">${cat.catName}</option>
-                                                    <#else >
-                                                        <option disabled value="${cat.catId}">${cat.catName}</option>
-                                                    </#if>-->
-                                                        <option value="${res.id}">${res.resName}</option>
-                                                    </#list>
+                                                     </#list>
                                                 </select>
                                             </div>
                                             <div class="am-u-sm-3"></div>
@@ -70,13 +70,22 @@
                                             <div class="am-u-sm-9">
                                                 <div class="am-u-sm-6">
                                                     <label class="am-radio-inline">
-                                                        <input type="radio" name="isLocked" value="1" data-am-ucheck> 是
+                                                        <#if role.available == 1>
+                                                            <input type="radio" checked="checked" name="isLocked" value="1" data-am-ucheck> 是
+                                                        <#else >
+                                                            <input type="radio" name="isLocked" value="1" data-am-ucheck> 是
+                                                        </#if>
                                                     </label>
                                                 </div>
 
                                                 <div class="am-u-sm-6">
                                                     <label class="am-radio-inline">
-                                                        <input type="radio" name="isLocked" value="0" data-am-ucheck> 否
+                                                        <#if role.available == 0>
+                                                            <input type="radio" checked="checked" name="isLocked" value="0" data-am-ucheck> 否
+                                                        <#else >
+                                                            <input type="radio" name="isLocked" value="0" data-am-ucheck> 否
+                                                        </#if>
+
                                                     </label>
                                                 </div>
                                             </div>
@@ -91,7 +100,7 @@
                                             <div class="am-u-sm-4">
                                             </div>
                                             <div class="am-u-sm-8">
-                                                <button id="add_user" type="button" class="am-btn am-btn-primary">提交</button>
+                                                <button id="update_role" type="button" class="am-btn am-btn-primary">提交</button>
                                             </div>
                                         </div>
                                     </div>
@@ -111,8 +120,9 @@
     $('#res_select').chosen({ width: '95%'});
 
 
-    $('#add_user').on('click',function () {
+    $('#update_role').on('click',function () {
         var form = $('#add_role_form');
+        var id = "${role.id}";
         var roleName = $('#role_name').val();
         var resource = $('#res_select').val();
         var roleDes = $('#role_des').val();
@@ -140,14 +150,14 @@
 
         //console.log(roleString);
 
-        var allData = {
+        var allData = { id : id,
                         role : roleName,
                         description : roleDes,
                         resourceIds : resString,
                         available :  isLocked
                         };
         $.ajax({
-            url:'/role/create.do',
+            url:'/role/update.do',
             contentType:"application/json;charset=utf-8",
             type:form.attr("method"), //GET
             async:true,    //或false,是否异步
@@ -164,7 +174,7 @@
                     $('#add_role_message').attr("class","am-alert am-alert-success")
                     $('#add_role_message').show();
                     $('#show_message').text(data.msg);
-                    setTimeout("$('#content').load('/role/create')",1500);
+                    setTimeout("$('#content').load('/role/view?page=1')",1000);
                 }else {
                     $('#add_role_message').attr("class","am-alert am-alert-danger")
                     $('#add_role_message').show();

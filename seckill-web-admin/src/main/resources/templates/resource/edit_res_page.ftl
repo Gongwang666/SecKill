@@ -6,9 +6,9 @@
                 <#--信息提示-->
                     <div id="message-show" hidden="hidden" class="am-alert am-alert-danger" data-am-alert>
                         <button type="button" class="am-close">&times;</button>
-                        <p>添加成功</p>
+                        <p>修改成功</p>
                     </div>
-                    <div class="widget-title  am-cf">添加分类</div>
+                    <div class="widget-title  am-cf">编辑分类</div>
                 </div>
                 <div class="widget-body  am-fr">
                     <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -27,9 +27,9 @@
 
                                                     <#list resList as res>
                                                         <#if res.resId == resourceInfo.parentId>
-                                                            <option selected value="${res.resId}">${res.resName}</option>
+                                                            <option selected value="${res.id}">${res.resName}</option>
                                                         <#else>
-                                                            <option value="${res.resId}">${res.resName}</option>
+                                                            <option value="${res.id}">${res.resName}</option>
                                                         </#if>
 
                                                     </#list>
@@ -173,7 +173,7 @@
         var resUrl = $('#res_url').val();
         var allParents = $('#all_parents').val();
         var resPermission = $('#res_permission').val();
-        var resId = "${resourceInfo.resId}";
+        var resId = "${resourceInfo.id}";
         //var isShow = $("input[name='isShow']:checked").val();
         if(resName == null || resName == ""){
             alert("资源名称不能为空！");
@@ -193,7 +193,7 @@
         }
 
         var allData = {
-                        resId:resId,
+                        id:resId,
                         resName:resName,
                         resType:resType,
                         resUrl:resUrl,
@@ -216,7 +216,7 @@
             success:function(data,textStatus,jqXHR){
                 console.log(data)
                 $('#message-show').show();
-                setTimeout("$('#content').load('/resource/view')", 1500);
+                setTimeout("$('#content').load('/resource/view?page=1')", 1500);
                 //console.log(textStatus)
                 //console.log(jqXHR)
             },
