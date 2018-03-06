@@ -1,6 +1,7 @@
 package com.gw.seckill.facade.admin.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.core.admin.biz.GoodsCatsBiz;
 import com.gw.seckill.facade.admin.entity.GoodsCats;
 import com.gw.seckill.facade.admin.service.GoodsCatsFacade;
@@ -29,5 +30,35 @@ public class GoodsCatsFacadeImpl implements GoodsCatsFacade {
     @Override
     public List<GoodsCats> getGoodsCatsTree() {
         return goodsCatsBiz.getGoodsCatsTree();
+    }
+
+    @Override
+    public PageInfo<GoodsCats> getAllCatsPaged(GoodsCats goodsCats) {
+        return goodsCatsBiz.getAllCatsPaged(goodsCats);
+    }
+
+    @Override
+    public int addCats(GoodsCats goodsCats) {
+        return goodsCatsBiz.addCats(goodsCats);
+    }
+
+    @Override
+    public int delCat(Long id) {
+        return goodsCatsBiz.delCat(id);
+    }
+
+    @Override
+    public GoodsCats getCatsById(Long id) {
+        return goodsCatsBiz.getCatsById(id);
+    }
+
+    @Override
+    public int editCat(GoodsCats goodsCats) {
+        return goodsCatsBiz.editCat(goodsCats);
+    }
+
+    @Override
+    public int enableCats(Long id) {
+        return goodsCatsBiz.enableCats(id);
     }
 }

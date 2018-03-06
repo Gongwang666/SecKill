@@ -129,7 +129,7 @@ public class RoleController {
     @RequiresPermissions("role:update")
     @RequestMapping("/role/enable.do")
     @ResponseBody
-    public Result enableRole(@RequestBody Long id,Model model){
+    public Result enableRole(@RequestBody Long id){
         Result result = new Result();
         if(id != null){
             int row = roleFacade.enableRoleById(id);

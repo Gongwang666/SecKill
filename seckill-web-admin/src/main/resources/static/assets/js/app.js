@@ -419,7 +419,8 @@ $('#firstTree').on('selected.tree.amui', function (event, data) {
     var viewUrl = data.selected[0].url;
     if(viewUrl == "/resource/view"||
        viewUrl == "/sysuser/view"||
-        viewUrl == "/role/view"){
+        viewUrl == "/role/view"||
+        viewUrl == "/goods/cats/view"){
         $('#content').load(viewUrl+"?page=1");
     }else {
         $('#content').load(viewUrl);

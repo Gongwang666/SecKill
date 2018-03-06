@@ -1,5 +1,6 @@
 package com.gw.seckill.facade.admin.service;
 
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.facade.admin.entity.GoodsCats;
 
 import java.util.List;
@@ -31,4 +32,59 @@ public interface GoodsCatsFacade {
     　* @创建时间: 2018/3/5 20:49
       */
     List<GoodsCats> getGoodsCatsTree();
+    /**
+    　* @描述:     分页查询分类信息
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 10:20
+      */
+    PageInfo<GoodsCats> getAllCatsPaged(GoodsCats goodsCats);
+    /**
+    　* @描述:     添加商品分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 10:54
+      */
+    int addCats(GoodsCats goodsCats);
+    
+    /**
+    　* @描述:     删除分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 14:30
+      */
+    int delCat(Long id);
+    /**
+    　* @描述:     通过id获取商品分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 14:33
+      */
+    GoodsCats getCatsById(Long id);
+    /**
+    　* @描述:     修改分类信息
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 15:18
+      */
+    int editCat(GoodsCats goodsCats);
+    /**
+    　* @描述:     启用分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 15:50
+      */
+    int enableCats(Long id);
 }

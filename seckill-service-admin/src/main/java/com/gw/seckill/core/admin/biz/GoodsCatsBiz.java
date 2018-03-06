@@ -1,6 +1,8 @@
 package com.gw.seckill.core.admin.biz;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gw.seckill.core.admin.dao.GoodsCatsMapper;
 import com.gw.seckill.core.admin.util.GoodsCatsUtil;
 import com.gw.seckill.facade.admin.entity.GoodsCats;
@@ -55,5 +57,80 @@ public class GoodsCatsBiz {
         }
         GoodsCatsUtil goodsCatsUtil = new GoodsCatsUtil();
         return goodsCatsUtil.getChildTreeObjects(goodsCatsTreeVOList,(long)-1);
+    }
+    /**
+    　* @描述:     获取分页后的分类菜单
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 14:31
+      */
+    public PageInfo<GoodsCats> getAllCatsPaged(GoodsCats goodsCats) {
+        if (goodsCats.getPage() != null && goodsCats.getRows() != null) {
+            PageHelper.startPage(goodsCats.getPage(), goodsCats.getRows());
+        }
+        return new PageInfo<GoodsCats>(goodsCatsDAO.selectAll());
+    }
+    /**
+    　* @描述:     添加分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 14:32
+      */
+    public int addCats(GoodsCats goodsCats) {
+        goodsCats.setCreateTime(new Date());
+        return goodsCatsDAO.insertSelective(goodsCats);
+    }
+    /**
+    　* @描述:     删除分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 14:32
+      */
+    public int delCat(Long id) {
+        GoodsCats goodsCats = getCatsById(id);
+        goodsCats.setDataFlag((byte)0);
+        return goodsCatsDAO.updateByPrimaryKeySelective(goodsCats);
+    }
+    /**
+    　* @描述:     通过id获取商品分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 14:35
+      */
+    public GoodsCats getCatsById(Long id) {
+        return goodsCatsDAO.selectByPrimaryKey(id);
+    }
+    /**
+    　* @描述:     修改分类信息
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 15:19
+      */
+    public int editCat(GoodsCats goodsCats) {
+        return goodsCatsDAO.updateByPrimaryKeySelective(goodsCats);
+    }
+    /**
+    　* @描述:     启用分类
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/6 15:51
+      */
+    public int enableCats(Long id) {
+        GoodsCats goodsCats = new GoodsCats();
+        goodsCats.setId(id);
+        goodsCats.setDataFlag((byte)1);
+        return goodsCatsDAO.updateByPrimaryKeySelective(goodsCats);
     }
 }

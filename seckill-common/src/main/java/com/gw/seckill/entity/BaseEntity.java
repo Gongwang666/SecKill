@@ -25,9 +25,9 @@ public class BaseEntity implements Serializable {
 	@Transient
 	private Integer rows = 10;
 
-	@Transient
-	/** 创建时间 **/
-	private Date createTime;
+	/*@Transient
+	*//** 创建时间 **//*
+	private Date createTime;*/
 
 	public Integer getPage() {
 		return page;
@@ -55,13 +55,13 @@ public class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	/** 创建时间 **/
+	/** 创建时间 **//*
 	public Date getCreateTime() {
 		return createTime;
 	}
 	
-	/** 创建时间 **/
+	*//** 创建时间 **//*
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
-	}
+	}*/
 }

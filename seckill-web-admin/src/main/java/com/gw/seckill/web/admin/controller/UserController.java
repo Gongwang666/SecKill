@@ -5,12 +5,14 @@ import com.gw.seckill.common.web.exception.enums.ExceptionEnum;
 import com.gw.seckill.common.web.exception.handler.WebGlobalExceptionHandler;
 import com.gw.seckill.facade.admin.entity.SysUser;
 import com.gw.seckill.facade.admin.service.UserFacade;
+import com.gw.seckill.web.admin.cache.SpringCacheManagerWrapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Set;
 
 /**
 　* @描述:     用户登录，登出，验证Controller
@@ -34,6 +38,8 @@ public class UserController {
     //统一异常处理
     @Autowired
     private WebGlobalExceptionHandler webGlobalExceptionHandler;
+    @Autowired
+    private SpringCacheManagerWrapper shiroCacheManager;
 
     @RequestMapping("/user/login")
     public String toLogin(){
@@ -83,9 +89,12 @@ public class UserController {
 
     @RequestMapping("/user/logout.do")
     public String userLogOut(){
+        Cache<String, Set<String>> authorizationCache = shiroCacheManager.getCache("authorizationCache");;
         Subject subject = SecurityUtils.getSubject();
+        String userName = subject.getPrincipal().toString();
+        //用户登出时清除权限缓存
+        authorizationCache.remove(userName);
         subject.logout();
-
         return "redirect:/user/login";
     }
 
