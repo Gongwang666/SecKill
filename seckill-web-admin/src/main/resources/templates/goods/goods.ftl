@@ -7,11 +7,16 @@
                     <#--表头标题-->
                         <div class="widget-head am-cf">
                             <div class="widget-title  am-cf">商品列表</div>
-                            <#--信息提示-->
+                        <#--信息提示-->
                             <div id="message-show" hidden="hidden" class="am-alert am-alert-danger" data-am-alert>
                                 <button type="button" class="am-close">&times;</button>
                                 <p id="show-message"></p>
                             </div>
+                            <form id="uploadForm" action="/goods/goodsInfo/uploadFile.do" name="uploadForm" method="post"
+                                  enctype="multipart/form-data">
+                                <label>文件</label> <input type="file" name="file">
+                                <button class="btn" type="button" id="doSave">提交</button>
+                            </form>
                         </div>
                         <div class="widget-body  am-fr">
 
@@ -149,7 +154,8 @@
                                     <ul class="am-pagination tpl-pagination">
                                         <#if pageInfo.hasPreviousPage>
                                             <li><a class="res-page" href="javascript:;" data-res-page="1">首页</a></li>
-                                            <li><a class="res-page"  href="javascript:;" data-res-page="${pageInfo.prePage}">«</a></li>
+                                            <li><a class="res-page" href="javascript:;"
+                                                   data-res-page="${pageInfo.prePage}">«</a></li>
                                         </#if>
 
                                         <#list pageInfo.navigatepageNums as nav>
@@ -157,13 +163,16 @@
                                                 <li class="am-active"><a href="javascript:;">${nav}</a></li>
                                             </#if>
                                             <#if nav != pageInfo.pageNum>
-                                                <li ><a class="res-page" href="javascript:;" data-res-page="${nav}">${nav}</a></li>
+                                                <li><a class="res-page" href="javascript:;"
+                                                       data-res-page="${nav}">${nav}</a></li>
                                             </#if>
                                         </#list>
 
                                         <#if pageInfo.hasNextPage>
-                                            <li><a class="res-page" href="javascript:;" data-res-page="${pageInfo.nextPage}">»</a></li>
-                                            <li><a class="res-page" href="javascript:;" data-res-page="${pageInfo.total}">尾页</a></li>
+                                            <li><a class="res-page" href="javascript:;"
+                                                   data-res-page="${pageInfo.nextPage}">»</a></li>
+                                            <li><a class="res-page" href="javascript:;"
+                                                   data-res-page="${pageInfo.total}">尾页</a></li>
                                         </#if>
                                     </ul>
                                 </div>
@@ -179,7 +188,7 @@
     $(function () {
         $('.update-res').on('click', function () {
             var id = $(this).attr('data-res-id');
-            $('#content').load('/resource/update?resID='+id);
+            $('#content').load('/resource/update?resID=' + id);
         })
     });
 
@@ -226,7 +235,7 @@
             AMUI.dialog.alert({
                 title: '删除提示',
                 content: '您确定要删除该资源？',
-                onConfirm: function() {
+                onConfirm: function () {
                     $.ajax({
                         url: '/resource/delete',
                         contentType: "application/json;charset=utf-8",
@@ -242,15 +251,15 @@
                         success: function (data, textStatus, jqXHR) {
                             console.log(data);
                             result = data;
-                            if(data.status == 0){
+                            if (data.status == 0) {
                                 $('#message-show').text(data.msg);
                                 $('#message-show').show();
                                 setTimeout("$('#content').load('/resource/view?page=${pageInfo.pageNum}')", 1500);
-                            }else if(data.status == -1){
+                            } else if (data.status == -1) {
                                 AMUI.dialog.alert({
                                     title: 'Message',
                                     content: data.msg,
-                                    onConfirm: function() {
+                                    onConfirm: function () {
                                         console.log("删除失败，错误提示：该资源不能被删除！");
                                     }
                                 });
@@ -271,14 +280,19 @@
             });
 
 
-
         })
     });
 
     $(function () {
-        $('.res-page').on('click',function () {
+        $('.res-page').on('click', function () {
             var page = $(this).attr('data-res-page');
-            $('#content').load("/resource/view?page="+page);
+            $('#content').load("/resource/view?page=" + page);
+        });
+    });
+
+    $(function () {
+        $('#doSave').on('click',function () {
+            $('#uploadForm').submit();
         });
     });
 </script>

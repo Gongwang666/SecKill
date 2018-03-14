@@ -3,6 +3,7 @@ package com.gw.seckill.web.admin.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.gw.seckill.common.web.exception.pojo.Result;
+import com.gw.seckill.common.web.fastdfs.utils.FastDFSClientWrapper;
 import com.gw.seckill.facade.admin.entity.Goods;
 import com.gw.seckill.facade.admin.service.GoodsFacade;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
 　* @描述:     商品信息管理Controller
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GoodsController {
     @Reference(version = "1.0.0")
     private GoodsFacade goodsFacade;
+    @Autowired
+    private FastDFSClientWrapper dfsClient;
 
     @RequiresPermissions("goodsInfo:view")
     @RequestMapping("/goods/goodsInfo/view")
@@ -57,6 +61,19 @@ public class GoodsController {
         result.setMsg("添加失败");
         return result;
     }
-
+    @RequestMapping("/goods/goodsInfo/uploadFile.do")
+    @ResponseBody
+    public Result uploadImg(MultipartFile file) throws Exception{
+        Result result = new Result();
+        if(file != null){
+            String imgUrl = dfsClient.uploadFile(file);
+            result.setStatus(-1);
+            result.setMsg("上传成功!url为:"+imgUrl);
+            return result;
+        }
+        result.setStatus(-1);
+        result.setMsg("添加失败");
+        return result;
+    }
 
 }
