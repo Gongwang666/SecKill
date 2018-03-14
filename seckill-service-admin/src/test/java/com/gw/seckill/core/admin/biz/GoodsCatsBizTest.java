@@ -24,4 +24,13 @@ public class GoodsCatsBizTest {
         List<GoodsCats> list = goodsCatsBiz.getGoodsCatsTree();
         System.out.print(0);
     }
+
+    @Test
+    public void getChildList(){
+        GoodsCats goodsCats = new GoodsCats();
+        goodsCats.setId((long)3);
+        goodsCats.setParentId((long)1);
+        List<GoodsCats> list = goodsCatsBiz.getChildList(goodsCats);
+        System.out.print(0);
+    }
 }

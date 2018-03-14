@@ -133,4 +133,31 @@ public class GoodsCatsBiz {
         goodsCats.setDataFlag((byte)1);
         return goodsCatsDAO.updateByPrimaryKeySelective(goodsCats);
     }
+    /**
+    　* @描述:     获取指定节点下的所有子节点
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/7 14:55
+      */
+    public List<GoodsCats> getChildList(GoodsCats goodsCats) {
+        List<GoodsCats> goodsCatsList = getAllGoodCats();
+        List<GoodsCatsTreeVO> goodsCatsTreeVOList = new ArrayList<GoodsCatsTreeVO>();
+        GoodsCatsTreeVO treeVO = new GoodsCatsTreeVO();
+        treeVO.setId(goodsCats.getId());
+        treeVO.setParentId(goodsCats.getParentId());
+        treeVO.setGoodsCats(goodsCats);
+        for(GoodsCats Cats : goodsCatsList){
+            if(Cats.getDataFlag() == 1){
+                GoodsCatsTreeVO goodsCatsTreeVO = new GoodsCatsTreeVO();
+                goodsCatsTreeVO.setId(Cats.getId());
+                goodsCatsTreeVO.setParentId(Cats.getParentId());
+                goodsCatsTreeVO.setGoodsCats(Cats);
+                goodsCatsTreeVOList.add(goodsCatsTreeVO);
+            }
+        }
+        GoodsCatsUtil goodsCatsUtil = new GoodsCatsUtil();
+        return goodsCatsUtil.getChildList(goodsCatsTreeVOList,treeVO);
+    }
 }

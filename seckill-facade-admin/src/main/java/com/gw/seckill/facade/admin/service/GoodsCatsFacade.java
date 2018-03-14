@@ -87,4 +87,14 @@ public interface GoodsCatsFacade {
     　* @创建时间: 2018/3/6 15:50
       */
     int enableCats(Long id);
+    
+    /**
+    　* @描述:     获取指定节点下的所有子节点
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/7 14:53
+      */
+    List<GoodsCats> getChildList(GoodsCats goodsCats);
 }

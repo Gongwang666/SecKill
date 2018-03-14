@@ -61,4 +61,9 @@ public class GoodsCatsFacadeImpl implements GoodsCatsFacade {
     public int enableCats(Long id) {
         return goodsCatsBiz.enableCats(id);
     }
+
+    @Override
+    public List<GoodsCats> getChildList(GoodsCats goodsCats) {
+        return goodsCatsBiz.getChildList(goodsCats);
+    }
 }

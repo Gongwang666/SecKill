@@ -6,7 +6,7 @@
                     <div class="widget am-cf">
                     <#--表头标题-->
                         <div class="widget-head am-cf">
-                            <div class="widget-title  am-cf">资源列表</div>
+                            <div class="widget-title  am-cf">商品列表</div>
                             <#--信息提示-->
                             <div id="message-show" hidden="hidden" class="am-alert am-alert-danger" data-am-alert>
                                 <button type="button" class="am-close">&times;</button>
@@ -60,39 +60,64 @@
                                 </div>
                             </div>
                         <#--分类展示表格-->
-                            <div class="am-u-sm-12">
-                                <table width="100%" class="am-table am-table-hover am-table-bordered am-table-striped tpl-table-black "
+                            <div class="am-scrollable-horizontal">
+                                <table class="am-table am-table-hover am-table-compact am-table-bordered am-table-striped am-text-nowrap tpl-table-black "
                                        id="example-r">
                                     <thead>
                                     <tr>
-                                        <th>资源ID</th>
-                                        <th>资源名称</th>
-                                        <th>资源类型</th>
-                                        <th>资源URL</th>
-                                        <th>父节点</th>
-                                        <th>所有父节点</th>
-                                        <th>权限</th>
-                                        <th>是否可用</th>
+                                        <th>商品ID</th>
+                                        <th>商品编号</th>
+                                        <th>商品名称</th>
+                                        <th>商品图片</th>
+                                        <th>市场价</th>
+                                        <th>门店价</th>
+                                        <th>预警库存</th>
+                                        <th>商品总库存</th>
+                                        <th>促销信息</th>
+                                        <th>是否上架</th>
+                                        <th>是否精品</th>
+                                        <th>是否热销产品</th>
+                                        <th>是否新品</th>
+                                        <th>商品分类ID路径</th>
+                                        <th>最后一级商品分类ID</th>
+                                        <th>商品描述</th>
+                                        <th>总销售量</th>
+                                        <th>上架时间</th>
+                                        <th>创建时间</th>
+                                        <th>是否删除</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <#list pageInfo.list as res>
+                                        <#list pageInfo.list as goods>
                                             <tr class="gradeX">
-                                                <td>${res.id}</td>
-                                                <td>${res.resName}</td>
-                                                <td>${res.resType}</td>
-                                                <td>${res.resUrl}</td>
-                                                <td>${res.parentId}</td>
-                                                <td>${res.parentIds}</td>
-                                                <td>${res.permission}</td>
+                                                <td>${goods.id}</td>
+                                                <td>${goods.goodsSn}</td>
+                                                <td>${goods.goodsName}</td>
+                                                <td>${goods.goodsImg}</td>
+                                                <td>${goods.marketPrice}</td>
+                                                <td>${goods.shopPrice}</td>
+                                                <td>${goods.warnStock}</td>
+                                                <td>${goods.goodsStock}</td>
+                                                <td>${goods.goodsTips}</td>
+                                                <td>${goods.isSale}</td>
+                                                <td>${goods.isBest}</td>
+                                                <td>${goods.isHot}</td>
+                                                <td>${goods.isNew}</td>
+                                                <td>${goods.goodsCatIdPath}</td>
+                                                <td>${goods.goodsCatId}</td>
+                                                <td>${goods.goodsDesc}</td>
+                                                <td>${goods.saleNum}</td>
+                                                <td>${goods.saleTime?string('yyyy-MM-dd')}</td>
                                                 <td>
-                                                    <#if res.available == 0>
-                                                        <p style="color: red">不可使用，已删除</p>
-                                                    <#else>
-                                                        可以使用
+                                                    ${goods.createTime?string('yyyy-MM-dd')}
+                                                </td>
+                                                <td>
+                                                    <#if goods.dataFlag == 1>
+                                                        <p>可用</p>
+                                                    <#else >
+                                                        <p style="color: red">已删除</p>
                                                     </#if>
-
                                                 </td>
                                                 <td>
                                                     <div class="tpl-table-black-operation">

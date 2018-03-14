@@ -1,6 +1,7 @@
 package com.gw.seckill.facade.admin.entity;
 
 import com.gw.seckill.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import java.io.Serializable;
@@ -56,12 +57,14 @@ public class Goods extends BaseEntity implements Serializable{
     @Column(name = "SALE_NUM")
     private Integer saleNum;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "SALE_TIME")
     private Date saleTime;
 
     @Column(name = "DATA_FLAG")
     private Byte dataFlag;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "CREATE_TIME")
     private Date createTime;
 
