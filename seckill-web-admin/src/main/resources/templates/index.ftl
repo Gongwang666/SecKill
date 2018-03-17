@@ -3,6 +3,12 @@
 
 <head>
     <#include "head_resources.ftl">
+    <#--解决Jquery-ui的Dialog被覆盖的问题-->
+    <style>
+        .ui-front{
+            z-index: 11111;
+        }
+    </style>
 </head>
 
 <body data-type="index">
@@ -17,7 +23,6 @@
 
         <!-- 内容区域 -->
         <div id="content" class="tpl-content-wrapper">
-
             <div class="container-fluid am-cf">
                 <div class="row">
                     <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
@@ -271,6 +276,7 @@
     <script src="../assets/js/amazeui.tree.min.js"></script>
     <script src="../assets/js/amazeui.chosen.min.js"></script>
     <script src="../assets/js/amazeui.dialog.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script src="../assets/js/app.js"></script>
 
 </body>

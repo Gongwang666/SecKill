@@ -126,17 +126,21 @@
                                                 </td>
                                                 <td>
                                                     <div class="tpl-table-black-operation">
-                                                        <a href="javascript:;" data-res-id="${res.id}"
-                                                           class="update-res">
+                                                        <a href="javascript:;" data-goods-id="${goods.id}"
+                                                           class="update-goods">
                                                             <i class="am-icon-pencil"></i> 编辑
                                                         </a>
-                                                        <a href="javascript:;" data-res-id="${res.id}"
-                                                           class="del-res tpl-table-black-operation-del">
+                                                        <a href="javascript:;" data-goods-id="${goods.id}"
+                                                           class="del-goods tpl-table-black-operation-del">
                                                             <i class="am-icon-trash"></i> 删除
                                                         </a>
-                                                        <a href="javascript:;" data-res-id="${res.id}"
-                                                           class="enable-res tpl-table-black-operation-enable">
+                                                        <a href="javascript:;" data-goods-id="${goods.id}"
+                                                           class="enable-goods tpl-table-black-operation-enable">
                                                             <i class="am-icon-deaf"></i> 启用节点
+                                                        </a>
+                                                        <a href="javascript:;" data-goods-id="${goods.id}"
+                                                           class="goods-img-manager tpl-table-black-operation-enable">
+                                                            <i class="am-icon-deaf"></i> 商品图片管理
                                                         </a>
                                                     </div>
                                                 </td>
@@ -291,8 +295,15 @@
     });
 
     $(function () {
+        $('.goods-img-manager').on('click', function () {
+            var id = $(this).attr('data-goods-id');
+            $('#content').load("/goods/goodsInfo/imgManage?id=" + id);
+        });
+    });
+
+    $(function () {
         $('#doSave').on('click',function () {
-            $('#uploadForm').submit();
+
         });
     });
 </script>
