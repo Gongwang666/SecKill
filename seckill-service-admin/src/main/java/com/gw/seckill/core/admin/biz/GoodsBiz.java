@@ -26,4 +26,11 @@ public class GoodsBiz {
         }
         return new PageInfo<Goods>(goodsDAO.selectAll());
     }
+
+    public PageInfo<Goods> getAllGoodsPagedWithImgs(Goods goods) {
+        if (goods.getPage() != null && goods.getRows() != null) {
+            PageHelper.startPage(goods.getPage(), goods.getRows());
+        }
+        return new PageInfo<Goods>(goodsDAO.selectGoodsWithImg());
+    }
 }

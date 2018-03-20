@@ -12,11 +12,6 @@
                                 <button type="button" class="am-close">&times;</button>
                                 <p id="show-message"></p>
                             </div>
-                            <form id="uploadForm" action="/goods/goodsInfo/uploadFile.do" name="uploadForm" method="post"
-                                  enctype="multipart/form-data">
-                                <label>文件</label> <input type="file" name="file">
-                                <button class="btn" type="button" id="doSave">提交</button>
-                            </form>
                         </div>
                         <div class="widget-body  am-fr">
 

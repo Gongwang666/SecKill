@@ -6,7 +6,7 @@
     <#--解决Jquery-ui的Dialog被覆盖的问题-->
     <style>
         .ui-front{
-            z-index: 11111;
+            z-index: 10000;
         }
     </style>
 </head>

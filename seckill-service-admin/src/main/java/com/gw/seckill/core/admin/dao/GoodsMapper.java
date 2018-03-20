@@ -5,6 +5,8 @@ import com.gw.seckill.facade.admin.entity.Goods;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("goodsDAO")
 @Mapper
 public interface GoodsMapper extends BaseMapper<Goods> {
@@ -19,4 +21,6 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     int updateByPrimaryKeySelective(Goods record);
 
     int updateByPrimaryKey(Goods record);*/
+
+   List<Goods> selectGoodsWithImg();
 }

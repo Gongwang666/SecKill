@@ -14,9 +14,11 @@
 <link rel="stylesheet" href="../assets/css/amazeui.tree.min.css"/>
 <link rel="stylesheet" href="../assets/css/amazeui.chosen.css"/>
 <link rel="stylesheet" href="../assets/css/amazeui.datatables.min.css" />
-<link rel="stylesheet" href="../assets/css/app.css">
+<link rel="stylesheet" href="../assets/css/app.css"/>
+<link rel="stylesheet" href="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.css"/>
 <link rel="stylesheet" href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.css">
 <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
+<script src="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.min.js"></script>
 
 

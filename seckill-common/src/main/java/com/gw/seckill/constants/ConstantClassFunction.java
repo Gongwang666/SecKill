@@ -9,6 +9,8 @@ public class ConstantClassFunction {
     private static final String VISITOR = "2";
     //添加用户时的默认密码
     private static final String DEFAULT_PASSWORD = "123456";
+    //文件上传服务器地址
+    private static final String FILE_UPLOAD_URL = "http://120.79.214.81/";
 
     public static Integer getHASH_ITERATIONS(){
         return HASH_ITERATIONS;
@@ -21,5 +23,8 @@ public class ConstantClassFunction {
     }
     public static String getDEFAULT_PASSWORD(){
         return DEFAULT_PASSWORD;
+    }
+    public static String getFILE_UPLOAD_URL(){
+        return FILE_UPLOAD_URL;
     }
 }

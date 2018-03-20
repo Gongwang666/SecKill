@@ -19,4 +19,6 @@ public interface GoodsFacade {
     　* @创建时间: 2018/3/7 10:47
       */
     PageInfo<Goods> getAllGoodsPaged(Goods goods);
+
+    PageInfo<Goods> getAllGoodsPagedWithImgs(Goods goods);
 }

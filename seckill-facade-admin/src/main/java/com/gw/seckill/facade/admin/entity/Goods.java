@@ -4,8 +4,10 @@ import com.gw.seckill.entity.BaseEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Goods extends BaseEntity implements Serializable{
 
@@ -67,6 +69,8 @@ public class Goods extends BaseEntity implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "CREATE_TIME")
     private Date createTime;
+    @Transient
+    private List<GoodsImg> goodsImgList;
 
 
     public String getGoodsSn() {
@@ -219,5 +223,13 @@ public class Goods extends BaseEntity implements Serializable{
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public List<GoodsImg> getGoodsImgList() {
+        return goodsImgList;
+    }
+
+    public void setGoodsImgList(List<GoodsImg> goodsImgList) {
+        this.goodsImgList = goodsImgList;
     }
 }

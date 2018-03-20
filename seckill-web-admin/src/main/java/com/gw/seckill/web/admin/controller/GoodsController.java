@@ -1,9 +1,11 @@
 package com.gw.seckill.web.admin.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.gw.seckill.common.web.exception.pojo.Result;
 import com.gw.seckill.common.web.fastdfs.utils.FastDFSClientWrapper;
+import com.gw.seckill.constants.ConstantClassFunction;
 import com.gw.seckill.facade.admin.entity.Goods;
 import com.gw.seckill.facade.admin.entity.GoodsImg;
 import com.gw.seckill.facade.admin.service.GoodsFacade;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 /**
 　* @描述:     商品信息管理Controller
@@ -77,11 +80,51 @@ public class GoodsController {
       */
     @RequiresPermissions("goodsInfo:view")
     @RequestMapping("/goods/goodsInfo/imgManage")
-    public String goodsImgsPage(@RequestParam Long id,Model model){
+    public String goodsImgsPage(@RequestParam Integer page,Model model){
+        if(page != null){
+            Goods goods = new Goods();
+            goods.setPage(page);
+            goods.setRows(15);
+            PageInfo<Goods> pageInfo = goodsFacade.getAllGoodsPagedWithImgs(goods);
+            model.addAttribute("pageInfo",pageInfo);
+        }
+        return "/goods/img_manager";
+    }
+    /**
+    　* @描述:     商品图片展示列表
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/20 14:11
+      */
+    @RequiresPermissions("goodsInfo:view")
+    @RequestMapping("/goods/goodsInfo/imgPage")
+    public String goodsImgManagerPage(@RequestParam Integer page,@RequestParam Long id,Model model){
+        GoodsImg goodsImg = new GoodsImg();
+        goodsImg.setGoodsID(id);
+        goodsImg.setPage(page);
+        goodsImg.setRows(15);
+        PageInfo<GoodsImg> pageInfo = goodsImgFacade.getAllImgPaged(goodsImg);
+        model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("goodsID",id);
         return "/goods/goods_img_manager";
     }
 
+    @RequiresPermissions("goodsInfo:view")
+    @RequestMapping("/goods/goodsInfo/uploadFile")
+    public String goodsImgUploadPage(@RequestParam Long id,Model model){
+        model.addAttribute("goodsID",id);
+        return "/goods/img_manager_page";
+    }
+    /**
+    　* @描述:     文件上传动作
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/20 14:11
+      */
     @RequiresPermissions("goodsInfo:create")
     @RequestMapping("/goods/goodsInfo/uploadFile.do")
     @ResponseBody
@@ -89,7 +132,7 @@ public class GoodsController {
         Result result = new Result();
         if(file != null && goodsID != null){
             GoodsImg goodsImg = new GoodsImg();
-            String imgUrl = dfsClient.uploadFile(file);
+            String imgUrl = ConstantClassFunction.getFILE_UPLOAD_URL()+dfsClient.uploadFile(file);
             goodsImg.setGoodsID(goodsID);
             goodsImg.setImgUrl(imgUrl);
             goodsImg.setUploadDate(new Date());
@@ -104,6 +147,38 @@ public class GoodsController {
         }
         result.setStatus(-1);
         result.setMsg("上传失败!");
+        return result;
+    }
+    /**
+    　* @描述:     删除图片
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/20 15:27
+      */
+    @RequiresPermissions("goodsInfo:create")
+    @RequestMapping("/goods/goodsInfo/delFile.do")
+    @ResponseBody
+    public Result delImg(String idsArray) throws Exception{
+        Result result = new Result();
+        List<Long> ids = JSONObject.parseArray(idsArray,Long.class);
+        if(ids !=null && ids.size()>0){
+            //删除图片服务器的文件
+            for(int i = 0; i < ids.size(); i++){
+                GoodsImg goodsImg = goodsImgFacade.getImgById(ids.get(i));
+                dfsClient.deleteFile(goodsImg.getImgUrl());
+            }
+            int rows = goodsImgFacade.delImg(ids.toArray(new Long[0]));
+            if(rows == ids.size()){
+                result.setStatus(0);
+                result.setMsg("删除成功!");
+                return result;
+            }
+
+        }
+        result.setStatus(-1);
+        result.setMsg("删除失败!");
         return result;
     }
 
