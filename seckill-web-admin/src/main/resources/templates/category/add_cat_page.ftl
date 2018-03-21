@@ -31,13 +31,6 @@
                                                         <option disabled value="${cat.id}">${cat.catName}</option>
                                                     </#if>
                                                 </#list>
-                                                <#--<option value=""></option>
-
-                                                <option selected disabled>Sloth Bear</option>
-                                                <option disabled>Sun Bear</option>
-                                                <option selected disabled>Paddington Bear</option>
-                                                <option selected>Polar Bear</option>
-                                                <option disabled>Spectacled Bear</option>-->
                                                 </select>
                                             </div>
                                             <div class="am-u-sm-3"></div>

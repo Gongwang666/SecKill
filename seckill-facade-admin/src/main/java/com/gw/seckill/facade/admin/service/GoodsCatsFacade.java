@@ -97,4 +97,6 @@ public interface GoodsCatsFacade {
     　* @创建时间: 2018/3/7 14:53
       */
     List<GoodsCats> getChildList(GoodsCats goodsCats);
+
+    String getCatIdPath(Long id);
 }

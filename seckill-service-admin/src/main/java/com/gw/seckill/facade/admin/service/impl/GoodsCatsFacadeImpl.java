@@ -66,4 +66,9 @@ public class GoodsCatsFacadeImpl implements GoodsCatsFacade {
     public List<GoodsCats> getChildList(GoodsCats goodsCats) {
         return goodsCatsBiz.getChildList(goodsCats);
     }
+
+    @Override
+    public String getCatIdPath(Long id) {
+        return goodsCatsBiz.getCatIdPath(id);
+    }
 }

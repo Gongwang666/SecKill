@@ -21,4 +21,13 @@ public interface GoodsFacade {
     PageInfo<Goods> getAllGoodsPaged(Goods goods);
 
     PageInfo<Goods> getAllGoodsPagedWithImgs(Goods goods);
+    /**
+    　* @描述:     添加商品
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/21 11:16
+      */
+    int addGoods(Goods goods);
 }

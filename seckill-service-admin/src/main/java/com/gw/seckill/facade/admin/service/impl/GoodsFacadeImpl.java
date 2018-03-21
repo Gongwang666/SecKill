@@ -28,4 +28,9 @@ public class GoodsFacadeImpl implements GoodsFacade{
     public PageInfo<Goods> getAllGoodsPagedWithImgs(Goods goods) {
         return goodsBiz.getAllGoodsPagedWithImgs(goods);
     }
+
+    @Override
+    public int addGoods(Goods goods) {
+        return goodsBiz.addGoods(goods);
+    }
 }

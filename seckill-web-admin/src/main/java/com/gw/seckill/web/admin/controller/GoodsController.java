@@ -1,13 +1,16 @@
 package com.gw.seckill.web.admin.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.gw.seckill.common.web.exception.pojo.Result;
 import com.gw.seckill.common.web.fastdfs.utils.FastDFSClientWrapper;
 import com.gw.seckill.constants.ConstantClassFunction;
 import com.gw.seckill.facade.admin.entity.Goods;
+import com.gw.seckill.facade.admin.entity.GoodsCats;
 import com.gw.seckill.facade.admin.entity.GoodsImg;
+import com.gw.seckill.facade.admin.service.GoodsCatsFacade;
 import com.gw.seckill.facade.admin.service.GoodsFacade;
 import com.gw.seckill.facade.admin.service.GoodsImgFacade;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -21,7 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
 　* @描述:     商品信息管理Controller
@@ -39,6 +44,8 @@ public class GoodsController {
     private GoodsImgFacade goodsImgFacade;
     @Autowired
     private FastDFSClientWrapper dfsClient;
+    @Reference(version = "1.0.0")
+    private GoodsCatsFacade goodsCatsFacade;
 
     @RequiresPermissions("goodsInfo:view")
     @RequestMapping("/goods/goodsInfo/view")
@@ -53,8 +60,9 @@ public class GoodsController {
 
     @RequiresPermissions("goodsInfo:create")
     @RequestMapping("/goods/goodsInfo/create")
-    public String addGoodsPage(){
-
+    public String addGoodsPage(Model model){
+        List<GoodsCats> catsList = goodsCatsFacade.getAllGoodCats();
+        model.addAttribute("catsList",catsList);
         return "/goods/add_goods_page";
     }
 
@@ -64,7 +72,12 @@ public class GoodsController {
     public Result addGoods(@RequestBody Goods goods){
         Result result = new Result();
         if(goods != null){
-
+            int row = goodsFacade.addGoods(goods);
+            if(row == 1){
+                result.setStatus(0);
+                result.setMsg("添加成功");
+                return result;
+            }
         }
         result.setStatus(-1);
         result.setMsg("添加失败");
@@ -182,4 +195,16 @@ public class GoodsController {
         return result;
     }
 
+    @RequestMapping("/goods/goodsInfo/getCatIdPath")
+    @ResponseBody
+    public String getCatIdPath(Long id){
+        Map<String,String> map = new HashMap<String,String>();
+        if(id != null){
+            String path = goodsCatsFacade.getCatIdPath(id);
+            map.put("path",path);
+            return JSON.toJSONString(map);
+        }
+        map.put("msg","出错了");
+        return JSON.toJSONString(map);
+    }
 }

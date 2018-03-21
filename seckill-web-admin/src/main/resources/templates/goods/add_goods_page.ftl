@@ -14,7 +14,7 @@
                         <!-- col start -->
                         <div class="am-u-md-6">
                             <div class="card-box">
-                                <form id="add_res_form" enctype="multipart/form-data" method="post" class="tpl-form-border-form tpl-form-border-br">
+                                <form id="add_goods_form" enctype="multipart/form-data" method="post" class="tpl-form-border-form tpl-form-border-br">
 
 
                                     <div class="am-form-group">
@@ -43,7 +43,7 @@
 
                                     <div class="am-form-group">
                                         <label for="goods-shop-price" class="am-u-sm-3 am-form-label">
-                                            商品市场价:
+                                            商品门店价:
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
@@ -54,16 +54,26 @@
                                     </div>
 
                                     <div class="am-form-group">
-                                        <label for="goods-catid" class="am-u-sm-3 am-form-label">
+                                        <label for="goods_catid" class="am-u-sm-3 am-form-label">
                                             最后一级分类路径:
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
-                                                <input id="goods_catid" type="text" class="tpl-form-input" placeholder="请输入最后一级分类路径"/>
+                                                <select id="goods_catid" name="catId" data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chosen-select-deselect" tabindex="9">
+
+                                                    <#list catsList as cat>
+                                                        <#if cat.dataFlag == 1>
+                                                            <option value="${cat.id}">${cat.catName}</option>
+                                                        <#else >
+                                                            <option disabled value="${cat.id}">${cat.catName}</option>
+                                                        </#if>
+                                                    </#list>
+                                                </select>
                                             </div>
                                             <div class="am-u-sm-3"></div>
                                         </div>
                                     </div>
+
 
                                     <div class="am-form-group">
                                         <label for="goods-catid-path" class="am-u-sm-3 am-form-label">
@@ -91,7 +101,7 @@
 
                                     <div class="am-form-group">
                                         <label for="goods-stock" class="am-u-sm-3 am-form-label">
-                                            预警库存:
+                                            总库存:
                                         </label>
                                         <div class="am-u-sm-9">
                                             <div class="am-u-sm-9">
@@ -241,47 +251,84 @@
 </div>
 <script>
     //下拉选项卡js代码
-    $('#res_parent_select').chosen({ width: '95%'});
-    $('#res_type_select').chosen({ width: '95%'});
+    $('#goods_catid').chosen({ width: '95%'});
 
+    $('#goods_catid').on('change', function(selected) {
+        var catId = $('#goods_catid').val();
+        //console.log(catId)
+        var data = {"id":catId};
+        $.post("/goods/goodsInfo/getCatIdPath",data,function (data) {
+            console.log(data)
+            var catIdPath = $('#goods_catid_path').val(data.path);
+        },'json');
+    });
     $('#add_res').on('click',function () {
-        var form = $('#add_res_form');
-        var resParentId = $('#res_parent_select').val();
-        var resName = $('#res_name').val();
-        var resType = $('#res_type_select').val();
-        var resUrl = $('#res_url').val();
-        var allParents = $('#all_parents').val();
-        var resPermission = $('#res_permission').val();
-        var isShow = $("input[name='isShow']:checked").val();
+        var form = $('#add_goods_form');
+        var goodsName = $('#goods_name').val();
+        var goodsMkPrice = $('#goods_mk_price').val();
+        var goodsShpPrice = $('#goods_shop_price').val();
+        var catId = $('#goods_catid').val();
+        var catIdPath = $('#goods_catid_path').val();
+        var warnStock = $('#goods_warn_stock').val();
+        var stock = $('#goods_stock').val();
+        var goodsTips = $('#goods_tips').val();
+        var goodsDesc = $('#goods_desc').val();
+        var isSale = $("input[name='isSale']:checked").val();
+        var isBest = $("input[name='isBest']:checked").val();
+        var isHot = $("input[name='isHot']:checked").val();
+        var isNew = $("input[name='isNew']:checked").val();
+
         //var isShow = $("input[name='isShow']:checked").val();
-        if(resName == null || resName == ""){
-            alert("资源名称不能为空！");
+        if(goodsName == null || goodsName == ""){
+            alert("商品名称不能为空！");
             return;
         }
-        if(resUrl == null || resUrl == ""){
-            alert("资源不能为空！");
+        if(goodsMkPrice == null || goodsMkPrice == ""){
+            alert("商品市场价不能为空！");
             return;
         }
-        if(allParents == null || allParents == ""){
-            alert("所有父类资源不能为空！");
+        if(goodsShpPrice == null || goodsShpPrice == ""){
+            alert("商品门店价不能为空！");
             return;
         }
-        if(resPermission == null || resPermission == ""){
-            alert("权限不能为空！");
+        if(catId == null || catId == ""){
+            alert("分类不能为空！");
+            return;
+        }
+        if(catIdPath == null || catIdPath == ""){
+            alert("分类路径不能为空！");
+            return;
+        }
+        if(warnStock == null || warnStock == ""){
+            alert("预警库存不能为空！");
+            return;
+        }
+        if(stock == null || stock == ""){
+            alert("总库存不能为空！");
+            return;
+        }
+        if(goodsDesc == null || goodsDesc == ""){
+            alert("商品描述不能为空！");
             return;
         }
 
         var allData = {
-                        resName:resName,
-                        resType:resType,
-                        resUrl:resUrl,
-                        parentId:resParentId,
-                        parentIds:allParents,
-                        permission:resPermission,
-                        available:isShow
+            goodsName:goodsName,
+            marketPrice:goodsMkPrice,
+            shopPrice:goodsShpPrice,
+            warnStock:warnStock,
+            goodsStock:stock,
+            goodsTips:goodsTips,
+            isSale:isSale,
+            isBest:isBest,
+            isHot:isHot,
+            isNew:isNew,
+            goodsCatIdPath:catIdPath,
+            goodsCatId:catId,
+            goodsDesc:goodsDesc
                         };
         $.ajax({
-            url:'/resource/create.do',
+            url:'/goods/goodsInfo/create.do',
             contentType:"application/json;charset=utf-8",
             type:form.attr("method"), //GET
             async:true,    //或false,是否异步
@@ -295,7 +342,7 @@
             success:function(data,textStatus,jqXHR){
                 console.log(data)
                 //$('#add_cat_alert').show();
-                setTimeout("$('#content').load('/resource/create')",1500);
+                //setTimeout("$('#content').load('/resource/create')",1500);
                 //console.log(textStatus)
                 //console.log(jqXHR)
             },

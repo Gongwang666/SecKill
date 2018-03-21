@@ -65,10 +65,10 @@
                                        id="example-r">
                                     <thead>
                                     <tr>
+                                        <th>操作</th>
                                         <th>商品ID</th>
                                         <th>商品编号</th>
                                         <th>商品名称</th>
-                                        <th>商品图片</th>
                                         <th>市场价</th>
                                         <th>门店价</th>
                                         <th>预警库存</th>
@@ -85,40 +85,11 @@
                                         <th>上架时间</th>
                                         <th>创建时间</th>
                                         <th>是否删除</th>
-                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <#list pageInfo.list as goods>
                                             <tr class="gradeX">
-                                                <td>${goods.id}</td>
-                                                <td>${goods.goodsSn}</td>
-                                                <td>${goods.goodsName}</td>
-                                                <td>${goods.goodsImg}</td>
-                                                <td>${goods.marketPrice}</td>
-                                                <td>${goods.shopPrice}</td>
-                                                <td>${goods.warnStock}</td>
-                                                <td>${goods.goodsStock}</td>
-                                                <td>${goods.goodsTips}</td>
-                                                <td>${goods.isSale}</td>
-                                                <td>${goods.isBest}</td>
-                                                <td>${goods.isHot}</td>
-                                                <td>${goods.isNew}</td>
-                                                <td>${goods.goodsCatIdPath}</td>
-                                                <td>${goods.goodsCatId}</td>
-                                                <td>${goods.goodsDesc}</td>
-                                                <td>${goods.saleNum}</td>
-                                                <td>${goods.saleTime?string('yyyy-MM-dd')}</td>
-                                                <td>
-                                                    ${goods.createTime?string('yyyy-MM-dd')}
-                                                </td>
-                                                <td>
-                                                    <#if goods.dataFlag == 1>
-                                                        <p>可用</p>
-                                                    <#else >
-                                                        <p style="color: red">已删除</p>
-                                                    </#if>
-                                                </td>
                                                 <td>
                                                     <div class="tpl-table-black-operation">
                                                         <a href="javascript:;" data-goods-id="${goods.id}"
@@ -133,12 +104,43 @@
                                                            class="enable-goods tpl-table-black-operation-enable">
                                                             <i class="am-icon-deaf"></i> 启用节点
                                                         </a>
-                                                        <a href="javascript:;" data-goods-id="${goods.id}"
-                                                           class="goods-img-manager tpl-table-black-operation-enable">
-                                                            <i class="am-icon-deaf"></i> 商品图片管理
-                                                        </a>
                                                     </div>
                                                 </td>
+                                                <td>${goods.id}</td>
+                                                <td>${goods.goodsSn}</td>
+                                                <td>${goods.goodsName}</td>
+                                                <td>${goods.marketPrice}</td>
+                                                <td>${goods.shopPrice}</td>
+                                                <td>${goods.warnStock}</td>
+                                                <td>${goods.goodsStock}</td>
+                                                <td>${goods.goodsTips}</td>
+                                                <td>${goods.isSale}</td>
+                                                <td>${goods.isBest}</td>
+                                                <td>${goods.isHot}</td>
+                                                <td>${goods.isNew}</td>
+                                                <td>${goods.goodsCatIdPath}</td>
+                                                <td>${goods.goodsCatId}</td>
+                                                <td>${goods.goodsDesc}</td>
+                                                <td>${goods.saleNum}</td>
+                                                <td>
+                                                    <#if goods.saleTime??>
+                                                        ${goods.saleTime?string('yyyy-MM-dd')}
+                                                    <#else >
+                                                        未上架
+                                                    </#if>
+
+                                                </td>
+                                                <td>
+                                                    ${goods.createTime?string('yyyy-MM-dd')}
+                                                </td>
+                                                <td>
+                                                    <#if goods.dataFlag == 1>
+                                                        <p>可用</p>
+                                                    <#else >
+                                                        <p style="color: red">已删除</p>
+                                                    </#if>
+                                                </td>
+
                                             </tr>
                                         </#list>
 

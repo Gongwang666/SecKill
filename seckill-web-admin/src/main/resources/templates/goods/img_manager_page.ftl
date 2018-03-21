@@ -10,8 +10,6 @@
         padding: 0;
         border: none;
         outline: 0;
-        font-size: 100%;
-        font: inherit;
         vertical-align: baseline;
     }
 
@@ -438,6 +436,7 @@
                 </div>
                 <div class="widget-body  am-fr">
                     <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div id="back-img-list" class="am-btn am-btn-success">返回图片列表</div>
                         <!-- col start -->
                         <div class="card-box">
                             <div id="wrapper">
@@ -1051,5 +1050,10 @@
         });
 
     })(jQuery);
-
+    $(function () {
+        $('#back-img-list').on('click',function () {
+            var id = '${goodsID}';
+            $('#content').load('/goods/goodsInfo/imgPage?page=1&id='+id);
+        })
+    });
 </script>

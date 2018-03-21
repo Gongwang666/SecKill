@@ -7,6 +7,9 @@ import com.gw.seckill.facade.admin.entity.Goods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.UUID;
+
 /**
 　* @描述:     商品信息管理业务类
 　* @参数描述: 
@@ -32,5 +35,14 @@ public class GoodsBiz {
             PageHelper.startPage(goods.getPage(), goods.getRows());
         }
         return new PageInfo<Goods>(goodsDAO.selectGoodsWithImg());
+    }
+
+    public int addGoods(Goods goods) {
+        goods.setGoodsSn(UUID.randomUUID().toString());
+        if(goods.getIsSale() == (byte)1){
+            goods.setSaleTime(new Date());
+        }
+        goods.setCreateTime(new Date());
+        return goodsDAO.insertSelective(goods);
     }
 }

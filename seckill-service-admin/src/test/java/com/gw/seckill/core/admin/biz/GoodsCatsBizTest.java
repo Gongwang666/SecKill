@@ -33,4 +33,9 @@ public class GoodsCatsBizTest {
         List<GoodsCats> list = goodsCatsBiz.getChildList(goodsCats);
         System.out.print(0);
     }
+    @Test
+    public  void getCatIdPath(){
+        String path = goodsCatsBiz.getCatIdPath((long)32);
+        System.out.print(0);
+    }
 }

@@ -22,7 +22,7 @@ import java.util.*;
 public class GoodsCatsBiz {
     @Autowired
     private GoodsCatsMapper goodsCatsDAO;
-
+    private GoodsCatsUtil goodsCatsUtil = new GoodsCatsUtil();
     /**
     　* @描述:     获取所有商品分类信息
     　* @参数描述: 
@@ -55,7 +55,7 @@ public class GoodsCatsBiz {
                 goodsCatsTreeVOList.add(goodsCatsTreeVO);
             }
         }
-        GoodsCatsUtil goodsCatsUtil = new GoodsCatsUtil();
+
         return goodsCatsUtil.getChildTreeObjects(goodsCatsTreeVOList,(long)-1);
     }
     /**
@@ -157,7 +157,36 @@ public class GoodsCatsBiz {
                 goodsCatsTreeVOList.add(goodsCatsTreeVO);
             }
         }
-        GoodsCatsUtil goodsCatsUtil = new GoodsCatsUtil();
         return goodsCatsUtil.getChildList(goodsCatsTreeVOList,treeVO);
     }
+    /**
+    　* @描述:     获取分类路径信息
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/21 20:20
+      */
+    public String getCatIdPath(Long id) {
+
+        return goodsCatsUtil.reversalPath(getPath(id));
+    }
+    
+    /**
+    　* @描述:     获取分类路径（顺序颠倒）
+    　* @参数描述: 
+    　* @返回值:
+    　* @异常:     
+    　* @作者:     gongwang
+    　* @创建时间: 2018/3/21 20:49
+      */
+    private String getPath(Long id){
+        GoodsCats cat = goodsCatsDAO.selectByPrimaryKey(id);
+        if(cat.getParentId() == (byte)-1){
+            return "1";
+        }else{
+            return id+"/"+getPath(cat.getParentId());
+        }
+    }
+
 }

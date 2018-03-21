@@ -19,6 +19,9 @@
                                     <button id="del-img-btn" type="button" class="am-btn am-btn-default am-btn-danger"><span
                                             class="am-icon-trash-o"></span> 删除
                                     </button>
+                                    <button id="back" type="button" class="am-btn am-btn-default am-btn-secondary"><span
+                                            class="am-icon-trash-o"></span> 返回
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -94,9 +97,16 @@
                 console.log(JSON.stringify(ids))
                 $.post("/goods/goodsInfo/delFile.do",{idsArray:JSON.stringify(ids)},function (data) {
                     console.log(data)
-
+                    alert("删除成功!");
+                    var page = '${pageInfo.pageNum}';
+                    var id = '${goodsID}';
+                    $('#content').load('/goods/goodsInfo/imgPage?page='+page+'&id='+id);
                 });
             }
+        });
+        //返回按钮事件
+        $('#back').on('click',function () {
+            $('#content').load('/goods/goodsInfo/imgManage?page=1');
         });
 
     });
